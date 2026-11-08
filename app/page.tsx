@@ -41,7 +41,7 @@ export default function Home() {
       {/* Footer / Compliance Baseline */}
       <footer className="w-full max-w-4xl border-t border-[#1a261a] pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-[#526652] gap-4">
         <div>
-          &copy; {new Date().getFullYear()} Kalyani Ma. All rights reserved.
+          &copy; 2026 Kalyani Ma. All rights reserved.
         </div>
         <div className="text-center sm:text-right text-[11px] max-w-md text-[#445544]">
           This archive is strictly for educational, informational, and historical botanical reference. No therapeutic or curative claims are stated or implied.
