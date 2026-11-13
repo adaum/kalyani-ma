@@ -1,0 +1,1011 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Turn the Bottle Around | Institutional Botanical Archive · Kalyani Ma</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#070C08;
+  --bg-card:#0B140E;
+  --bg-card-subtle:#0F1A12;
+  --bg-input:#060A07;
+  --text-main:#E4E8E3;
+  --text-muted:#A6B0A7;
+  --text-dim:#7D877E;
+  --accent-gold:#CBB279;
+  --accent-gold-d:#917D50;
+  --accent-gold-light:#EFE6CF;
+  --border:#1A261D;
+  --border-light:#293A2D;
+  --border-gold:rgba(203,178,121,0.28);
+  --section-divider:2px solid rgba(203,178,121,0.26);
+  --green-badge:#152B1E;
+  --green-text:#52B77C;
+  --alert-red:#E06464;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+html, body{
+  margin:0;
+  padding:0;
+  width:100%;
+  background:var(--bg);
+  color:var(--text-main);
+  font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  line-height:1.75;
+  font-size:18.5px;
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%;display:block}
+h1,h2,h3{
+  line-height:1.22;
+  margin:0 0 .5em;
+  overflow-wrap:break-word;
+  text-wrap:balance;
+  font-family:'Newsreader',Georgia,Cambria,serif;
+  font-weight:500;
+  letter-spacing:-0.01em;
+}
+.font-cinzel{
+  font-family:'Cinzel',serif;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+}
+.font-mono{
+  font-family:'JetBrains Mono',monospace;
+}
+p{margin:0 0 1em;overflow-wrap:break-word}
+a{color:var(--accent-gold);text-decoration:none;transition:color .15s}
+a:hover{color:var(--accent-gold-light);text-decoration:underline}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+
+/* Top Navigation Bar */
+.top-nav{
+  border-bottom:var(--section-divider);
+  padding:18px 0;
+  background:rgba(7,12,8,0.95);
+  width:100%;
+}
+.top-nav .wrap{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.brand-meta{
+  display:flex;
+  flex-direction:column;
+}
+.brand-meta .inst{
+  font-family:'Cinzel',serif;
+  font-size:11px;
+  letter-spacing:0.18em;
+  color:var(--text-dim);
+  text-transform:uppercase;
+  margin-bottom:2px;
+}
+.brand-meta .name{
+  font-family:'Newsreader',Georgia,serif;
+  font-size:20px;
+  color:var(--text-main);
+  font-weight:600;
+}
+.status-pill{
+  font-family:'JetBrains Mono',monospace;
+  font-size:11.5px;
+  padding:4px 12px;
+  background:var(--green-badge);
+  border:1px solid rgba(82,183,124,0.3);
+  color:var(--green-text);
+  border-radius:20px;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+}
+.status-pill::before{
+  content:"";
+  width:6px;
+  height:6px;
+  background:var(--green-text);
+  border-radius:50%;
+  display:inline-block;
+}
+
+/* Primary Button Styling */
+.btn-blueprint{
+  font-family:'Plus Jakarta Sans',sans-serif;
+  display:inline-block;
+  background:var(--accent-gold);
+  color:#0B140E !important;
+  font-weight:700;
+  font-size:16px;
+  padding:15px 28px;
+  border-radius:4px;
+  border:1px solid var(--accent-gold);
+  cursor:pointer;
+  text-decoration:none !important;
+  box-shadow:0 4px 18px rgba(203,178,121,0.22);
+  transition:all .15s ease;
+  text-align:center;
+}
+.btn-blueprint:hover{
+  background:#dfca96;
+  transform:translateY(-1px);
+}
+
+/* Hero Section */
+.hero{
+  padding:64px 0 72px;
+  border-bottom:var(--section-divider);
+  background:radial-gradient(circle at 80% 20%, rgba(26,45,30,0.4) 0%, rgba(7,12,8,0) 65%);
+}
+.hero .wrap{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:44px;
+  align-items:center;
+}
+.badge-tag{
+  display:inline-flex;
+  align-items:center;
+  background:var(--bg-card-subtle);
+  border:1px solid var(--border-gold);
+  color:var(--accent-gold);
+  font-size:11.5px;
+  font-family:'Cinzel',serif;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  padding:5px 12px;
+  border-radius:3px;
+  margin-bottom:20px;
+}
+.hero h1{
+  font-size:clamp(32px,5.2vw,50px);
+  color:#fff;
+  font-weight:500;
+  line-height:1.18;
+  margin-bottom:20px;
+}
+.hero h1 span{
+  color:var(--accent-gold);
+  font-style:italic;
+  font-weight:400;
+}
+.hero .sub{
+  font-size:clamp(19px,2.2vw,22px);
+  color:var(--text-muted);
+  max-width:640px;
+  line-height:1.7;
+  margin-bottom:28px;
+}
+.hero .meta{
+  font-size:13.5px;
+  color:var(--text-dim);
+  font-family:'JetBrains Mono',monospace;
+  margin-top:20px;
+}
+
+/* Vertical Reel Frame in Hero */
+.hero-video-box{
+  border-radius:8px;
+  overflow:hidden;
+  border:1px solid var(--border-gold);
+  background:#050705;
+  box-shadow:0 24px 60px rgba(0,0,0,0.8);
+  position:relative;
+  width:100%;
+  max-width:340px;
+  aspect-ratio:9/16;
+  margin:0 auto;
+}
+.hero-video-box iframe{
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  border:0;
+}
+
+@media(min-width:920px){
+  .hero .wrap{
+    grid-template-columns:1.35fr 1fr;
+    gap:56px;
+    padding-top:40px;
+    padding-bottom:50px;
+  }
+}
+
+/* Intro Section */
+.intro{
+  background:var(--bg-card);
+  padding:64px 0 32px;
+  border-bottom:var(--section-divider);
+}
+.intro .wrap{max-width:840px}
+.byline{
+  font-size:12px;
+  color:var(--accent-gold);
+  border-left:2px solid var(--accent-gold);
+  padding-left:14px;
+  margin-bottom:28px;
+  text-transform:uppercase;
+  letter-spacing:.14em;
+  font-weight:600;
+  font-family:'Cinzel',serif;
+}
+.intro p{font-size:21px;color:var(--text-main);line-height:1.8}
+
+/* Pillar Showcase — Hierarchical Header + Aligned 2-Column Grid */
+.reason{
+  background:var(--bg);
+  padding:76px 0;
+  border-bottom:var(--section-divider);
+}
+.reason.flip{
+  background:var(--bg-card);
+}
+.reason.flip .reason-img-holder{
+  background:var(--bg);
+}
+.reason.flip .tip{
+  background:var(--bg);
+}
+.pillar-header{
+  margin-bottom:32px;
+}
+.num-badge{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:40px;
+  height:40px;
+  border-radius:4px;
+  background:var(--bg-card-subtle);
+  color:var(--accent-gold);
+  font-family:'Cinzel',serif;
+  font-weight:700;
+  font-size:16px;
+  margin-bottom:14px;
+  border:1px solid var(--border-gold);
+}
+.pillar-header h2{
+  font-size:clamp(28px,3.8vw,38px);
+  color:#fff;
+  margin-bottom:6px;
+}
+.latin{
+  display:block;
+  font-family:'Newsreader',Georgia,serif;
+  font-size:18px;
+  font-weight:400;
+  font-style:italic;
+  color:var(--accent-gold-d);
+}
+
+.reason-grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:44px;
+  align-items:stretch;
+}
+
+/* Exact Balanced Image Frame */
+.reason-img-holder{
+  border-radius:8px;
+  overflow:hidden;
+  min-height:640px;
+  height:100%;
+  align-self:stretch;
+  background:var(--bg-card);
+  border:1px solid var(--border-gold);
+  box-shadow:0 18px 45px rgba(0,0,0,0.65);
+  position:relative;
+  display:flex;
+}
+.reason-img-holder img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  transition:transform .4s ease;
+}
+.reason-img-holder:hover img{
+  transform:scale(1.03);
+}
+.specimen-tag{
+  position:absolute;
+  bottom:14px;
+  left:14px;
+  background:rgba(7,12,8,0.85);
+  backdrop-filter:blur(6px);
+  border:1px solid var(--border-gold);
+  padding:6px 14px;
+  border-radius:4px;
+  font-family:'Cinzel',serif;
+  font-size:11px;
+  letter-spacing:.1em;
+  color:var(--accent-gold);
+  text-transform:uppercase;
+}
+
+.reason-content{
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+}
+.reason-content p{
+  font-size:17.5px;
+  line-height:1.75;
+  color:var(--text-main);
+}
+.label{
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  margin:20px 0 8px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  font-family:'Cinzel',serif;
+}
+.label:first-of-type{
+  margin-top:0;
+}
+.l-trap{color:var(--alert-red)}
+.l-how{color:var(--green-text)}
+.l-tip{color:var(--accent-gold)}
+.tip{
+  border-left:2px solid var(--accent-gold);
+  padding:16px 20px;
+  background:var(--bg-card-subtle);
+  border-radius:0 4px 4px 0;
+  border:1px solid var(--border);
+  border-left-width:2px;
+  margin-top:8px;
+  font-size:17.5px;
+  line-height:1.75;
+  color:var(--text-main);
+}
+
+@media(min-width:960px){
+  .reason-grid{
+    grid-template-columns:520px 1fr;
+    gap:56px;
+  }
+  .reason.flip .reason-grid{
+    grid-template-columns:1fr 520px;
+  }
+  .reason.flip .reason-img-holder{
+    order:2;
+  }
+}
+
+/* Mid CTA Break */
+.mid-cta{
+  background:var(--bg-card);
+  text-align:center;
+  padding:72px 0;
+  border-top:none;
+  border-bottom:var(--section-divider);
+}
+.mid-cta h3{
+  font-size:clamp(24px,3.6vw,34px);
+  color:#fff;
+  margin-bottom:14px;
+}
+.mid-cta p{
+  color:var(--text-muted);
+  max-width:640px;
+  margin:0 auto 28px;
+  font-size:17.5px;
+}
+
+/* Executive Summary Cards */
+.summary{
+  padding:84px 0;
+  background:var(--bg);
+  border-bottom:var(--section-divider);
+}
+.summary h2{
+  font-size:clamp(28px,4vw,38px);
+  text-align:center;
+  color:#fff;
+}
+.summary .lead{
+  text-align:center;
+  color:var(--text-muted);
+  max-width:680px;
+  margin:0 auto 44px;
+  font-size:17.5px;
+}
+.summary-grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:24px;
+}
+@media(min-width:900px){.summary-grid{grid-template-columns:repeat(3,1fr)}}
+.summary-card{
+  background:var(--bg-card);
+  border:1px solid var(--border);
+  border-radius:6px;
+  padding:32px 26px;
+  display:flex;
+  flex-direction:column;
+}
+.summary-card .sc-num{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:32px;height:32px;
+  border-radius:4px;
+  background:var(--bg-card-subtle);
+  color:var(--accent-gold);
+  font-family:'Cinzel',serif;
+  font-weight:700;
+  font-size:13px;
+  margin-bottom:18px;
+  border:1px solid var(--border);
+}
+.summary-card h3{
+  font-size:20px;
+  color:#fff;
+  margin:0 0 12px;
+}
+.summary-card p{
+  margin:0;
+  font-size:17px;
+  line-height:1.7;
+  color:var(--text-muted);
+  flex-grow:1;
+}
+
+/* Comparison Table */
+.audit-compare{
+  padding:80px 0;
+  background:var(--bg-card);
+  border-top:none;
+  border-bottom:var(--section-divider);
+}
+.audit-compare h2{
+  font-size:clamp(26px,3.8vw,38px);
+  text-align:center;
+  color:#fff;
+  margin-bottom:10px;
+}
+.audit-compare .lead{
+  text-align:center;
+  color:var(--text-muted);
+  max-width:720px;
+  margin:0 auto 40px;
+  font-size:16px;
+}
+.table-responsive{
+  width:100%;
+  overflow-x:auto;
+  border-radius:6px;
+  border:1px solid var(--border);
+  background:var(--bg);
+}
+.compare-tbl{
+  width:100%;
+  border-collapse:collapse;
+  text-align:left;
+  font-size:16px;
+}
+.compare-tbl thead th{
+  padding:18px 20px;
+  font-family:'Cinzel',serif;
+  font-size:13px;
+  letter-spacing:0.06em;
+  font-weight:600;
+  color:#fff;
+  border-bottom:1px solid var(--border);
+}
+.compare-tbl thead th:nth-child(1){background:#060A07;width:22%;color:var(--text-dim)}
+.compare-tbl thead th:nth-child(2){background:#141A15;width:38%;color:var(--alert-red)}
+.compare-tbl thead th:nth-child(3){background:#102217;width:40%;color:var(--green-text)}
+.compare-tbl tbody td{
+  padding:18px 20px;
+  vertical-align:top;
+  border-bottom:1px solid var(--border);
+  line-height:1.6;
+}
+.compare-tbl tbody tr:last-child td{border-bottom:0}
+.compare-tbl tbody td:nth-child(1){
+  font-weight:600;
+  color:var(--text-main);
+  background:var(--bg-card);
+  border-right:1px solid var(--border);
+}
+.compare-tbl tbody td:nth-child(2){
+  background:var(--bg);
+  border-right:1px solid var(--border);
+  color:var(--text-muted);
+}
+.compare-tbl tbody td:nth-child(3){
+  background:#0B160E;
+  color:#D5E8DA;
+  border-left:1px solid var(--border);
+}
+
+/* Personal Note from Kalyani Ma */
+.elder-dispatch{
+  padding:64px 0;
+  background:var(--bg);
+  border-top:none;
+  border-bottom:var(--section-divider);
+}
+.dispatch-box{
+  max-width:820px;
+  margin:0 auto;
+  background:var(--bg-card-subtle);
+  border:1px solid var(--border-gold);
+  border-left:3px solid var(--accent-gold);
+  border-radius:6px;
+  padding:44px 38px;
+  box-shadow:0 16px 40px rgba(0,0,0,0.5);
+}
+.dispatch-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:22px;
+}
+.dispatch-badge{
+  font-family:'Cinzel',serif;
+  font-size:11px;
+  letter-spacing:.14em;
+  color:var(--accent-gold);
+  text-transform:uppercase;
+}
+.dispatch-date{
+  font-family:'JetBrains Mono',monospace;
+  font-size:11.5px;
+  color:var(--text-dim);
+}
+.dispatch-box h3{
+  font-size:clamp(24px,3.2vw,32px);
+  color:#fff;
+  margin-bottom:20px;
+}
+.dispatch-body{
+  font-size:19px;
+  color:var(--text-main);
+  line-height:1.85;
+  margin-bottom:18px;
+}
+.dispatch-signoff{
+  display:flex;
+  align-items:center;
+  gap:16px;
+  margin-top:32px;
+  padding-top:24px;
+  border-top:1px solid var(--border);
+}
+.signoff-seal{
+  width:44px;
+  height:44px;
+  border-radius:50%;
+  border:1px solid var(--border-gold);
+  background:var(--bg-card);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-family:'Cinzel',serif;
+  font-weight:700;
+  font-size:13px;
+  color:var(--accent-gold);
+  letter-spacing:0.05em;
+}
+.signoff-meta{
+  display:flex;
+  flex-direction:column;
+}
+.signoff-meta strong{
+  font-family:'Newsreader',Georgia,serif;
+  font-size:18px;
+  color:#fff;
+  font-weight:600;
+}
+.signoff-meta span{
+  font-family:'Cinzel',serif;
+  font-size:11px;
+  letter-spacing:0.1em;
+  color:var(--text-muted);
+  text-transform:uppercase;
+}
+
+/* Master Conversion Section */
+.claim{
+  background:var(--bg-card);
+  color:#fff;
+  padding:80px 0;
+  border-top:none;
+}
+.claim h2{
+  font-size:clamp(28px,4.5vw,42px);
+  text-align:center;
+  color:#fff;
+}
+.claim .lead{
+  text-align:center;
+  color:var(--text-muted);
+  max-width:700px;
+  margin:0 auto 40px;
+  font-size:17.5px;
+}
+.claim-paths{
+  max-width:540px;
+  margin:0 auto;
+  text-align:center;
+}
+.claim-paths .btn-wa{
+  background:#128C7E;
+  color:#fff !important;
+  font-weight:700;
+  width:100%;
+  border-radius:4px;
+  border:1px solid #1ebea5;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  font-size:18.5px;
+  padding:16px 20px;
+  box-shadow:0 4px 18px rgba(18,140,126,0.3);
+  text-decoration:none !important;
+  transition:all .15s ease;
+}
+.claim-paths .btn-wa:hover{
+  background:#14A090;
+}
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <div class="wrap">
+    <div class="brand-meta">
+      <span class="inst">Institutional Botanical Archive</span>
+      <span class="name">Kalyani Ma</span>
+    </div>
+    <div class="status-pill">System Status: Active</div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div>
+      <span class="badge-tag">Investigative Botanical Audit · Five Pillars</span>
+      <h1>Turn the Bottle Around: <span>The First-Ingredient Deception on Household Botanicals</span></h1>
+      <p class="sub">Commercial wellness staples quietly replace therapeutic volatile biomass with inert refinery byproducts. On bestselling shelf formulations, light liquid paraffin accounts for up to 76.8% of net volume. The issue is not immediate toxicity—it is dilution: paying for sovereign plants and receiving petroleum wax.</p>
+      <a class="btn-blueprint" href="#claim">Access the Household Botanical Blueprint</a>
+      <p class="meta">Verified Dilution Matrix · 5-Room Architecture · 10-Second Label Audit</p>
+    </div>
+
+    <div class="hero-video-box">
+      <iframe 
+        src="https://iframe.mediadelivery.net/embed/801915/04de9916-5ee1-43a9-a875-e2432fe28acb?autoplay=false&loop=false&muted=false&preload=true&responsive=true" 
+        loading="lazy" 
+        allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;" 
+        allowfullscreen="true">
+      </iframe>
+    </div>
+  </div>
+</header>
+
+<section class="intro">
+  <div class="wrap">
+    <p class="byline">Field Research &amp; Clinical Formulary · Educational Archive</p>
+    <p>The traditional Indian home was built on a foundational botanical apothecary: Sunday champi with pure carrier infusions, warm respiratory steam over boiling water, wintergreen and camphor rubbed into tired knees after physical labor, and pure resin smoke rising before evening prayers. The ritual was never about an enterprise brand. It was anchored entirely to molecular integrity.</p>
+    <p>Inspect the fine print on commercial domestic shelves today, and the leading line items are light liquid paraffin, refined petroleum distillates, and synthetic fragrance stacks. Peer-reviewed trichological analysis (Rele &amp; Mohile) confirms mineral oil cannot penetrate the hair cuticle or bond with keratin the way native plant triglycerides do. The same industrial cost-cutting permeates muscle rubs, chest balms, and home diffusers.</p>
+    <p>This technical archive restores verification over marketing, treating five essential pillars with empirical rigor.</p>
+  </div>
+</section>
+
+<!-- Card 1: Frankincense Resin -->
+<section class="reason">
+  <div class="wrap">
+    <div class="pillar-header">
+      <span class="num-badge">01</span>
+      <h2>Frankincense — The Sovereign Foundation</h2>
+      <span class="latin">Boswellia carterii, sacra, papyrifera, frereana</span>
+    </div>
+    <div class="reason-grid">
+      <div class="reason-img-holder">
+        <img 
+          src="images/pillar-01-frankincense.webp" 
+          alt="Raw Frankincense Boswellia Resin Tears" 
+          loading="lazy"
+        >
+        <span class="specimen-tag">Specimen 01 · Boswellia Carterii Resin</span>
+      </div>
+      <div class="reason-content">
+        <div>
+          <p class="label l-trap">&times; The Commercial Adulteration Trap</p>
+          <p>Mass-market incense sticks and cosmetic frankincense formulations rely heavily on synthetic dipping aromas and solvent-extracted resinoid cuts. You absorb petrochemical aroma chemicals designed to mimic the fragrance profile, completely devoid of genuine Boswellia volatile compounds.</p>
+          <p class="label l-how">&check; The Certified Testing Standard</p>
+          <p>Authentic Boswellia resin oil requires supercritical steam extraction from sustainable wildcrafted trees. Every authentic lot undergoes third-party Gas Chromatography/Mass Spectrometry (GC/MS) analysis to guarantee zero synthetic adulteration and complete compound verification.</p>
+          </div>
+        <div>
+          <p class="label l-tip">&bull; The Elder’s Household Protocol</p>
+          <div class="tip">Dilute 1 single drop into 5ml of pure Fractionated Coconut Oil. Disperse across palm surface, cup over nose and mouth for three deep respiratory cycles, or apply along the jawline prior to morning meditation. Patch-test behind the ear before first use.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Card 2: Rosemary Botanical Foliage -->
+<section class="reason flip">
+  <div class="wrap">
+    <div class="pillar-header">
+      <span class="num-badge">02</span>
+      <h2>Rosemary — The Ancestral Crown &amp; Scalp Ritual</h2>
+      <span class="latin">Rosmarinus officinalis</span>
+    </div>
+    <div class="reason-grid">
+      <div class="reason-img-holder">
+        <img 
+          src="images/pillar-02-rosemary.webp" 
+          alt="Fresh Rosmarinus officinalis Rosemary Sprigs" 
+          loading="lazy"
+        >
+        <span class="specimen-tag">Specimen 02 · Rosmarinus Officinalis</span>
+      </div>
+      <div class="reason-content">
+        <div>
+          <p class="label l-trap">&times; The Commercial Adulteration Trap</p>
+          <p>Commercial grocery-shelf hair oils feature elaborate botanical imagery on the front face, while the rear declaration lists mineral oil and paraffinum liquidum at upwards of 70% to 76.8%. The plant extract you sought is relegated to an insignificant fraction behind synthetic dye.</p>
+          <p class="label l-how">&check; The Certified Testing Standard</p>
+          <p>Clinical trials (Panahi et al., <i>SKINmed</i>) compared pure rosemary lotion against 2% minoxidil over six months, noting comparable follicular support with significantly less pruritus (scalp irritation). True botanical rosemary must be distilled from leaf biomass with verified chemotypes (1,8-Cineole and Camphor) and certified lot records.</p>
+          </div>
+        <div>
+          <p class="label l-tip">&bull; The Elder’s Household Protocol</p>
+          <div class="tip">Incorporate 2–3 drops into one teaspoon (5ml) of Fractionated Coconut Oil to yield a precise 1–2% botanical suspension. Part hair systematically; massage directly into scalp using fingertip pads for five minutes. Leave on for 45 minutes before a clean botanical rinse.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Card 3: Peppermint Leaf & Eucalyptus -->
+<section class="reason">
+  <div class="wrap">
+    <div class="pillar-header">
+      <span class="num-badge">03</span>
+      <h2>Peppermint &amp; Eucalyptus — Respiratory Architecture</h2>
+      <span class="latin">Mentha piperita · Eucalyptus radiata</span>
+    </div>
+    <div class="reason-grid">
+      <div class="reason-img-holder">
+        <img 
+          src="images/pillar-03-peppermint-eucalyptus.webp" 
+          alt="Fresh Peppermint and Eucalyptus Biomass" 
+          loading="lazy"
+        >
+        <span class="specimen-tag">Specimen 03 · Mentha &amp; Eucalyptus</span>
+      </div>
+      <div class="reason-content">
+        <div>
+          <p class="label l-trap">&times; The Commercial Adulteration Trap</p>
+          <p>Drugstore vapor rubs rely almost exclusively on white petrolatum or hydrogenated wax matrices, dosed with isolated synthetic menthol. This creates an occlusive surface barrier on the skin without delivering the volatile botanical terpenes necessary for clean aromatic inhalation.</p>
+          <p class="label l-how">&check; The Certified Testing Standard</p>
+          <p>Unadulterated steam-distilled Peppermint and Eucalyptus provide pure volatile compounds (menthol, menthone, and eucalyptol) that vaporize cleanly into ambient air without leaving occlusive petroleum residues in delicate nasal passages.</p>
+          </div>
+        <div>
+          <p class="label l-tip">&bull; The Elder’s Household Protocol</p>
+          <div class="tip">Steam Infusion: Add exactly 1 drop of pure Peppermint and 1 drop of Eucalyptus to a ceramic bowl of steaming filtered water. Position face 12 inches above bowl, drape a light cotton towel, and breathe gently through nose with eyes closed for 3 minutes. Keep strictly away from small children and infants.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Card 4: Wintergreen & Camphor Foliage -->
+<section class="reason flip">
+  <div class="wrap">
+    <div class="pillar-header">
+      <span class="num-badge">04</span>
+      <h2>Wintergreen &amp; Camphor — Musculoskeletal Restoration</h2>
+      <span class="latin">Gaultheria procumbens · Cinnamomum camphora</span>
+    </div>
+    <div class="reason-grid">
+      <div class="reason-img-holder">
+        <img 
+          src="images/pillar-04-wintergreen-camphor.webp" 
+          alt="Gaultheria Forest Foliage and Wintergreen" 
+          loading="lazy"
+        >
+        <span class="specimen-tag">Specimen 04 · Gaultheria &amp; Camphora</span>
+      </div>
+      <div class="reason-content">
+        <div>
+          <p class="label l-trap">&times; The Commercial Adulteration Trap</p>
+          <p>Commercial pain liniments and balms frequently rely on synthetic methyl salicylate synthesized from petrochemical feedstocks, dissolved in a heavy mineral grease matrix. While providing a momentary skin burn, they fail to supply the botanical synergistic compounds found in whole-plant extracts.</p>
+          <p class="label l-how">&check; The Certified Testing Standard</p>
+          <p>Authentic wintergreen oil derived from harvested leaves contains upwards of 99% naturally occurring methyl salicylate, verified through isotopic carbon analysis and chiral chromatography to confirm 0% synthetic petrochemical imitation.</p>
+          </div>
+        <div>
+          <p class="label l-tip">&bull; The Elder’s Household Protocol</p>
+          <div class="tip">Mix 2 drops of genuine distilled wintergreen and camphor botanical extract into one teaspoon of Fractionated Coconut Oil. Massage with firm pressure into lumbar muscles, knees, or neck tension after rigorous physical exertion. Do not use if sensitive to salicylates.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Card 5: High-Altitude Lavender Flower -->
+<section class="reason">
+  <div class="wrap">
+    <div class="pillar-header">
+      <span class="num-badge">05</span>
+      <h2>True Lavender — Nocturnal Rest &amp; Neural Calm</h2>
+      <span class="latin">Lavandula angustifolia</span>
+    </div>
+    <div class="reason-grid">
+      <div class="reason-img-holder">
+        <img 
+          src="images/pillar-05-lavender.webp" 
+          alt="Flowering True Lavender Lavandula angustifolia" 
+          loading="lazy"
+        >
+        <span class="specimen-tag">Specimen 05 · Lavandula Angustifolia</span>
+      </div>
+      <div class="reason-content">
+        <div>
+          <p class="label l-trap">&times; The Commercial Adulteration Trap</p>
+          <p>Commercial room diffusers and "sleep mist" sprays routinely blend inexpensive synthetic lavandin or petroleum-synthesized linalyl acetate with chemical phthalate fixatives. These artificial esters irritate mucous membranes, often triggering morning sinus congestion.</p>
+          <p class="label l-how">&check; The Certified Testing Standard</p>
+          <p>True high-altitude <i>Lavandula angustifolia</i> produces a precise natural equilibrium between linalool and linalyl acetate. This botanical equilibrium is verified through independent chiral gas chromatography, ensuring absolute freedom from synthetic spikes or solvent traces.</p>
+          </div>
+        <div>
+          <p class="label l-tip">&bull; The Elder’s Household Protocol</p>
+          <div class="tip">Dispense 1 drop into palms with 5 drops of pure carrier oil. Work gently across soles of feet and back of the neck 20 minutes before retiring. Extinguish artificial electronic screens to let biological circadian mechanisms engage naturally.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Mid CTA Break -->
+<section class="mid-cta">
+  <div class="wrap">
+    <h3>Audit Your Current Household Formulations</h3>
+    <p>The Master Botanical Blueprint provides the complete single-page dilution formula table, five-room protocols, and the 10-second laboratory label check.</p>
+    <a class="btn-blueprint" href="#claim">Receive the Institutional Blueprint</a>
+  </div>
+</section>
+
+<!-- Executive Summary 3 Cards -->
+<section class="summary" id="field-summary">
+  <div class="wrap">
+    <h2>Executive Audit Rules</h2>
+    <p class="lead">Three non-negotiable operational benchmarks to evaluate every botanical compound entering the domestic environment.</p>
+    <div class="summary-grid">
+      <article class="summary-card">
+        <span class="sc-num">01</span>
+        <h3>The First-Ingredient Law</h3>
+        <p>Audit any bottle in 10 seconds. If the initial ingredient lists <i>light liquid paraffin</i>, <i>mineral oil</i>, or <i>petrolatum</i>, you have acquired an inert petroleum coat. Demand a verified, transparent plant carrier (such as Fractionated Coconut Oil) declared as the primary base.</p>
+      </article>
+      <article class="summary-card">
+        <span class="sc-num">02</span>
+        <h3>The Open GC/MS Protocol</h3>
+        <p>Generic cosmetic compliance proves only that an oil is not acutely toxic; it confirms zero botanical efficacy. Demand an open lot-auditing standard where the consumer can input the batch number engraved on the bottle and view the independent chemical spectroscopy analysis.</p>
+      </article>
+      <article class="summary-card">
+        <span class="sc-num">03</span>
+        <h3>The Dilution Discipline</h3>
+        <p>Universal household standard: maintain essential plant oils at 1–2% suspension within Fractionated Coconut Oil (2–3 drops per 5ml teaspoon for adult topical use). Consistent micro-dosing and respect for compound volatility always surpass excessive raw concentrations.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- Comparison Table -->
+<section class="audit-compare" id="comparison-audit">
+  <div class="wrap">
+    <h2>Domestic Shelf Blends vs Certified Analytical Standard</h2>
+    <p class="lead">Comparing published consumer label disclosures against unadulterated analytical standards.</p>
+
+    <div class="table-responsive">
+      <table class="compare-tbl">
+        <thead>
+          <tr>
+            <th>Analytical Dimension</th>
+            <th>Commercial Domestic Products</th>
+            <th>Independent Verified Standard</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Carrier Transparency</td>
+            <td>Botanicals highlighted on front label; inert paraffin listed first on ingredients panel.</td>
+            <td>Single botanical origin declared with 100% full-disclosure plant carrier base.</td>
+          </tr>
+          <tr>
+            <td>Mineral Hydrocarbons</td>
+            <td>Light liquid paraffin often declared at 60% to 76.8% volume.</td>
+            <td>0.0% mineral oil, petroleum distillates, or industrial carriers.</td>
+          </tr>
+          <tr>
+            <td>Aromatic Profile</td>
+            <td>Synthetic fragrance compounds ("Parfum") and industrial dye additives.</td>
+            <td>100% steam-distilled or cold-pressed volatile plant compounds; zero additives.</td>
+          </tr>
+          <tr>
+            <td>Batch-Level Spectroscopy</td>
+            <td>Not published or made available to the end-use consumer.</td>
+            <td>Individual lot GC/MS reports publicly auditable via online batch registry.</td>
+          </tr>
+          <tr>
+            <td>Epidermal Interaction</td>
+            <td>Heavy occlusive barrier that blocks natural cutaneous respiration.</td>
+            <td>Rapidly absorbing botanical lipids matched to human skin structure.</td>
+          </tr>
+          <tr>
+            <td>Consumer Investment</td>
+            <td>Paying premium prices for bulk petroleum byproducts.</td>
+            <td>Pure, unadulterated plant biomass used drop-by-drop.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- Personal Note from Kalyani Ma -->
+<section class="elder-dispatch">
+  <div class="wrap">
+    <div class="dispatch-box">
+      <div class="dispatch-header">
+        <span class="dispatch-badge">A Personal Note · Kalyani Ma</span>
+        <span class="dispatch-date">Archival Entry</span>
+      </div>
+      
+      <h3>Why I Opened This Dossier</h3>
+      
+      <p class="dispatch-body">
+        If I sound uncompromising on these pages, it is because I am quietly angry.
+      </p>
+      
+      <p class="dispatch-body">
+        For generations, these plants were not mere commodities traded on supermarket shelves. They were our living lineage. Sunday champi rubbed into scalp roots by grandmother's hands, pure camphor and wintergreen pressed into weary joints after hard physical labor, frankincense resins purifying our homes at dusk—these rituals were anchored entirely to molecular truth and ancestral reverence.
+      </p>
+      
+      <p class="dispatch-body">
+        Today, industrial marketers print exquisite botanical sketches on the front labels, while quietly pouring 70% to 76.8% inert petroleum paraffin and synthetic fragrance into the back of the bottle. They assume our families will never turn the bottle around. They assume we will never read the fine print. They either fail to understand the sacred sanctity of these botanical rituals—or worse, they simply do not care.
+      </p>
+
+     <p class="dispatch-body">
+        I created this technical blueprint to restore sovereignty to our domestic hearths. Our heritage deserves better than refinery sludge disguised as healing.
+      </p>
+
+      <div class="dispatch-signoff">
+        <div class="signoff-seal">KM</div>
+        <div class="signoff-meta">
+          <strong>Kalyani Ma</strong>
+          <span>Keeper of the Botanical Archive · Field Formulary</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Master Conversion Section -->
+<section class="claim" id="claim">
+  <div class="wrap">
+    <h2>Access the Master Botanical Blueprint</h2>
+    <p class="lead">The complete single-page dilution ratio table, 5-room household protocols, and 10-second label verification guide.</p>
+
+    <div class="claim-paths">
+      <a class="btn-wa" href="https://wa.me/?text=Send%20Blueprint" target="_blank" rel="noopener">
+        Receive Blueprint on WhatsApp
+      </a>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>
