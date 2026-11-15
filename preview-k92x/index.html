@@ -373,6 +373,44 @@ a:hover{color:var(--accent-gold-light);text-decoration:underline}
   color:var(--text-main);
 }
 
+/* Kalyani Pillar Audio Player */
+.kalyani-audio-box{
+  margin:20px 0 22px;
+  padding:16px 18px;
+  background:var(--bg-card-subtle);
+  border:1px solid var(--border-gold);
+  border-left:3px solid var(--accent-gold);
+  border-radius:6px;
+}
+.kalyani-audio-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:10px;
+  flex-wrap:wrap;
+}
+.kalyani-audio-title{
+  font-family:'Newsreader',Georgia,serif;
+  font-size:18px;
+  font-weight:600;
+  color:#fff;
+}
+.kalyani-audio-meta{
+  font-family:'JetBrains Mono',monospace;
+  font-size:11.5px;
+  color:var(--accent-gold);
+  letter-spacing:0.04em;
+  text-transform:uppercase;
+}
+.kalyani-audio-box audio{
+  width:100%;
+  height:38px;
+  border-radius:4px;
+  outline:none;
+  display:block;
+}
+
 @media(min-width:960px){
   .reason-grid{
     grid-template-columns:520px 1fr;
@@ -730,12 +768,22 @@ a:hover{color:var(--accent-gold-light);text-decoration:underline}
         <div>
           <p class="label l-trap">&times; The Commercial Adulteration Trap</p>
           <p>Mass-market incense sticks and cosmetic frankincense formulations rely heavily on synthetic dipping aromas and solvent-extracted resinoid cuts. You absorb petrochemical aroma chemicals designed to mimic the fragrance profile, completely devoid of genuine Boswellia volatile compounds.</p>
-          <p class="label l-how">&check; The Certified Testing Standard</p>
-          <p>Authentic Boswellia resin oil requires supercritical steam extraction from sustainable wildcrafted trees. Every authentic lot undergoes third-party Gas Chromatography/Mass Spectrometry (GC/MS) analysis to guarantee zero synthetic adulteration and complete compound verification.</p>
+
+          <div class="kalyani-audio-box">
+            <div class="kalyani-audio-header">
+              <span class="kalyani-audio-title">A message from Kalyani</span>
+              <span class="kalyani-audio-meta">The $12 Bottle Math &bull; 0:46</span>
+            </div>
+            <audio controls preload="metadata">
+              <source src="https://kalyani-assets.b-cdn.net/frankincense-audio.mp3" type="audio/mpeg">
+              Your browser does not support the audio element.
+            </audio>
           </div>
+        </div>
         <div>
           <p class="label l-tip">&bull; The Elder’s Household Protocol</p>
           <div class="tip">Dilute 1 single drop into 5ml of pure Fractionated Coconut Oil. Disperse across palm surface, cup over nose and mouth for three deep respiratory cycles, or apply along the jawline prior to morning meditation. Patch-test behind the ear before first use.</div>
+        </div>
       </div>
     </div>
   </div>
@@ -764,10 +812,11 @@ a:hover{color:var(--accent-gold-light);text-decoration:underline}
           <p>Commercial grocery-shelf hair oils feature elaborate botanical imagery on the front face, while the rear declaration lists mineral oil and paraffinum liquidum at upwards of 70% to 76.8%. The plant extract you sought is relegated to an insignificant fraction behind synthetic dye.</p>
           <p class="label l-how">&check; The Certified Testing Standard</p>
           <p>Clinical trials (Panahi et al., <i>SKINmed</i>) compared pure rosemary lotion against 2% minoxidil over six months, noting comparable follicular support with significantly less pruritus (scalp irritation). True botanical rosemary must be distilled from leaf biomass with verified chemotypes (1,8-Cineole and Camphor) and certified lot records.</p>
-          </div>
+        </div>
         <div>
           <p class="label l-tip">&bull; The Elder’s Household Protocol</p>
           <div class="tip">Incorporate 2–3 drops into one teaspoon (5ml) of Fractionated Coconut Oil to yield a precise 1–2% botanical suspension. Part hair systematically; massage directly into scalp using fingertip pads for five minutes. Leave on for 45 minutes before a clean botanical rinse.</div>
+        </div>
       </div>
     </div>
   </div>
@@ -796,10 +845,11 @@ a:hover{color:var(--accent-gold-light);text-decoration:underline}
           <p>Drugstore vapor rubs rely almost exclusively on white petrolatum or hydrogenated wax matrices, dosed with isolated synthetic menthol. This creates an occlusive surface barrier on the skin without delivering the volatile botanical terpenes necessary for clean aromatic inhalation.</p>
           <p class="label l-how">&check; The Certified Testing Standard</p>
           <p>Unadulterated steam-distilled Peppermint and Eucalyptus provide pure volatile compounds (menthol, menthone, and eucalyptol) that vaporize cleanly into ambient air without leaving occlusive petroleum residues in delicate nasal passages.</p>
-          </div>
+        </div>
         <div>
           <p class="label l-tip">&bull; The Elder’s Household Protocol</p>
           <div class="tip">Steam Infusion: Add exactly 1 drop of pure Peppermint and 1 drop of Eucalyptus to a ceramic bowl of steaming filtered water. Position face 12 inches above bowl, drape a light cotton towel, and breathe gently through nose with eyes closed for 3 minutes. Keep strictly away from small children and infants.</div>
+        </div>
       </div>
     </div>
   </div>
@@ -828,10 +878,11 @@ a:hover{color:var(--accent-gold-light);text-decoration:underline}
           <p>Commercial pain liniments and balms frequently rely on synthetic methyl salicylate synthesized from petrochemical feedstocks, dissolved in a heavy mineral grease matrix. While providing a momentary skin burn, they fail to supply the botanical synergistic compounds found in whole-plant extracts.</p>
           <p class="label l-how">&check; The Certified Testing Standard</p>
           <p>Authentic wintergreen oil derived from harvested leaves contains upwards of 99% naturally occurring methyl salicylate, verified through isotopic carbon analysis and chiral chromatography to confirm 0% synthetic petrochemical imitation.</p>
-          </div>
+        </div>
         <div>
           <p class="label l-tip">&bull; The Elder’s Household Protocol</p>
           <div class="tip">Mix 2 drops of genuine distilled wintergreen and camphor botanical extract into one teaspoon of Fractionated Coconut Oil. Massage with firm pressure into lumbar muscles, knees, or neck tension after rigorous physical exertion. Do not use if sensitive to salicylates.</div>
+        </div>
       </div>
     </div>
   </div>
@@ -860,10 +911,11 @@ a:hover{color:var(--accent-gold-light);text-decoration:underline}
           <p>Commercial room diffusers and "sleep mist" sprays routinely blend inexpensive synthetic lavandin or petroleum-synthesized linalyl acetate with chemical phthalate fixatives. These artificial esters irritate mucous membranes, often triggering morning sinus congestion.</p>
           <p class="label l-how">&check; The Certified Testing Standard</p>
           <p>True high-altitude <i>Lavandula angustifolia</i> produces a precise natural equilibrium between linalool and linalyl acetate. This botanical equilibrium is verified through independent chiral gas chromatography, ensuring absolute freedom from synthetic spikes or solvent traces.</p>
-          </div>
+        </div>
         <div>
           <p class="label l-tip">&bull; The Elder’s Household Protocol</p>
           <div class="tip">Dispense 1 drop into palms with 5 drops of pure carrier oil. Work gently across soles of feet and back of the neck 20 minutes before retiring. Extinguish artificial electronic screens to let biological circadian mechanisms engage naturally.</div>
+        </div>
       </div>
     </div>
   </div>
@@ -978,7 +1030,7 @@ a:hover{color:var(--accent-gold-light);text-decoration:underline}
         Today, industrial marketers print exquisite botanical sketches on the front labels, while quietly pouring 70% to 76.8% inert petroleum paraffin and synthetic fragrance into the back of the bottle. They assume our families will never turn the bottle around. They assume we will never read the fine print. They either fail to understand the sacred sanctity of these botanical rituals—or worse, they simply do not care.
       </p>
 
-     <p class="dispatch-body">
+      <p class="dispatch-body">
         I created this technical blueprint to restore sovereignty to our domestic hearths. Our heritage deserves better than refinery sludge disguised as healing.
       </p>
 
