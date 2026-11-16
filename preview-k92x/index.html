@@ -1243,10 +1243,45 @@ document.querySelectorAll(".kalyani-audio-box").forEach(box => {
   if (closeBtn && overlay) closeBtn.addEventListener("click", () => { overlay.style.display = "none"; });
   if (overlay) overlay.addEventListener("click", (e) => { if (e.target === overlay) overlay.style.display = "none"; });
   if (form && statusBox) {
-    form.addEventListener("submit", (e) => {
+    form.addEventListener("submit", async (e) => {
       e.preventDefault();
-      form.style.display = "none";
-      statusBox.style.display = "block";
+      const submitBtn = form.querySelector('button[type="submit"]');
+      const origText = submitBtn ? submitBtn.textContent : "Send My Blueprint PDF";
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = "Sending...";
+      }
+
+      const payload = {
+        FIRSTNAME: form.elements["FIRSTNAME"]?.value || "",
+        EMAIL: form.elements["EMAIL"]?.value || "",
+        ref: form.elements["ref"]?.value || localStorage.getItem("kalyani_ref") || ""
+      };
+
+      try {
+        const res = await fetch("/api/subscribe", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok) throw new Error(data.error || "Something went wrong. Please try again.");
+
+        form.style.display = "none";
+        statusBox.style.background = "rgba(20,134,109,0.16)";
+        statusBox.style.borderColor = "rgba(20,134,109,0.45)";
+        statusBox.innerHTML = "<strong>Sent!</strong> Check your inbox for <em>The Household Botanical Blueprint</em> PDF (check Promotions or Spam if it doesn&rsquo;t appear within a minute).";
+        statusBox.style.display = "block";
+      } catch (err) {
+        statusBox.style.background = "rgba(180,55,55,0.18)";
+        statusBox.style.borderColor = "rgba(220,85,85,0.5)";
+        statusBox.textContent = err.message;
+        statusBox.style.display = "block";
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = origText;
+        }
+      }
     });
   }
 })();
