@@ -1120,5 +1120,20 @@ em, i{padding-right:0.14em;}
   </div>
 </section>
 
+<script>
+document.querySelectorAll(".kalyani-audio-box").forEach(box => {
+  const audio = box.querySelector("audio");
+  const meta = box.querySelector(".kalyani-audio-meta");
+  if (!audio || !meta) return;
+  const updateTime = () => {
+    if (isFinite(audio.duration)) {
+      const mins = Math.floor(audio.duration / 60);
+      const secs = String(Math.floor(audio.duration % 60)).padStart(2, "0");
+      meta.innerHTML = meta.innerHTML.replace(/\d+:\d{2}$/, `${mins}:${secs}`);
+    }
+  };
+  audio.readyState >= 1 ? updateTime() : audio.addEventListener("loadedmetadata", updateTime);
+});
+</script>
 </body>
 </html>
