@@ -1233,6 +1233,11 @@ document.querySelectorAll(".kalyani-audio-box").forEach(box => {
   const urlRef = (params.get("ref") || params.get("r") || "").replace(/[^a-zA-Z0-9_-]/g, "");
   if (urlRef) {
     localStorage.setItem("kalyani_ref", urlRef);
+    params.delete("ref");
+    params.delete("r");
+    const cleanSearch = params.toString();
+    const cleanUrl = window.location.pathname + (cleanSearch ? "?" + cleanSearch : "") + window.location.hash;
+    window.history.replaceState({}, document.title, cleanUrl);
   }
   const activeRef = urlRef || localStorage.getItem("kalyani_ref") || DEFAULT_REF;
   if (refField) refField.value = activeRef;
