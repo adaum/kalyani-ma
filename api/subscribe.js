@@ -14,7 +14,7 @@ module.exports = async function handler(req, res) {
       email: EMAIL.trim(),
       attributes: {
         FIRSTNAME: (FIRSTNAME || '').trim(),
-        ...(ref ? { REFERRAL_ID: String(ref).trim() } : {}),
+        ...(ref ? { REF: String(ref).trim() } : {}),
       },
       listIds: [listId],
       updateEnabled: true,
