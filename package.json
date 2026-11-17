@@ -1,6 +1,9 @@
 {
   "name": "kalyani-ma",
   "private": true,
+  "scripts": {
+    "test": "node --test"
+  },
   "dependencies": {
     "pdf-lib": "^1.17.1"
   }
