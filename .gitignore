@@ -9,3 +9,4 @@
 .vercel
 .trueline-history/
 .backups/
+node_modules/

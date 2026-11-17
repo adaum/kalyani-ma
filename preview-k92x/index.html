@@ -1220,6 +1220,7 @@ document.querySelectorAll(".kalyani-audio-box").forEach(box => {
 
 <script>
 (function() {
+  const DEFAULT_REF = "44405";
   const openBtn = document.getElementById("openEmailModalBtn");
   const closeBtn = document.getElementById("closeEmailModalBtn");
   const overlay = document.getElementById("emailModalOverlay");
@@ -1227,59 +1228,74 @@ document.querySelectorAll(".kalyani-audio-box").forEach(box => {
   const statusBox = document.getElementById("blueprintEmailStatus");
   const refField = document.getElementById("blueprintRefField");
 
+  // 1. Capture ?ref= or ?r= attribution with fallback to 44405
   const params = new URLSearchParams(window.location.search);
-  const ref = params.get("ref") || params.get("r") || localStorage.getItem("kalyani_ref") || "";
-  const waBtn = document.getElementById("blueprintWaBtn");
-  if (ref) {
-    localStorage.setItem("kalyani_ref", ref);
-    if (refField) refField.value = ref;
-    if (waBtn) {
-      const msg = encodeURIComponent(`Hi Kalyani! Please send me the Household Botanical Blueprint. (Ref: ${ref})`);
-      waBtn.href = `https://wa.me/14303404160?text=${msg}`;
-    }
+  const urlRef = (params.get("ref") || params.get("r") || "").replace(/[^a-zA-Z0-9_-]/g, "");
+  if (urlRef) {
+    localStorage.setItem("kalyani_ref", urlRef);
+  }
+  const activeRef = urlRef || localStorage.getItem("kalyani_ref") || DEFAULT_REF;
+  if (refField) refField.value = activeRef;
+
+  // 2. Decorate WhatsApp CTA with active referral ID for ManyChat/WhatsApp tracking
+  document.querySelectorAll('a[href*="wa.me"]').forEach((a) => {
+    const msg = encodeURIComponent(`Send Blueprint (Ref: ${activeRef})`);
+    a.href = `https://wa.me/?text=${msg}`;
+  });
+
+  // 3. Decorate any outbound doterra or wholesale links with activeRef
+  document.querySelectorAll('a[href*="referral.doterra.me"], a[data-ref-link]').forEach((a) => {
+    a.href = `https://referral.doterra.me/${encodeURIComponent(activeRef)}`;
+  });
+
+  // 4. Modal controls
+  if (openBtn && overlay) {
+    openBtn.addEventListener("click", () => { overlay.style.display = "flex"; });
+  }
+  if (closeBtn && overlay) {
+    closeBtn.addEventListener("click", () => { overlay.style.display = "none"; });
+  }
+  if (overlay) {
+    overlay.addEventListener("click", (e) => { if (e.target === overlay) overlay.style.display = "none"; });
   }
 
-  if (openBtn && overlay) openBtn.addEventListener("click", () => { overlay.style.display = "flex"; });
-  if (closeBtn && overlay) closeBtn.addEventListener("click", () => { overlay.style.display = "none"; });
-  if (overlay) overlay.addEventListener("click", (e) => { if (e.target === overlay) overlay.style.display = "none"; });
+  // 5. Live Brevo submission via Vercel serverless function
   if (form && statusBox) {
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
-      const submitBtn = form.querySelector('button[type="submit"]');
-      const origText = submitBtn ? submitBtn.textContent : "Send My Blueprint PDF";
-      if (submitBtn) {
-        submitBtn.disabled = true;
-        submitBtn.textContent = "Sending...";
+      const btn = form.querySelector('button[type="submit"]');
+      const origText = btn ? btn.textContent : "Send My Blueprint PDF";
+      if (btn) {
+        btn.disabled = true;
+        btn.textContent = "Sending...";
       }
+      statusBox.style.display = "none";
 
-      const payload = {
-        FIRSTNAME: form.elements["FIRSTNAME"]?.value || "",
-        EMAIL: form.elements["EMAIL"]?.value || "",
-        ref: form.elements["ref"]?.value || localStorage.getItem("kalyani_ref") || ""
-      };
+      const data = Object.fromEntries(new FormData(form).entries());
+      if (!data.ref) data.ref = activeRef;
 
       try {
         const res = await fetch("/api/subscribe", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload)
+          body: JSON.stringify(data),
         });
-        const data = await res.json().catch(() => ({}));
-        if (!res.ok) throw new Error(data.error || "Something went wrong. Please try again.");
+        const result = await res.json().catch(() => ({}));
+        if (!res.ok) throw new Error(result.error || "Unable to send right now.");
 
         form.style.display = "none";
         statusBox.style.background = "rgba(20,134,109,0.16)";
         statusBox.style.borderColor = "rgba(20,134,109,0.45)";
-        statusBox.innerHTML = "<strong>Sent!</strong> Check your inbox for <em>The Household Botanical Blueprint</em> PDF (check Promotions or Spam if it doesn&rsquo;t appear within a minute).";
+        statusBox.innerHTML = "Thank you! Check your inbox in about 1 minute for Kalyani Ma&rsquo;s email with your <em>Household Botanical Blueprint</em> PDF.";
         statusBox.style.display = "block";
       } catch (err) {
-        statusBox.style.background = "rgba(180,55,55,0.18)";
-        statusBox.style.borderColor = "rgba(220,85,85,0.5)";
-        statusBox.textContent = err.message;
+        statusBox.style.background = "rgba(180,60,60,0.2)";
+        statusBox.style.borderColor = "rgba(220,90,90,0.5)";
+        statusBox.textContent = err.message || "Something went wrong. Please try again.";
         statusBox.style.display = "block";
-        if (submitBtn) {
-          submitBtn.disabled = false;
-          submitBtn.textContent = origText;
+        if (btn) {
+          btn.disabled = false;
+          btn.textContent = origText;
         }
       }
     });
