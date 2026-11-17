@@ -366,6 +366,76 @@ describe('POST /api/subscribe', () => {
     assert.deepEqual(res.body, { error: 'Server error connecting to email service.' });
   });
 
+  async function firstNameOnCreate(raw) {
+    const calls = installFetch((call) => {
+      if (call.method === 'GET') return { status: 404, json: { message: 'Contact does not exist' } };
+      if (call.method === 'POST' && call.url.endsWith('/contacts')) return { status: 201, json: { id: 7 } };
+      return null;
+    });
+    const res = mockRes();
+    await handler({
+      method: 'POST',
+      body: { FIRSTNAME: raw, EMAIL: 'ada@example.com', ref: '  44405 ' },
+    }, res);
+    assert.equal(res.statusCode, 200);
+    assert.deepEqual(res.body, { ok: true });
+    assert.deepEqual(calls[1].body.listIds, [5]);
+    assert.equal(calls.some((call) => call.url.includes('/remove') || call.url.includes('/lists/')), false);
+    return calls[1].body.attributes;
+  }
+
+  it('normalizes a lowercase FIRSTNAME to title case', async () => {
+    assert.deepEqual(await firstNameOnCreate('  andrew  '), { FIRSTNAME: 'Andrew', REF: '44405' });
+  });
+
+  it('normalizes an uppercase FIRSTNAME to title case', async () => {
+    assert.deepEqual(await firstNameOnCreate('ANDREW'), { FIRSTNAME: 'Andrew', REF: '44405' });
+  });
+
+  it('normalizes a mixed-case FIRSTNAME to title case', async () => {
+    assert.deepEqual(await firstNameOnCreate('aNdReW'), { FIRSTNAME: 'Andrew', REF: '44405' });
+  });
+
+  it('normalizes a multi-word FIRSTNAME to title case', async () => {
+    assert.deepEqual(await firstNameOnCreate('  mary ann  '), { FIRSTNAME: 'Mary Ann', REF: '44405' });
+  });
+
+  it('title-cases hyphenated and apostrophe names', async () => {
+    assert.deepEqual(await firstNameOnCreate('mary-jo'), { FIRSTNAME: 'Mary-Jo', REF: '44405' });
+    assert.deepEqual(await firstNameOnCreate("o'neil"), { FIRSTNAME: "O'Neil", REF: '44405' });
+  });
+
+  it('title-cases FIRSTNAME on a repeat signup and still removes then re-adds list 5', async () => {
+    const email = 'return@example.com';
+    const calls = installFetch((call) => {
+      if (call.method === 'GET') {
+        return { status: 200, json: contact(email, { listIds: [5], emailBlacklisted: false }) };
+      }
+      if (call.method === 'PUT') return { status: 204, json: {} };
+      if (call.url.includes('/contacts/remove')) return { status: 201, json: nestedResult(email) };
+      if (call.url.includes('/contacts/add')) return { status: 201, json: nestedResult(email) };
+      return null;
+    });
+
+    const res = mockRes();
+    await handler({
+      method: 'POST',
+      body: { FIRSTNAME: 'mary ann', EMAIL: email, ref: '99' },
+    }, res);
+
+    assert.equal(res.statusCode, 200);
+    assert.deepEqual(calls.map(callSummary), [
+      'GET /v3/contacts/return%40example.com?identifierType=email_id',
+      'PUT /v3/contacts/return%40example.com?identifierType=email_id',
+      'POST /v3/contacts/lists/5/contacts/remove',
+      'POST /v3/contacts/lists/5/contacts/add',
+    ]);
+    assert.deepEqual(calls[1].body, {
+      attributes: { FIRSTNAME: 'Mary Ann', REF: '99' },
+    });
+    assert.equal(Object.hasOwn(calls[1].body, 'emailBlacklisted'), false);
+  });
+
   it('does not log the request or the API key', async () => {
     const logs = [];
     const originals = ['log', 'info', 'warn', 'error', 'debug'].map((name) => [name, console[name]]);
