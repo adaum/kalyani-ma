@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Direct Wholesale Access | Kalyani Botanical Archive</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <script>
+    (function() {
+      const params = new URLSearchParams(window.location.search);
+      const rawRef = (params.get('ref') || localStorage.getItem('kalyani_ref') || '44405').trim();
+      const cleanRef = rawRef.replace(/[^a-zA-Z0-9_-]/g, '') || '44405';
+      const rawRegion = (params.get('region') || localStorage.getItem('kalyani_region') || '').trim().toLowerCase();
+      const isIndia = rawRegion === 'india' || rawRegion === 'in';
+
+      window.__KALYANI_ACCESS__ = { ref: cleanRef, isIndia: isIndia };
+
+      // Auto-redirect US / Global visitors immediately to dynamic 25% discount link
+      if (rawRegion && !isIndia) {
+        window.location.replace('https://referral.doterra.me/' + encodeURIComponent(cleanRef));
+      }
+    })();
+  </script>
+  <style>
+    :root {
+      --bg: #F7F2E7;
+      --card: #FFFFFF;
+      --green: #102217;
+      --green-mid: #1B3826;
+      --gold: #CBB279;
+      --gold-dark: #9B7E3E;
+      --text: #1E2420;
+      --muted: #5A635D;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 28px 18px;
+      line-height: 1.6;
+    }
+    .shell {
+      max-width: 620px;
+      width: 100%;
+      background: var(--card);
+      border: 1px solid rgba(203, 178, 121, 0.55);
+      border-radius: 14px;
+      padding: 36px 32px;
+      box-shadow: 0 18px 45px rgba(16, 34, 23, 0.08);
+      position: relative;
+    }
+    .eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gold-dark);
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+    h1 {
+      font-family: 'Cinzel', Georgia, serif;
+      color: var(--green);
+      font-size: 26px;
+      line-height: 1.25;
+      margin-bottom: 14px;
+    }
+    .sub {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 19px;
+      color: var(--muted);
+      margin-bottom: 24px;
+    }
+    .id-box {
+      background: #FBF8F1;
+      border: 1.5px solid var(--gold);
+      border-radius: 10px;
+      padding: 18px 20px;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .id-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      display: block;
+      margin-bottom: 3px;
+    }
+    .id-value {
+      font-family: 'Cinzel', Georgia, serif;
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--green);
+      letter-spacing: 0.06em;
+    }
+    .copy-btn {
+      background: transparent;
+      border: 1.5px solid var(--green);
+      color: var(--green);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 600;
+      font-size: 13px;
+      padding: 9px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .copy-btn:hover { background: var(--green); color: #FFF; }
+    .steps {
+      list-style: none;
+      margin-bottom: 26px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .steps li {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      font-size: 14.5px;
+      color: var(--text);
+    }
+    .step-num {
+      flex-shrink: 0;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--green);
+      color: var(--gold);
+      font-size: 12px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 2px;
+    }
+    .cta {
+      display: block;
+      width: 100%;
+      text-align: center;
+      background: var(--green);
+      color: #FFFFFF;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 15px;
+      padding: 16px 22px;
+      border-radius: 10px;
+      border: 1px solid var(--gold);
+      transition: background 0.2s ease;
+    }
+    .cta:hover { background: var(--green-mid); }
+    .footnote {
+      margin-top: 16px;
+      font-size: 12.5px;
+      color: var(--muted);
+      text-align: center;
+    }
+    .alt-link {
+      margin-top: 14px;
+      text-align: center;
+      font-size: 12.5px;
+    }
+    .alt-link a { color: var(--gold-dark); text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <div class="eyebrow">Kalyani Botanical Archive &bull; Wholesale Access</div>
+    <h1 id="pageTitle">Your Direct 25% Wholesale Access (India)</h1>
+    <p class="sub" id="pageSub">Free Wellness Advocate enrollment &mdash; zero joining fee, no starter kit required, and no obligation to sell.</p>
+
+    <div class="id-box" id="sponsorBox">
+      <div>
+        <span class="id-label">Your Enroller / Sponsor ID</span>
+        <span class="id-value" id="refDisplay">44405</span>
+      </div>
+      <button type="button" class="copy-btn" id="copyBtn">Copy ID</button>
+    </div>
+
+    <ul class="steps" id="indiaSteps">
+      <li><span class="step-num">1</span><span>Tap <strong>Copy ID</strong> above so your Sponsor / Enroller number is ready to paste.</span></li>
+      <li><span class="step-num">2</span><span>Open d&#333;TERRA India&rsquo;s official welcome page below and select <strong>Join Now</strong> (enrollment is completely free).</span></li>
+      <li><span class="step-num">3</span><span>Paste your Sponsor ID during registration and choose only the single oils you want for your home.</span></li>
+    </ul>
+
+    <a href="https://www.doterra.com/IN/en_IN/new-to-doterra" class="cta" id="primaryCta">Continue to Official d&#333;TERRA India Portal &rarr;</a>
+    <p class="footnote">Personal household access at 25% below retail. No monthly minimums or business participation required.</p>
+    <p class="alt-link" id="regionSwitch"></p>
+  </main>
+
+  <script>
+    (function() {
+      const state = window.__KALYANI_ACCESS__ || { ref: '44405', isIndia: true };
+      const refEl = document.getElementById('refDisplay');
+      const copyBtn = document.getElementById('copyBtn');
+      const cta = document.getElementById('primaryCta');
+      const switchEl = document.getElementById('regionSwitch');
+
+      refEl.textContent = state.ref;
+
+      copyBtn.addEventListener('click', function() {
+        navigator.clipboard.writeText(state.ref).then(function() {
+          copyBtn.textContent = 'Copied!';
+          setTimeout(function() { copyBtn.textContent = 'Copy ID'; }, 2000);
+        });
+      });
+
+      const globalUrl = 'https://referral.doterra.me/' + encodeURIComponent(state.ref);
+      const indiaUrl = 'https://www.doterra.com/IN/en_IN/new-to-doterra';
+
+      if (state.isIndia) {
+        cta.href = indiaUrl;
+        switchEl.innerHTML = 'Ordering from the US or outside India? <a href="' + globalUrl + '">Use the Global 25% Discount Link &rarr;</a>';
+      } else {
+        // Fallback if region param wasn't set on /access: auto-forward to Global link
+        window.location.replace(globalUrl);
+      }
+    })();
+  </script>
+</body>
+</html>
