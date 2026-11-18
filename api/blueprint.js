@@ -18,18 +18,6 @@ module.exports = async function handler(req, res) {
     const lastPage = pages[pages.length - 1]; // Page 8
     const { width } = lastPage.getSize();
 
-    const fontMono = await pdfDoc.embedFont(StandardFonts.CourierBold);
-
-    // Stamp the personalized referral URL inside the dark CTA card on Page 8
-    const stampText = `Direct Wholesale Link: ${targetUrl}`;
-    lastPage.drawText(stampText, {
-      x: 78,
-      y: 365,
-      size: 9.5,
-      font: fontMono,
-      color: rgb(0.85, 0.66, 0.31),
-    });
-
     // Make the entire CTA button + link area on Page 8 clickable to targetUrl
     const uriAction = pdfDoc.context.obj({
       Type: 'Action',
@@ -39,7 +27,7 @@ module.exports = async function handler(req, res) {
     const linkAnnot = pdfDoc.context.obj({
       Type: 'Annot',
       Subtype: 'Link',
-      Rect: [72, 326, width - 72, 382],
+      Rect: [72, 322, width - 72, 360],
       Border: [0, 0, 0],
       A: uriAction,
     });
