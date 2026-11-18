@@ -4,6 +4,7 @@ const crypto = require('crypto');
 const fs = require('fs');
 const path = require('path');
 const { EventEmitter } = require('node:events');
+const { PassThrough } = require('node:stream');
 const handler = require('../api/whatsapp');
 
 const { extractRef, buildReply } = handler;
@@ -104,6 +105,42 @@ function postReq(payload, headers) {
     rawBody: JSON.stringify(payload),
     headers: headers || {},
   };
+}
+
+// Mirrors @vercel/node addHelpers: the original stream is already finished,
+// req.body is a lazy JSON parse, and the exact bytes are replayed through
+// req.read (restoreBody's PassThrough). Whitespace is kept so a
+// JSON.stringify of the parsed object would not match the signature.
+function vercelJsonRequest(raw, headers) {
+  const req = new EventEmitter();
+  req.method = 'POST';
+  req.readableEnded = true;
+  req.headers = Object.assign({ 'content-type': 'application/json' }, headers || {});
+
+  const replicateBody = new PassThrough();
+  const on = replicateBody.on.bind(replicateBody);
+  const originalOn = req.on.bind(req);
+  req.read = replicateBody.read.bind(replicateBody);
+  req.on = req.addListener = (name, cb) =>
+    (name === 'data' || name === 'end' ? on(name, cb) : originalOn(name, cb));
+  replicateBody.write(Buffer.from(raw));
+  replicateBody.end();
+
+  Object.defineProperty(req, 'body', {
+    configurable: true,
+    enumerable: true,
+    get() {
+      const value = JSON.parse(raw);
+      Object.defineProperty(req, 'body', {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        value,
+      });
+      return value;
+    },
+  });
+  return req;
 }
 
 beforeEach(() => {
@@ -327,6 +364,81 @@ describe('POST /api/whatsapp', () => {
     assert.equal(calls.length, 1);
     assert.equal(calls[0].url, GRAPH_URL);
     assert.equal(calls[0].body.text.body, replyFor('99999'));
+  });
+
+  it('accepts the Vercel replayed raw body when req.body is parsed JSON', async () => {
+    process.env.WHATSAPP_APP_SECRET = APP_SECRET;
+    const calls = installFetch();
+    const compact = JSON.stringify(textMessage('Send Blueprint (Ref: 99999) 🌿', 'wamid.VERCEL'));
+    const raw = compact.replace('{', '{ ');
+    assert.notEqual(raw, JSON.stringify(JSON.parse(raw)));
+    const req = vercelJsonRequest(raw, { 'X-Hub-Signature-256': sign(raw, APP_SECRET) });
+
+    const res = mockRes();
+    await handler(req, res);
+    assert.equal(res.statusCode, 200);
+    assert.equal(res.body, 'EVENT_RECEIVED');
+    assert.equal(calls.length, 1);
+    assert.equal(calls[0].body.to, '15551234567');
+    assert.equal(calls[0].body.text.body, replyFor('99999'));
+  });
+
+  it('logs a non-secret diagnostic when the Vercel body cannot be verified', async () => {
+    process.env.WHATSAPP_APP_SECRET = APP_SECRET;
+    const logs = [];
+    const originals = ['log', 'info', 'warn', 'error', 'debug'].map((name) => [name, console[name]]);
+    for (const [name] of originals) console[name] = (...args) => logs.push(args.join(' '));
+    const calls = installFetch();
+    const raw = `{ ${JSON.stringify(textMessage('Send Blueprint (Ref: 99999)', 'wamid.VERCELBAD')).slice(1)}`;
+    const signature = `sha256=${'cd'.repeat(32)}`;
+    try {
+      const res = mockRes();
+      await handler(vercelJsonRequest(raw, { 'X-Hub-Signature-256': signature }), res);
+      assert.equal(res.statusCode, 401);
+      assert.equal(res.body, 'Invalid signature');
+      assert.equal(calls.length, 0);
+      const logged = logs.join('\n');
+      assert.match(logged, /WhatsApp signature rejected: rawBodyFound=true rawBodyLength=\d+ signaturePresent=true bodyKind=object/);
+      assert.equal(logged.includes(String(Buffer.byteLength(raw))), true);
+      assert.equal(logged.includes(APP_SECRET), false);
+      assert.equal(logged.includes(signature), false);
+      assert.equal(logged.includes('cd'.repeat(8)), false);
+    } finally {
+      for (const [name, fn] of originals) console[name] = fn;
+    }
+  });
+
+  it('does not treat a parsed object as the signed bytes', { timeout: 1000 }, async () => {
+    process.env.WHATSAPP_APP_SECRET = APP_SECRET;
+    const logs = [];
+    const originals = ['log', 'info', 'warn', 'error', 'debug'].map((name) => [name, console[name]]);
+    for (const [name] of originals) console[name] = (...args) => logs.push(args.join(' '));
+    const calls = installFetch();
+    const payload = textMessage('Send Blueprint (Ref: 99999)', 'wamid.PARSED');
+    const signature = sign(JSON.stringify(payload), APP_SECRET);
+    const req = new EventEmitter();
+    req.method = 'POST';
+    req.readableEnded = true;
+    req.headers = {
+      'content-type': 'application/json',
+      'X-Hub-Signature-256': signature,
+    };
+    req.body = payload;
+    req.read = () => null;
+
+    try {
+      const res = mockRes();
+      await handler(req, res);
+      assert.equal(res.statusCode, 401);
+      assert.equal(res.body, 'Invalid signature');
+      assert.equal(calls.length, 0);
+      const logged = logs.join('\n');
+      assert.match(logged, /rawBodyFound=false rawBodyLength=0 signaturePresent=true bodyKind=object/);
+      assert.equal(logged.includes(APP_SECRET), false);
+      assert.equal(logged.includes(signature), false);
+    } finally {
+      for (const [name, fn] of originals) console[name] = fn;
+    }
   });
 
   it('returns 200 when the Graph send fails, and does not log the token', async () => {

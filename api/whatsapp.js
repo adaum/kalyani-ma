@@ -7,7 +7,10 @@ const crypto = require('crypto');
 // Botanical Blueprint link. Status callbacks and other non-text messages
 // (image, audio, video, sticker, location, and so on) are ignored.
 //
-// Vercel must not parse the body: the signature is an HMAC of the raw bytes.
+// The signature is an HMAC of the exact request bytes. Vercel's Node
+// runtime ignores `config.api.bodyParser` and replaces `req.body` with a
+// lazy getter that JSON.parses. The original bytes are replayed on
+// `req.read()` after that stream has already ended.
 
 const GRAPH_VERSION = 'v21.0';
 const DEFAULT_REF = '44405';
@@ -128,15 +131,77 @@ function readStream(req) {
   });
 }
 
+// Pull bytes already buffered on an ended request. Vercel's helper consumes
+// the original stream, then points `req.read` at a PassThrough holding the
+// exact body. `data`/`end` on that replay are not synchronous, and waiting
+// on them after `readableEnded` can hang when nothing was replayed.
+function readBuffered(req) {
+  if (!req || typeof req.read !== 'function') return null;
+  const chunks = [];
+  try {
+    let chunk = req.read();
+    while (chunk != null) {
+      const buf = Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk);
+      if (buf.length === 0) break;
+      chunks.push(buf);
+      chunk = req.read();
+    }
+  } catch (_) {
+    return null;
+  }
+  if (!chunks.length) return null;
+  return Buffer.concat(chunks);
+}
+
 async function readRawBody(req) {
-  if (req && req.rawBody != null) {
+  if (!req) return null;
+  if (req.rawBody != null) {
     return Buffer.isBuffer(req.rawBody) ? req.rawBody : Buffer.from(String(req.rawBody));
   }
-  if (req && Buffer.isBuffer(req.body)) return req.body;
-  if (req && typeof req.body === 'string') return Buffer.from(req.body);
-  const parsedObject = req && req.body && typeof req.body === 'object';
-  if (!parsedObject && req && typeof req.on === 'function') return readStream(req);
+
+  // Touching `req.body` first runs the lazy JSON getter and used to return
+  // null here, so the HMAC never saw the bytes Meta signed.
+  if (req.readableEnded === true) {
+    const replayed = readBuffered(req);
+    if (replayed) return replayed;
+  }
+
+  let body;
+  try {
+    body = req.body;
+  } catch (_) {
+    body = undefined;
+  }
+  if (Buffer.isBuffer(body)) return body;
+  if (typeof body === 'string') return Buffer.from(body);
+
+  const parsedObject = Boolean(body && typeof body === 'object');
+  if (!parsedObject && req.readableEnded !== true && typeof req.on === 'function') {
+    return readStream(req);
+  }
   return null;
+}
+
+function bodyKind(req) {
+  try {
+    const body = req && req.body;
+    if (body == null) return 'empty';
+    if (Buffer.isBuffer(body)) return 'buffer';
+    if (typeof body === 'string') return 'string';
+    if (typeof body === 'object') return 'object';
+    return typeof body;
+  } catch (_) {
+    return 'unreadable';
+  }
+}
+
+function logSignatureRejection(req, rawBody, signatureHeader) {
+  const found = Buffer.isBuffer(rawBody);
+  const length = found ? rawBody.length : 0;
+  const signaturePresent = Boolean(String(signatureHeader || '').trim());
+  console.error(
+    `WhatsApp signature rejected: rawBodyFound=${found} rawBodyLength=${length} signaturePresent=${signaturePresent} bodyKind=${bodyKind(req)}`
+  );
 }
 
 function parsePayload(rawBody, req) {
@@ -295,6 +360,7 @@ async function handler(req, res) {
   if (secret) {
     const signature = headerValue(req, 'x-hub-signature-256');
     if (!rawBody || !signatureIsValid(rawBody, signature, secret)) {
+      logSignatureRejection(req, rawBody, signature);
       return sendPlain(res, 401, 'Invalid signature');
     }
   }
@@ -318,6 +384,8 @@ async function handler(req, res) {
   return sendPlain(res, 200, 'EVENT_RECEIVED');
 }
 
+// Ignored by the Node runtime (it still parses JSON). Kept so a runtime
+// that does honor it leaves the stream unread for readRawBody.
 const config = {
   api: {
     bodyParser: false,
