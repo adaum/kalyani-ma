@@ -1,24 +1,29 @@
 const fs = require('fs');
 const path = require('path');
-const { PDFDocument, rgb, StandardFonts } = require('pdf-lib');
+const { PDFDocument } = require('pdf-lib');
 
 const DEFAULT_REF = '44405';
+const INDIA_URL = 'https://www.doterra.com/IN/en_IN';
 
 module.exports = async function handler(req, res) {
   try {
     const rawRef = Array.isArray(req.query?.ref) ? req.query.ref[0] : (req.query?.ref || '');
     const cleanRef = String(rawRef).trim().replace(/[^a-zA-Z0-9_-]/g, '') || DEFAULT_REF;
-    const targetUrl = `https://referral.doterra.me/${cleanRef}`;
+
+    const rawRegion = Array.isArray(req.query?.region) ? req.query.region[0] : (req.query?.region || '');
+    const cleanRegion = String(rawRegion).trim().toLowerCase();
+    const isIndia = cleanRegion === 'india' || cleanRegion === 'in';
+
+    const targetUrl = isIndia ? INDIA_URL : `https://referral.doterra.me/${cleanRef}`;
 
     const pdfPath = path.join(process.cwd(), 'assets', 'household-botanical-blueprint.pdf');
     const existingPdfBytes = fs.readFileSync(pdfPath);
 
     const pdfDoc = await PDFDocument.load(existingPdfBytes);
     const pages = pdfDoc.getPages();
-    const lastPage = pages[pages.length - 1]; // Page 8
+    const lastPage = pages[pages.length - 1];
     const { width } = lastPage.getSize();
 
-    // Make the entire CTA button + link area on Page 8 clickable to targetUrl
     const uriAction = pdfDoc.context.obj({
       Type: 'Action',
       S: 'URI',

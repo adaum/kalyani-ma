@@ -33,10 +33,11 @@ function toTitleCase(value) {
 }
 
 function attributesFrom(body) {
-  const { FIRSTNAME, ref } = body || {};
+  const { FIRSTNAME, ref, region } = body || {};
   return {
     FIRSTNAME: toTitleCase(FIRSTNAME),
     ...(ref ? { REF: String(ref).trim() } : {}),
+    ...(region && String(region).trim() ? { REGION: String(region).trim() } : {}),
   };
 }
 
