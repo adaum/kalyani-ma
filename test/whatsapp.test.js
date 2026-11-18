@@ -24,7 +24,19 @@ const savedEnv = {
 let originalFetch;
 
 function replyFor(ref) {
-  return `Namaste! 🌿 Here is your Household Botanical Blueprint: https://kalyanima.in/api/blueprint?ref=${ref}\nWith love, Kalyani`;
+  return `Namaste, your Blueprint is here.
+
+Thank you for requesting the Household Botanical Blueprint. Inside, you'll find:
+✓  The exact carrier dilution ratios our elders relied on
+✓  The 5-second label audit
+✓  The 10-second home blot test
+✓  How to verify the batch code and expiration date stamped on the bottom of the glass
+
+https://kalyanima.in/api/blueprint?ref=${ref}
+
+Save this guide to your device for quick reference in your kitchen and home—and whenever you are ready for pure, batch-verified oils, your direct wholesale access link is waiting on the final page.
+Warmly,
+Kalyani`;
 }
 
 function mockRes() {
@@ -186,6 +198,17 @@ describe('extractRef and buildReply', () => {
     assert.equal(buildReply('../etc'), replyFor('etc'));
     assert.equal(buildReply(''), replyFor('44405'));
   });
+
+  it('keeps the reply inside the WhatsApp text limit and uses the blueprint API link', () => {
+    const longest = buildReply('a'.repeat(40));
+    assert.equal(longest.length <= 4096, true);
+    assert.match(longest, /https:\/\/kalyanima\.in\/api\/blueprint\?ref=a{32}/);
+    assert.equal(longest.includes('/blueprint.pdf'), false);
+    assert.equal(longest.includes('<<<download link'), false);
+    assert.match(longest, /^Namaste, your Blueprint is here\.\n\nThank you/);
+    assert.match(longest, /glass\n\nhttps:\/\/kalyanima\.in\/api\/blueprint\?ref=a{32}\n\nSave this guide/);
+    assert.match(longest, /final page\.\nWarmly,\nKalyani$/);
+  });
 });
 
 describe('GET /api/whatsapp', () => {
@@ -274,7 +297,7 @@ describe('POST /api/whatsapp', () => {
       type: 'text',
       text: {
         body: replyFor('99999'),
-        preview_url: true,
+        preview_url: false,
       },
     });
   });
