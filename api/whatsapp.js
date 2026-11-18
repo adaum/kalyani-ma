@@ -7,10 +7,12 @@ const crypto = require('crypto');
 // Botanical Blueprint link. Status callbacks and other non-text messages
 // (image, audio, video, sticker, location, and so on) are ignored.
 //
-// The signature is an HMAC of the exact request bytes. Vercel's Node
-// runtime ignores `config.api.bodyParser` and replaces `req.body` with a
-// lazy getter that JSON.parses. The original bytes are replayed on
-// `req.read()` after that stream has already ended.
+// The signature is an HMAC of the exact request bytes. On the Node helper
+// path, Vercel ignores `config.api.bodyParser`, parses JSON into `req.body`,
+// and does not leave those bytes on `req.read()`. Production therefore
+// enters through GET/POST Web handlers and reads `request.arrayBuffer()`
+// before anything parses the body. The parsed object is never re-serialized
+// for the HMAC.
 
 const GRAPH_VERSION = 'v21.0';
 const DEFAULT_REF = '44405';
@@ -183,6 +185,7 @@ async function readRawBody(req) {
 }
 
 function bodyKind(req) {
+  if (req && req.bodySource) return String(req.bodySource);
   try {
     const body = req && req.body;
     if (body == null) return 'empty';
@@ -384,15 +387,94 @@ async function handler(req, res) {
   return sendPlain(res, 200, 'EVENT_RECEIVED');
 }
 
-// Ignored by the Node runtime (it still parses JSON). Kept so a runtime
-// that does honor it leaves the stream unread for readRawBody.
+function queryFromUrl(url) {
+  const query = {};
+  url.searchParams.forEach((value, key) => {
+    if (Object.prototype.hasOwnProperty.call(query, key)) {
+      const existing = query[key];
+      query[key] = Array.isArray(existing) ? existing.concat(value) : [existing, value];
+      return;
+    }
+    query[key] = value;
+  });
+  return query;
+}
+
+async function callAsNode(req) {
+  const res = {
+    statusCode: 200,
+    body: '',
+    headers: {},
+    setHeader(name, value) {
+      this.headers[String(name).toLowerCase()] = value;
+      return this;
+    },
+    status(code) {
+      this.statusCode = code;
+      return this;
+    },
+    send(payload) {
+      this.body = payload;
+      return this;
+    },
+    end(payload) {
+      if (payload !== undefined) this.body = payload;
+      return this;
+    },
+  };
+  await handler(req, res);
+  return new Response(res.body == null ? '' : String(res.body), {
+    status: res.statusCode || 200,
+    headers: res.headers,
+  });
+}
+
+// Web handlers. Vercel skips the Node body helpers when GET/POST are
+// exported, so `arrayBuffer()` is the exact payload Meta signed.
+async function GET(request) {
+  const url = new URL(request.url);
+  return callAsNode({
+    method: 'GET',
+    url: `${url.pathname}${url.search}`,
+    query: queryFromUrl(url),
+    headers: request.headers,
+  });
+}
+
+async function POST(request) {
+  let rawBody;
+  try {
+    rawBody = Buffer.from(await request.arrayBuffer());
+  } catch (_) {
+    console.error('WhatsApp webhook could not read the body');
+    return new Response('Bad request', {
+      status: 400,
+      headers: { 'content-type': 'text/plain; charset=utf-8' },
+    });
+  }
+  return callAsNode({
+    method: 'POST',
+    url: new URL(request.url).pathname,
+    headers: request.headers,
+    rawBody,
+    bodySource: 'web',
+  });
+}
+
+// Ignored by the Node runtime (it still parses JSON). The Web POST above
+// is what production uses. Kept so a runtime that does honor it leaves
+// the stream unread for the default handler.
 const config = {
   api: {
     bodyParser: false,
   },
 };
 
+handler.GET = GET;
+handler.POST = POST;
 module.exports = handler;
+module.exports.GET = GET;
+module.exports.POST = POST;
 module.exports.extractRef = extractRef;
 module.exports.buildReply = buildReply;
 module.exports.resetSeen = resetSeen;

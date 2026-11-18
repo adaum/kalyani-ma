@@ -473,6 +473,86 @@ describe('POST /api/whatsapp', () => {
 
   it('disables the Vercel body parser so the signature covers the raw body', () => {
     assert.deepEqual(handler.config, { api: { bodyParser: false } });
+    assert.equal(typeof handler.GET, 'function');
+    assert.equal(typeof handler.POST, 'function');
+  });
+});
+
+describe('Web Request handlers', () => {
+  it('verifies the callback from the request URL', async () => {
+    const calls = installFetch();
+    const response = await handler.GET(new Request(
+      `https://kalyanima.in/api/whatsapp?hub.mode=subscribe&hub.verify_token=${VERIFY_TOKEN}&hub.challenge=from-web`
+    ));
+    assert.equal(response.status, 200);
+    assert.equal(await response.text(), 'from-web');
+    assert.match(response.headers.get('content-type'), /^text\/plain/);
+    assert.equal(calls.length, 0);
+  });
+
+  it('checks the HMAC against request.arrayBuffer(), not a re-serialized object', async () => {
+    process.env.WHATSAPP_APP_SECRET = APP_SECRET;
+    const calls = installFetch();
+    const compact = JSON.stringify(textMessage('Send Blueprint (Ref: 99999)', 'wamid.WEB'));
+    const raw = compact.replace('{', '{ ');
+    assert.notEqual(raw, JSON.stringify(JSON.parse(raw)));
+
+    const ok = await handler.POST(new Request('https://kalyanima.in/api/whatsapp', {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+        'x-hub-signature-256': sign(raw, APP_SECRET),
+      },
+      body: raw,
+    }));
+    assert.equal(ok.status, 200);
+    assert.equal(await ok.text(), 'EVENT_RECEIVED');
+    assert.equal(calls.length, 1);
+    assert.equal(calls[0].body.text.body, replyFor('99999'));
+
+    const resigned = sign(JSON.stringify(JSON.parse(raw)), APP_SECRET);
+    const mismatch = await handler.POST(new Request('https://kalyanima.in/api/whatsapp', {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+        'x-hub-signature-256': resigned,
+      },
+      body: raw,
+    }));
+    assert.equal(mismatch.status, 401);
+    assert.equal(await mismatch.text(), 'Invalid signature');
+    assert.equal(calls.length, 1);
+  });
+
+  it('logs that the web body was the signed bytes, without the secret', async () => {
+    process.env.WHATSAPP_APP_SECRET = APP_SECRET;
+    const logs = [];
+    const originals = ['log', 'info', 'warn', 'error', 'debug'].map((name) => [name, console[name]]);
+    for (const [name] of originals) console[name] = (...args) => logs.push(args.join(' '));
+    installFetch();
+    const raw = '{ "object":"whatsapp_business_account","entry":[]}';
+    const signature = `sha256=${'ef'.repeat(32)}`;
+    try {
+      const response = await handler.POST(new Request('https://kalyanima.in/api/whatsapp', {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json',
+          'x-hub-signature-256': signature,
+        },
+        body: raw,
+      }));
+      assert.equal(response.status, 401);
+      const logged = logs.join('\n');
+      assert.match(
+        logged,
+        new RegExp(`WhatsApp signature rejected: rawBodyFound=true rawBodyLength=${Buffer.byteLength(raw)} signaturePresent=true bodyKind=web`)
+      );
+      assert.equal(logged.includes(APP_SECRET), false);
+      assert.equal(logged.includes(signature), false);
+      assert.equal(logged.includes('ef'.repeat(8)), false);
+    } finally {
+      for (const [name, fn] of originals) console[name] = fn;
+    }
   });
 });
 
