@@ -23,10 +23,19 @@ function contactPath(email) {
   return `/contacts/${encodeURIComponent(email)}?identifierType=email_id`;
 }
 
+// Welcome mail greets with the stored FIRSTNAME ("Namaste Andrew,").
+// Capitalize each word, including after a hyphen or apostrophe.
+function toTitleCase(value) {
+  return (value || '')
+    .trim()
+    .toLowerCase()
+    .replace(/(^|[\s'\u2018\u2019-])(\p{L})/gu, (_, boundary, letter) => boundary + letter.toUpperCase());
+}
+
 function attributesFrom(body) {
   const { FIRSTNAME, ref } = body || {};
   return {
-    FIRSTNAME: (FIRSTNAME || '').trim(),
+    FIRSTNAME: toTitleCase(FIRSTNAME),
     ...(ref ? { REF: String(ref).trim() } : {}),
   };
 }
