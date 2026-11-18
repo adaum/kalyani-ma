@@ -179,21 +179,21 @@
 <body>
   <main class="shell">
     <div class="eyebrow">Kalyani Botanical Archive &bull; Wholesale Access</div>
-    <h1 id="pageTitle">Your Direct 25% Wholesale Access (India)</h1>
-    <p class="sub" id="pageSub">Free Wellness Advocate enrollment &mdash; zero joining fee, no starter kit required, and no obligation to sell.</p>
+    <h1 id="pageTitle">Your Personal 25% Wholesale Access (India)</h1>
+    <p class="sub" id="pageSub">Direct household pricing from our vetted botanical source &mdash; zero joining fee, no starter kit required, and no obligation to sell.</p>
 
     <div class="id-box" id="sponsorBox">
       <div>
-        <span class="id-label">Your Enroller / Sponsor ID</span>
+        <span class="id-label">Your Wholesale Access Code</span>
         <span class="id-value" id="refDisplay">44405</span>
       </div>
-      <button type="button" class="copy-btn" id="copyBtn">Copy ID</button>
+      <button type="button" class="copy-btn" id="copyBtn">Copy Code</button>
     </div>
 
     <ul class="steps" id="indiaSteps">
-      <li><span class="step-num">1</span><span>Tap <strong>Copy ID</strong> above so your Sponsor / Enroller number is ready to paste.</span></li>
-      <li><span class="step-num">2</span><span>Open d&#333;TERRA India&rsquo;s official welcome page below and select <strong>Join Now</strong> (enrollment is completely free).</span></li>
-      <li><span class="step-num">3</span><span>Paste your Sponsor ID during registration and choose only the single oils you want for your home.</span></li>
+      <li><span class="step-num">1</span><span>Tap <strong>Copy Code</strong> above so your wholesale access code is ready to paste.</span></li>
+      <li><span class="step-num">2</span><span>Open d&#333;TERRA India&rsquo;s official welcome page below and select <strong>Join Now</strong> (India accounts carry the <em>Wellness Advocate</em> label by default&mdash;that is simply how the 25% household discount is applied, with zero business requirement).</span></li>
+      <li><span class="step-num">3</span><span>Paste your access code during registration to establish your profile and lock in your permanent 25% wholesale discount.</span></li>
     </ul>
 
     <a href="https://www.doterra.com/IN/en_IN/new-to-doterra" class="cta" id="primaryCta">Continue to Official d&#333;TERRA India Portal &rarr;</a>
@@ -214,7 +214,7 @@
       copyBtn.addEventListener('click', function() {
         navigator.clipboard.writeText(state.ref).then(function() {
           copyBtn.textContent = 'Copied!';
-          setTimeout(function() { copyBtn.textContent = 'Copy ID'; }, 2000);
+          setTimeout(function() { copyBtn.textContent = 'Copy Code'; }, 2000);
         });
       });
 
