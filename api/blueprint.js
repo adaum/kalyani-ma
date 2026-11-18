@@ -3,7 +3,12 @@ const path = require('path');
 const { PDFDocument } = require('pdf-lib');
 
 const DEFAULT_REF = '44405';
-const INDIA_URL = 'https://www.doterra.com/IN/en_IN';
+const DEFAULT_INDIA_URL = 'https://doterra.me/LcwElF';
+
+// Partner-specific pre-loaded India custom cart links (falls back to DEFAULT_INDIA_URL)
+const INDIA_LINKS = {
+  '44405': 'https://doterra.me/LcwElF',
+};
 
 module.exports = async function handler(req, res) {
   try {
@@ -14,7 +19,9 @@ module.exports = async function handler(req, res) {
     const cleanRegion = String(rawRegion).trim().toLowerCase();
     const isIndia = cleanRegion === 'india' || cleanRegion === 'in';
 
-    const targetUrl = isIndia ? INDIA_URL : `https://referral.doterra.me/${cleanRef}`;
+    const targetUrl = isIndia
+      ? (INDIA_LINKS[cleanRef] || DEFAULT_INDIA_URL)
+      : `https://referral.doterra.me/${cleanRef}`;
 
     const pdfPath = path.join(process.cwd(), 'assets', 'household-botanical-blueprint.pdf');
     const existingPdfBytes = fs.readFileSync(pdfPath);
