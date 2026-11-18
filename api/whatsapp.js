@@ -41,7 +41,19 @@ function extractRef(text) {
 function buildReply(ref) {
   const id = sanitizeRef(ref);
   const url = `https://kalyanima.in/api/blueprint?ref=${encodeURIComponent(id)}`;
-  return `Namaste! 🌿 Here is your Household Botanical Blueprint: ${url}\nWith love, Kalyani`;
+  return `Namaste, your Blueprint is here.
+
+Thank you for requesting the Household Botanical Blueprint. Inside, you'll find:
+✓  The exact carrier dilution ratios our elders relied on
+✓  The 5-second label audit
+✓  The 10-second home blot test
+✓  How to verify the batch code and expiration date stamped on the bottom of the glass
+
+${url}
+
+Save this guide to your device for quick reference in your kitchen and home—and whenever you are ready for pure, batch-verified oils, your direct wholesale access link is waiting on the final page.
+Warmly,
+Kalyani`;
 }
 
 function remember(id) {
@@ -289,7 +301,9 @@ async function sendWhatsAppText(to, body) {
       type: 'text',
       text: {
         body,
-        preview_url: true,
+        // The only URL is a PDF from /api/blueprint. A preview would crawl
+        // that download and has no HTML card to show. The link stays tappable.
+        preview_url: false,
       },
     }),
   });

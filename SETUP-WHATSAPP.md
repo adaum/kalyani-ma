@@ -8,12 +8,25 @@ It does **not** reply to status callbacks (`delivered`, `read`, and the rest) or
 
 A valid POST always returns 200, including when the Graph send fails, so Meta does not retry-storm. Message ids are remembered on the warm serverless instance so a retry does not send a second link.
 
-Reply copy:
+Reply copy (the download line is `https://kalyanima.in/api/blueprint?ref=<ID>`):
 
 ```
-Namaste! 🌿 Here is your Household Botanical Blueprint: https://kalyanima.in/api/blueprint?ref=<ID>
-With love, Kalyani
+Namaste, your Blueprint is here.
+
+Thank you for requesting the Household Botanical Blueprint. Inside, you'll find:
+✓  The exact carrier dilution ratios our elders relied on
+✓  The 5-second label audit
+✓  The 10-second home blot test
+✓  How to verify the batch code and expiration date stamped on the bottom of the glass
+
+https://kalyanima.in/api/blueprint?ref=<ID>
+
+Save this guide to your device for quick reference in your kitchen and home—and whenever you are ready for pure, batch-verified oils, your direct wholesale access link is waiting on the final page.
+Warmly,
+Kalyani
 ```
+
+The Graph send sets `preview_url` to false. That URL returns a PDF, so a link preview has no page card to show and would only crawl the download. The link is still tappable. The body stays under WhatsApp's 4096-character text limit.
 
 ## Vercel environment variables
 
