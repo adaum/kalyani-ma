@@ -1,81 +1,345 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="robots" content="noindex, nofollow, noarchive">
-  <title>Partner Field Portal &bull; Kalyani Ma</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Newsreader:opsz,wght@6..72,400;6..72,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      min-height: 100vh;
-      background: #070f0b;
-      color: #f7f2e7;
-      font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 32px 20px;
-    }
-    .card {
-      width: 100%;
-      max-width: 540px;
-      padding: 40px 32px;
-      border-radius: 16px;
-      background: linear-gradient(180deg, rgba(22, 39, 30, 0.96) 0%, rgba(11, 22, 16, 0.99) 100%);
-      border: 1px solid rgba(203, 178, 121, 0.45);
-      border-top: 1px solid rgba(242, 202, 118, 0.8);
-      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.65);
-      text-align: center;
-    }
-    .crest {
-      width: 44px;
-      height: 44px;
-      margin: 0 auto 14px;
-      border-radius: 50%;
-      border: 1.5px solid #cbb279;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: "Cinzel", Georgia, serif;
-      font-size: 0.9rem;
-      font-weight: 700;
-      color: #cbb279;
-      letter-spacing: 0.5px;
-    }
-    .kicker {
-      font-size: 0.72rem;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: #cbb279;
-      margin-bottom: 10px;
-      font-weight: 600;
-    }
-    h1 {
-      font-family: "Cinzel", Georgia, serif;
-      font-size: 1.55rem;
-      font-weight: 600;
-      color: #f7f2e7;
-      margin-bottom: 12px;
-    }
-    p {
-      font-family: "Newsreader", Georgia, serif;
-      font-size: 1.05rem;
-      line-height: 1.6;
-      color: #c8d3cc;
-    }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Partner Field Portal | Kalyani Ma</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#070C08;
+  --bg-card:#0B140E;
+  --bg-card-subtle:#0F1A12;
+  --bg-input:#060A07;
+  --text-main:#E4E8E3;
+  --text-muted:#A6B0A7;
+  --text-dim:#7D877E;
+  --accent-gold:#CBB279;
+  --accent-gold-light:#EFE6CF;
+  --border:#1A261D;
+  --border-gold:rgba(203,178,121,0.32);
+  --green-badge:#152B1E;
+  --green-text:#52B77C;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  min-height:100vh;
+  background:radial-gradient(circle at 50% 0%, rgba(26,45,30,0.38) 0%, #070C08 65%);
+  color:var(--text-main);
+  font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,sans-serif;
+  line-height:1.65;
+  display:flex;
+  flex-direction:column;
+}
+.top-nav{
+  border-bottom:1px solid rgba(203,178,121,0.22);
+  padding:16px 24px;
+  background:rgba(7,12,8,0.95);
+}
+.nav-wrap{
+  max-width:860px;
+  margin:0 auto;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  text-decoration:none;
+}
+.seal{
+  width:36px;
+  height:36px;
+  border-radius:50%;
+  border:1.5px solid var(--accent-gold);
+  background:var(--bg-card);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-family:'Cinzel',serif;
+  font-weight:700;
+  font-size:12px;
+  color:var(--accent-gold);
+  letter-spacing:0.05em;
+}
+.brand-text{
+  font-family:'Newsreader',Georgia,serif;
+  font-size:19px;
+  font-weight:600;
+  color:#fff;
+}
+.back-link{
+  font-family:'JetBrains Mono',monospace;
+  font-size:12px;
+  color:var(--accent-gold);
+  text-decoration:none;
+}
+.back-link:hover{text-decoration:underline}
+
+main{
+  flex:1;
+  width:100%;
+  max-width:680px;
+  margin:0 auto;
+  padding:48px 20px 64px;
+}
+.header{
+  text-align:center;
+  margin-bottom:32px;
+}
+.kicker{
+  display:inline-block;
+  font-family:'Cinzel',serif;
+  font-size:11px;
+  letter-spacing:0.16em;
+  text-transform:uppercase;
+  color:var(--accent-gold);
+  border:1px solid var(--border-gold);
+  background:var(--bg-card-subtle);
+  padding:5px 12px;
+  border-radius:3px;
+  margin-bottom:14px;
+}
+h1{
+  font-family:'Newsreader',Georgia,serif;
+  font-size:clamp(28px,4.5vw,38px);
+  font-weight:500;
+  color:#fff;
+  margin-bottom:10px;
+}
+.sub{
+  color:var(--text-muted);
+  font-size:16px;
+  max-width:540px;
+  margin:0 auto;
+}
+
+.panel{
+  background:linear-gradient(180deg, rgba(15,26,18,0.96) 0%, rgba(11,20,14,0.99) 100%);
+  border:1px solid var(--border-gold);
+  border-top:1px solid rgba(242,202,118,0.75);
+  border-radius:12px;
+  padding:30px 26px;
+  box-shadow:0 22px 55px rgba(0,0,0,0.65);
+}
+label{
+  display:block;
+  font-family:'Cinzel',serif;
+  font-size:11.5px;
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+  color:var(--accent-gold);
+  margin-bottom:8px;
+  font-weight:600;
+}
+.input-row{
+  display:flex;
+  gap:10px;
+  margin-bottom:24px;
+}
+input[type="text"]{
+  flex:1;
+  background:var(--bg-input);
+  border:1px solid var(--border-gold);
+  border-radius:6px;
+  padding:14px 16px;
+  color:#fff;
+  font-family:'JetBrains Mono',monospace;
+  font-size:16px;
+  outline:none;
+}
+input[type="text"]:focus{
+  border-color:#F2CA76;
+  box-shadow:0 0 0 2px rgba(203,178,121,0.18);
+}
+
+.output-group{
+  margin-bottom:20px;
+}
+.output-box{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  background:var(--bg-input);
+  border:1px solid var(--border);
+  border-radius:6px;
+  padding:12px 14px;
+}
+.output-url{
+  font-family:'JetBrains Mono',monospace;
+  font-size:13.5px;
+  color:var(--accent-gold-light);
+  word-break:break-all;
+}
+.btn-copy{
+  flex-shrink:0;
+  background:var(--accent-gold);
+  color:#0B140E;
+  border:none;
+  border-radius:4px;
+  padding:9px 15px;
+  font-family:'Plus Jakarta Sans',sans-serif;
+  font-weight:700;
+  font-size:13px;
+  cursor:pointer;
+  transition:background .15s;
+}
+.btn-copy:hover{background:#dfca96}
+.btn-copy.copied{
+  background:var(--green-badge);
+  color:var(--green-text);
+  border:1px solid rgba(82,183,124,0.4);
+}
+.hint{
+  font-size:13px;
+  color:var(--text-dim);
+  margin-top:6px;
+}
+
+.actions{
+  margin-top:24px;
+  padding-top:22px;
+  border-top:1px solid var(--border);
+  display:grid;
+  grid-template-columns:1fr;
+  gap:12px;
+}
+.btn-wa{
+  background:#128C7E;
+  color:#fff;
+  font-weight:700;
+  font-size:15px;
+  padding:14px 18px;
+  border-radius:6px;
+  border:1px solid #1ebea5;
+  text-decoration:none;
+  text-align:center;
+  display:block;
+}
+.btn-wa:hover{background:#14A090}
+
+#partner-notes{
+  margin-top:28px;
+}
+
+footer{
+  border-top:1px solid rgba(203,178,121,0.18);
+  padding:22px 20px;
+  text-align:center;
+  font-size:12.5px;
+  color:var(--text-dim);
+}
+</style>
 </head>
 <body>
-  <main class="card">
-    <div class="crest">KM</div>
-    <div class="kicker">Keeper of the Botanical Archive</div>
-    <h1>Partner Link Generator</h1>
-    <p>Field sharing tools and custom referral link generation are being prepared here.</p>
-  </main>
+
+<nav class="top-nav">
+  <div class="nav-wrap">
+    <a class="brand" href="/">
+      <span class="seal">KM</span>
+      <span class="brand-text">Kalyani Ma</span>
+    </a>
+    <a class="back-link" href="/">&larr; Return to Archive</a>
+  </div>
+</nav>
+
+<main>
+  <div class="header">
+    <span class="kicker">Keeper of the Botanical Archive &bull; Field Portal</span>
+    <h1>Partner Referral Link Generator</h1>
+    <p class="sub">Enter your d&#333;TERRA Member ID below to generate your personal Kalyani Ma sharing links.</p>
+  </div>
+
+  <section class="panel">
+    <label for="memberId">Your d&#333;TERRA Member ID</label>
+    <div class="input-row">
+      <input type="text" id="memberId" inputmode="numeric" pattern="[0-9]*" placeholder="e.g. 44405" autocomplete="off">
+    </div>
+
+    <div class="output-group">
+      <label>1. Main Kalyani Ma Funnel Link (Recommended)</label>
+      <div class="output-box">
+        <span class="output-url" id="funnelUrl">https://kalyanima.in/?ref=44405</span>
+        <button class="btn-copy" type="button" data-target="funnelUrl">Copy Link</button>
+      </div>
+      <p class="hint">Automatically scrubs the ID from the visitor&rsquo;s address bar upon landing while locking in your attribution across Email, WhatsApp, and the Blueprint PDF.</p>
+    </div>
+
+    <div class="output-group">
+      <label>2. Direct Stamped Blueprint PDF Link</label>
+      <div class="output-box">
+        <span class="output-url" id="pdfUrl">https://kalyanima.in/api/blueprint?ref=44405</span>
+        <button class="btn-copy" type="button" data-target="pdfUrl">Copy PDF Link</button>
+      </div>
+      <p class="hint">Opens the 16-page Household Botanical Blueprint directly with your Member ID stamped on Page 16.</p>
+    </div>
+
+    <div class="actions">
+      <a class="btn-wa" id="waShareBtn" href="https://wa.me/?text=Have%20you%20seen%20this%20investigative%20botanical%20guide%3F%20https%3A%2F%2Fkalyanima.in%2F%3Fref%3D44405" target="_blank" rel="noopener">
+        Share Your Link via WhatsApp
+      </a>
+    </div>
+  </section>
+
+  <!-- Reserved container for tomorrow's partner guidelines & copy-paste message scripts -->
+  <section id="partner-notes"></section>
+</main>
+
+<footer>
+  &copy; 2026 Kalyani Ma &bull; Field Formulary &amp; Botanical Archive
+</footer>
+
+<script>
+(function() {
+  const input = document.getElementById("memberId");
+  const funnelEl = document.getElementById("funnelUrl");
+  const pdfEl = document.getElementById("pdfUrl");
+  const waBtn = document.getElementById("waShareBtn");
+
+  const saved = localStorage.getItem("km_partner_id");
+  if (saved) input.value = saved;
+
+  function updateLinks() {
+    const clean = input.value.replace(/[^0-9]/g, "");
+    if (input.value !== clean) input.value = clean;
+    const id = clean || "44405";
+    if (clean) localStorage.setItem("km_partner_id", clean);
+
+    const funnel = "https://kalyanima.in/?ref=" + id;
+    const pdf = "https://kalyanima.in/api/blueprint?ref=" + id;
+
+    funnelEl.textContent = funnel;
+    pdfEl.textContent = pdf;
+
+    const msg = "Have you seen this investigative botanical guide? " + funnel;
+    waBtn.href = "https://wa.me/?text=" + encodeURIComponent(msg);
+  }
+
+  input.addEventListener("input", updateLinks);
+  updateLinks();
+
+  document.querySelectorAll(".btn-copy").forEach(function(btn) {
+    btn.addEventListener("click", function() {
+      const target = document.getElementById(btn.getAttribute("data-target"));
+      if (!target) return;
+      navigator.clipboard.writeText(target.textContent).then(function() {
+        const orig = btn.textContent;
+        btn.textContent = "Copied!";
+        btn.classList.add("copied");
+        setTimeout(function() {
+          btn.textContent = orig;
+          btn.classList.remove("copied");
+        }, 1800);
+      });
+    });
+  });
+})();
+</script>
 </body>
 </html>
