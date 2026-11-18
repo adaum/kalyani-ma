@@ -24,7 +24,7 @@ module.exports = async function handler(req, res) {
     const stampText = `Direct Wholesale Link: ${targetUrl}`;
     lastPage.drawText(stampText, {
       x: 78,
-      y: 356,
+      y: 374,
       size: 9.5,
       font: fontMono,
       color: rgb(0.85, 0.66, 0.31),
@@ -39,7 +39,7 @@ module.exports = async function handler(req, res) {
     const linkAnnot = pdfDoc.context.obj({
       Type: 'Annot',
       Subtype: 'Link',
-      Rect: [72, 344, width - 72, 420],
+      Rect: [72, 326, width - 72, 390],
       Border: [0, 0, 0],
       A: uriAction,
     });
