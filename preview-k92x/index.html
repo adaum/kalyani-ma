@@ -1152,7 +1152,7 @@ em, i{padding-right:0.14em;}
           <button type="button" id="closeEmailModalBtn" aria-label="Close" style="position:absolute; top:14px; right:16px; background:none; border:none; color:#9fb0a6; font-size:1.5rem; line-height:1; cursor:pointer;">&times;</button>
           <p style="margin:0 0 6px; font-size:0.75rem; letter-spacing:1.6px; text-transform:uppercase; color:#d9a84e; font-weight:600;">Free Field Formulary</p>
           <h3 style="margin:0 0 10px; font-size:1.45rem; color:#f7f2e7; font-weight:600;">Send the Blueprint to Your Inbox</h3>
-          <p style="margin:0 0 20px; font-size:0.93rem; line-height:1.55; color:#c8d3cc;">Enter your details below and we&rsquo;ll email you the complete 8-page <em>Household Botanical Blueprint</em> PDF right away.</p>
+          <p style="margin:0 0 20px; font-size:0.93rem; line-height:1.55; color:#c8d3cc;">Enter your details below and we&rsquo;ll email you the complete 16-page <em>Household Botanical Blueprint</em> PDF right away.</p>
           <form id="blueprintEmailForm">
             <input type="hidden" name="ref" id="blueprintRefField" value="">
             <label style="display:block; margin-bottom:12px;">
@@ -1163,7 +1163,28 @@ em, i{padding-right:0.14em;}
               <span style="display:block; font-size:0.82rem; color:#d7e0da; margin-bottom:5px;">Email Address</span>
               <input type="email" name="EMAIL" required placeholder="you@example.com" style="width:100%; box-sizing:border-box; padding:12px 14px; border-radius:6px; border:1px solid rgba(217,168,78,0.35); background:#09130e; color:#f7f2e7; font-size:0.95rem;">
             </label>
-            <button type="submit" style="width:100%; padding:14px 20px; border-radius:6px; border:none; background:#14866d; color:#ffffff; font-size:1rem; font-weight:600; cursor:pointer;">Send My Blueprint PDF</button>
+            <div id="regionDetectBox" style="display:flex;align-items:center;justify-content:space-between;padding:11px 14px;margin:14px 0 16px;border-radius:6px;border:1px solid rgba(203,178,121,0.28);background:rgba(7,12,8,0.65);font-size:14px;color:#f7f2e7;">
+        <div style="display:flex;align-items:center;gap:9px;">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#9aa89e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+          <span id="regionLabel" style="font-weight:500;color:#ffffff;">India</span>
+          <span id="regionTag" style="color:#8b9990;font-size:13.5px;">(detected)</span>
+        </div>
+        <button type="button" id="regionChangeBtn" style="background:none;border:none;padding:0;color:#58b8c9;font-size:13.5px;font-weight:500;text-decoration:underline;cursor:pointer;">Change</button>
+      </div>
+      <div id="regionSelectWrap" style="display:none;margin:-8px 0 16px;">
+        <select id="regionSelect" style="width:100%;padding:10px 12px;border-radius:6px;border:1px solid rgba(203,178,121,0.35);background:#09110c;color:#f7f2e7;font-size:14px;">
+          <option value="India">India</option>
+          <option value="United States">United States</option>
+          <option value="United Kingdom">United Kingdom</option>
+          <option value="Canada">Canada</option>
+          <option value="United Arab Emirates">United Arab Emirates</option>
+          <option value="Australia">Australia</option>
+          <option value="Singapore">Singapore</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+      <input type="hidden" name="region" id="blueprintRegionField" value="India">
+      <button type="submit" style="width:100%; padding:14px 20px; border-radius:6px; border:none; background:#14866d; color:#ffffff; font-size:1rem; font-weight:600; cursor:pointer;">Send My Blueprint PDF</button>
           </form>
           <div id="blueprintEmailStatus" style="display:none; margin-top:16px; padding:14px; border-radius:6px; background:rgba(20,134,109,0.16); border:1px solid rgba(20,134,109,0.45); color:#e6f4ef; font-size:0.92rem; line-height:1.5;">
             Thank you! Check your inbox in about 1 minute for Kalyani Ma&rsquo;s email with your Household Botanical Blueprint PDF.
@@ -1305,6 +1326,49 @@ document.querySelectorAll(".kalyani-audio-box").forEach(box => {
       }
     });
   }
+})();
+</script>
+
+<script>
+(function() {
+  const label = document.getElementById("regionLabel");
+  const tag = document.getElementById("regionTag");
+  const changeBtn = document.getElementById("regionChangeBtn");
+  const selectWrap = document.getElementById("regionSelectWrap");
+  const selectEl = document.getElementById("regionSelect");
+  const hiddenField = document.getElementById("blueprintRegionField");
+  if (!label || !changeBtn || !selectEl) return;
+
+  function setRegion(country, isDetected) {
+    label.textContent = country;
+    tag.textContent = isDetected ? "(detected)" : "(selected)";
+    hiddenField.value = country;
+    let found = false;
+    for (const opt of selectEl.options) {
+      if (opt.value === country) { opt.selected = true; found = true; break; }
+    }
+    if (!found) {
+      const opt = document.createElement("option");
+      opt.value = country; opt.textContent = country; opt.selected = true;
+      selectEl.insertBefore(opt, selectEl.firstChild);
+    }
+  }
+
+  fetch("/api/region")
+    .then(r => r.ok ? r.json() : null)
+    .then(data => { if (data && data.country) setRegion(data.country, true); })
+    .catch(() => {});
+
+  changeBtn.addEventListener("click", () => {
+    const open = selectWrap.style.display === "block";
+    selectWrap.style.display = open ? "none" : "block";
+    if (!open) selectEl.focus();
+  });
+
+  selectEl.addEventListener("change", () => {
+    setRegion(selectEl.value, false);
+    selectWrap.style.display = "none";
+  });
 })();
 </script>
 </body>
