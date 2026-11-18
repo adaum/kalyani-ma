@@ -1152,7 +1152,7 @@ em, i{padding-right:0.14em;}
           <button type="button" id="closeEmailModalBtn" aria-label="Close" style="position:absolute; top:14px; right:16px; background:none; border:none; color:#9fb0a6; font-size:1.5rem; line-height:1; cursor:pointer;">&times;</button>
           <p style="margin:0 0 6px; font-size:0.75rem; letter-spacing:1.6px; text-transform:uppercase; color:#d9a84e; font-weight:600;">Free Field Formulary</p>
           <h3 style="margin:0 0 10px; font-size:1.45rem; color:#f7f2e7; font-weight:600;">Send the Blueprint to Your Inbox</h3>
-          <p style="margin:0 0 20px; font-size:0.93rem; line-height:1.55; color:#c8d3cc;">Enter your details below and we&rsquo;ll email you the complete 16-page <em>Household Botanical Blueprint</em> PDF right away.</p>
+          <p style="margin:0 0 20px; font-size:0.93rem; line-height:1.55; color:#c8d3cc;">Enter your details below and we&rsquo;ll email you the complete 16-page <em>Household Botanical Blueprint</em> PDF within 3 minutes.</p>
           <form id="blueprintEmailForm">
             <input type="hidden" name="ref" id="blueprintRefField" value="">
             <label style="display:block; margin-bottom:12px;">
@@ -1185,9 +1185,10 @@ em, i{padding-right:0.14em;}
       </div>
       <input type="hidden" name="region" id="blueprintRegionField" value="India">
       <button type="submit" style="width:100%; padding:14px 20px; border-radius:6px; border:none; background:#14866d; color:#ffffff; font-size:1rem; font-weight:600; cursor:pointer;">Send My Blueprint PDF</button>
+      <p style="margin:10px 0 0;text-align:center;font-size:12.5px;color:#8b9990;letter-spacing:0.01em;">Arrives within 3 minutes — check Spam/Promotions if unseen.</p>
           </form>
           <div id="blueprintEmailStatus" style="display:none; margin-top:16px; padding:14px; border-radius:6px; background:rgba(20,134,109,0.16); border:1px solid rgba(20,134,109,0.45); color:#e6f4ef; font-size:0.92rem; line-height:1.5;">
-            Thank you! Check your inbox in about 1 minute for Kalyani Ma&rsquo;s email with your Household Botanical Blueprint PDF.
+            Thank you! Check your inbox within 3 minutes for Kalyani Ma&rsquo;s email with your Household Botanical Blueprint PDF.
           </div>
         </div>
       </div>
@@ -1312,7 +1313,7 @@ document.querySelectorAll(".kalyani-audio-box").forEach(box => {
         form.style.display = "none";
         statusBox.style.background = "rgba(20,134,109,0.16)";
         statusBox.style.borderColor = "rgba(20,134,109,0.45)";
-        statusBox.innerHTML = "Thank you! Check your inbox in about 1 minute for Kalyani Ma&rsquo;s email with your <em>Household Botanical Blueprint</em> PDF.";
+        statusBox.innerHTML = "Thank you! Check your inbox within 3 minutes for Kalyani Ma&rsquo;s email with your <em>Household Botanical Blueprint</em> PDF.";
         statusBox.style.display = "block";
       } catch (err) {
         statusBox.style.background = "rgba(180,60,60,0.2)";
