@@ -253,35 +253,26 @@ footer{
 
 <main>
   <div class="header">
-    <span class="kicker">Keeper of the Botanical Archive &bull; Field Portal</span>
+    <span class="kicker">Keeper of the Botanical Archive &bull; Partner Portal</span>
     <h1>Partner Link Generator Page</h1>
   </div>
 
   <section class="panel">
-    <label for="memberId">Your d&#333;TERRA Member ID</label>
+    <label for="memberId">Enter Your d&#333;TERRA Member ID</label>
     <div class="input-row">
       <input type="text" id="memberId" inputmode="numeric" pattern="[0-9]*" placeholder="e.g. 44405" autocomplete="off">
     </div>
 
-    <div class="output-group">
+    <div class="output-group" style="margin-bottom:0;">
       <label>Your All-In-One Link to Share</label>
       <div class="output-box">
         <span class="output-url" id="funnelUrl">https://kalyanima.in/?ref=44405</span>
-        <button class="btn-copy" type="button" data-target="funnelUrl">Copy Link</button>
+        <button class="btn-copy" type="button" id="copyBtn">Copy Link</button>
       </div>
-      <p class="voice-note"><strong>This is the only link you ever need to share.</strong> The Kalyani Ma site quietly remembers your ID in the background, walks your guest through the purity standards, delivers <em>The Household Botanical Blueprint</em>, and attaches your sponsorship ID when they acquire their oils&mdash;all without you ever pitching or chasing anyone. <strong>And it&rsquo;s Free for you to use.</strong></p>
+      <p class="voice-note">
+        <strong>This is the only link you ever need to share.</strong> The Kalyani Ma site quietly remembers your ID in the background, walks your guest through the purity standards, delivers <em>The Household Botanical Blueprint</em>, and attaches your sponsorship ID when they acquire their oils&mdash;all without you ever pitching or chasing anyone. <strong>And it&rsquo;s Free for you to use.</strong>
+      </p>
     </div>
-
-    <div class="output-group">
-      <label>2. Direct Stamped Blueprint PDF Link</label>
-      <div class="output-box">
-        <span class="output-url" id="pdfUrl">https://kalyanima.in/api/blueprint?ref=44405</span>
-        <button class="btn-copy" type="button" data-target="pdfUrl">Copy PDF Link</button>
-      </div>
-      <p class="hint">Opens the 16-page Household Botanical Blueprint directly with your Member ID stamped on Page 16.</p>
-    </div>
-
-    
   </section>
 
   <!-- Reserved container for tomorrow's partner guidelines & copy-paste message scripts -->
