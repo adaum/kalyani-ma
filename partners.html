@@ -254,8 +254,7 @@ footer{
 <main>
   <div class="header">
     <span class="kicker">Keeper of the Botanical Archive &bull; Field Portal</span>
-    <h1>Your Personal Sharing Link</h1>
-    <p class="sub">No meetings. No pestering your friends. Simply share this one link&mdash;the Kalyani Ma archive educates your guests, delivers their Blueprint, and sponsors them directly under you automatically. Completely free.</p>
+    <h1>Partner Link Generator Page</h1>
   </div>
 
   <section class="panel">
@@ -282,11 +281,7 @@ footer{
       <p class="hint">Opens the 16-page Household Botanical Blueprint directly with your Member ID stamped on Page 16.</p>
     </div>
 
-    <div class="actions">
-      <a class="btn-wa" id="waShareBtn" href="https://wa.me/?text=Have%20you%20seen%20this%20investigative%20botanical%20guide%3F%20https%3A%2F%2Fkalyanima.in%2F%3Fref%3D44405" target="_blank" rel="noopener">
-        Share Your Link via WhatsApp
-      </a>
-    </div>
+    
   </section>
 
   <!-- Reserved container for tomorrow's partner guidelines & copy-paste message scripts -->
@@ -302,8 +297,7 @@ footer{
   const input = document.getElementById("memberId");
   const funnelEl = document.getElementById("funnelUrl");
   const pdfEl = document.getElementById("pdfUrl");
-  const waBtn = document.getElementById("waShareBtn");
-
+  
   const saved = localStorage.getItem("km_partner_id");
   if (saved) input.value = saved;
 
@@ -318,9 +312,6 @@ footer{
 
     funnelEl.textContent = funnel;
     pdfEl.textContent = pdf;
-
-    const msg = "Have you seen this investigative botanical guide? " + funnel;
-    waBtn.href = "https://wa.me/?text=" + encodeURIComponent(msg);
   }
 
   input.addEventListener("input", updateLinks);
