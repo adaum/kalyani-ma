@@ -238,9 +238,115 @@ footer{
   font-size:12.5px;
   color:var(--text-dim);
 }
+
+#protectedPortalContent[hidden]{display:none !important}
+#partnerGateOverlay{
+  position:fixed;
+  inset:0;
+  z-index:40;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:24px;
+  background:
+    radial-gradient(circle at 50% 18%, rgba(203,178,121,0.14), transparent 42%),
+    #0B140E;
+  color:#E4E8E3;
+}
+#partnerGateOverlay[hidden]{display:none !important}
+.gate-card{
+  width:min(440px, 100%);
+  text-align:center;
+  border:1px solid rgba(203,178,121,0.45);
+  border-radius:14px;
+  background:linear-gradient(180deg, rgba(203,178,121,0.08), rgba(11,20,14,0.2));
+  box-shadow:0 24px 60px rgba(0,0,0,0.45);
+  padding:36px 28px 30px;
+}
+.gate-seal{
+  width:64px;
+  height:64px;
+  margin:0 auto 18px;
+  border-radius:50%;
+  border:1.5px solid #CBB279;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-family:'Cinzel',serif;
+  font-weight:700;
+  letter-spacing:0.06em;
+  color:#CBB279;
+  background:#0B140E;
+}
+#partnerGateTitle{
+  font-family:'Newsreader',Georgia,serif;
+  font-weight:500;
+  font-size:clamp(26px, 4vw, 34px);
+  line-height:1.25;
+  color:#F4EFE2;
+  margin-bottom:22px;
+}
+.gate-label{
+  display:block;
+  margin-bottom:8px;
+  font-family:'Cinzel',serif;
+  font-size:11px;
+  letter-spacing:0.14em;
+  text-transform:uppercase;
+  color:#CBB279;
+}
+#partnerPasscode{
+  width:100%;
+  background:#060A07;
+  border:1px solid rgba(203,178,121,0.55);
+  border-radius:6px;
+  padding:14px 16px;
+  color:#fff;
+  font-family:'JetBrains Mono',monospace;
+  font-size:18px;
+  text-align:center;
+  outline:none;
+}
+#partnerPasscode:focus{
+  border-color:#E8D7A8;
+  box-shadow:0 0 0 2px rgba(203,178,121,0.2);
+}
+.gate-submit{
+  margin-top:16px;
+  width:100%;
+  background:#CBB279;
+  color:#0B140E;
+  border:none;
+  border-radius:6px;
+  padding:13px 16px;
+  font-family:'Plus Jakarta Sans',sans-serif;
+  font-weight:700;
+  font-size:15px;
+  cursor:pointer;
+}
+.gate-submit:disabled{opacity:0.65;cursor:wait}
+#partnerGateError{
+  margin-top:14px;
+  color:#E7C2A0;
+  font-size:14px;
+}
+#partnerGateError[hidden]{display:none}
 </style>
 </head>
 <body>
+
+<div id="partnerGateOverlay" role="dialog" aria-modal="true" aria-labelledby="partnerGateTitle">
+  <form class="gate-card" id="partnerGateForm">
+    <div class="gate-seal" aria-hidden="true">KM</div>
+    <h2 id="partnerGateTitle">Keeper's Private Room — Partner Portal Access</h2>
+    <label class="gate-label" for="partnerPasscode">Passcode</label>
+    <input id="partnerPasscode" name="passcode" type="password" autocomplete="current-password" required>
+    <button class="gate-submit" type="submit">Enter</button>
+    <p id="partnerGateError" role="alert" hidden></p>
+  </form>
+</div>
+
+<div id="protectedPortalContent" hidden>
 
 <nav class="top-nav">
   <div class="nav-wrap">
@@ -283,6 +389,60 @@ footer{
 <footer>
   &copy; 2026 Kalyani Ma &bull; Field Formulary &amp; Botanical Archive
 </footer>
+
+</div>
+
+<script>
+(function() {
+  const UNLOCK_KEY = "km_partner_unlocked";
+  const overlay = document.getElementById("partnerGateOverlay");
+  const content = document.getElementById("protectedPortalContent");
+  const form = document.getElementById("partnerGateForm");
+  const input = document.getElementById("partnerPasscode");
+  const errorEl = document.getElementById("partnerGateError");
+  const submit = form.querySelector("button[type='submit']");
+
+  function showError(message) {
+    errorEl.textContent = message;
+    errorEl.hidden = !message;
+  }
+
+  function unlock() {
+    try { sessionStorage.setItem(UNLOCK_KEY, "1"); } catch (e) {}
+    overlay.hidden = true;
+    content.hidden = false;
+    showError("");
+  }
+
+  try {
+    if (sessionStorage.getItem(UNLOCK_KEY) === "1") unlock();
+  } catch (e) {}
+
+  form.addEventListener("submit", async function(event) {
+    event.preventDefault();
+    showError("");
+    submit.disabled = true;
+    try {
+      const response = await fetch("/api/partner-auth", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ passcode: input.value }),
+      });
+      const data = await response.json().catch(function() { return {}; });
+      if (response.ok && data.ok === true) {
+        input.value = "";
+        unlock();
+        return;
+      }
+      showError(data.error || "Incorrect partner passcode.");
+    } catch (e) {
+      showError("Could not reach the partner gate.");
+    } finally {
+      submit.disabled = false;
+    }
+  });
+})();
+</script>
 
 <script>
 (function() {
