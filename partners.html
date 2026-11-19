@@ -287,41 +287,50 @@ footer{
 (function() {
   const input = document.getElementById("memberId");
   const funnelEl = document.getElementById("funnelUrl");
-  const pdfEl = document.getElementById("pdfUrl");
-  
-  // Always start fresh with placeholder visible
+  const copyBtn = document.getElementById("copyBtn");
+
   localStorage.removeItem("km_partner_id");
 
-  function updateLinks() {
+  function updateLink() {
     const clean = input.value.replace(/[^0-9]/g, "");
     if (input.value !== clean) input.value = clean;
     const id = clean || "44405";
-    if (clean) localStorage.setItem("km_partner_id", clean);
-
-    const funnel = "https://kalyanima.in/?ref=" + id;
-    const pdf = "https://kalyanima.in/api/blueprint?ref=" + id;
-
-    funnelEl.textContent = funnel;
-    pdfEl.textContent = pdf;
+    funnelEl.textContent = "https://kalyanima.in/?ref=" + id;
   }
 
-  input.addEventListener("input", updateLinks);
-  updateLinks();
+  function showCopied() {
+    const orig = copyBtn.textContent;
+    copyBtn.textContent = "Copied!";
+    copyBtn.classList.add("copied");
+    setTimeout(function() {
+      copyBtn.textContent = orig;
+      copyBtn.classList.remove("copied");
+    }, 1800);
+  }
 
-  document.querySelectorAll(".btn-copy").forEach(function(btn) {
-    btn.addEventListener("click", function() {
-      const target = document.getElementById(btn.getAttribute("data-target"));
-      if (!target) return;
-      navigator.clipboard.writeText(target.textContent).then(function() {
-        const orig = btn.textContent;
-        btn.textContent = "Copied!";
-        btn.classList.add("copied");
-        setTimeout(function() {
-          btn.textContent = orig;
-          btn.classList.remove("copied");
-        }, 1800);
+  function fallbackCopy(text) {
+    const ta = document.createElement("textarea");
+    ta.value = text;
+    ta.style.position = "fixed";
+    ta.style.opacity = "0";
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand("copy"); showCopied(); } catch (e) {}
+    document.body.removeChild(ta);
+  }
+
+  input.addEventListener("input", updateLink);
+  updateLink();
+
+  copyBtn.addEventListener("click", function() {
+    const text = funnelEl.textContent.trim();
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(text).then(showCopied).catch(function() {
+        fallbackCopy(text);
       });
-    });
+    } else {
+      fallbackCopy(text);
+    }
   });
 })();
 </script>
