@@ -171,6 +171,7 @@ input[type="text"]:focus{
   border-radius:6px;
   padding:12px 14px;
 }
+.output-url.is-placeholder{color:var(--text-dim);}
 .output-url{
   font-family:'JetBrains Mono',monospace;
   font-size:16px;
@@ -266,7 +267,7 @@ footer{
     <div class="output-group" style="margin-bottom:0;">
       <label>Your All-In-One Link to Share</label>
       <div class="output-box">
-        <span class="output-url" id="funnelUrl">https://kalyanima.in/?ref=44405</span>
+        <span class="output-url" id="funnelUrl" class="output-url is-placeholder">https://kalyanima.in/?ref=&lt;your ID#&gt;</span>
         <button class="btn-copy" type="button" id="copyBtn">Copy Link</button>
       </div>
       <p class="voice-note">
@@ -294,8 +295,13 @@ footer{
   function updateLink() {
     const clean = input.value.replace(/[^0-9]/g, "");
     if (input.value !== clean) input.value = clean;
-    const id = clean || "44405";
-    funnelEl.textContent = "https://kalyanima.in/?ref=" + id;
+    if (clean) {
+      funnelEl.textContent = "https://kalyanima.in/?ref=" + clean;
+      funnelEl.classList.remove("is-placeholder");
+    } else {
+      funnelEl.textContent = "https://kalyanima.in/?ref=<your ID#>";
+      funnelEl.classList.add("is-placeholder");
+    }
   }
 
   function showCopied() {
