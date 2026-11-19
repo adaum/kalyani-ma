@@ -260,7 +260,7 @@ footer{
   <section class="panel">
     <label for="memberId">Enter Your d&#333;TERRA Member ID</label>
     <div class="input-row">
-      <input type="text" id="memberId" inputmode="numeric" pattern="[0-9]*" placeholder="e.g. 44405" autocomplete="off">
+      <input type="text" id="memberId" inputmode="numeric" pattern="[0-9]*" placeholder="Place your d&#333;TERRA Member ID here (e.g., 12345)" autocomplete="off">
     </div>
 
     <div class="output-group" style="margin-bottom:0;">
@@ -289,8 +289,8 @@ footer{
   const funnelEl = document.getElementById("funnelUrl");
   const pdfEl = document.getElementById("pdfUrl");
   
-  const saved = localStorage.getItem("km_partner_id");
-  if (saved) input.value = saved;
+  // Always start fresh with placeholder visible
+  localStorage.removeItem("km_partner_id");
 
   function updateLinks() {
     const clean = input.value.replace(/[^0-9]/g, "");
