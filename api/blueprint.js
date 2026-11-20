@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const { PDFDocument } = require('pdf-lib');
+const { PDFDocument, rgb, StandardFonts } = require('pdf-lib');
 
 const DEFAULT_REF = '44405';
 
