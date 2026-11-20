@@ -331,6 +331,35 @@ footer{
   font-size:14px;
 }
 #partnerGateError[hidden]{display:none}
+
+.partner-notes{width:100%;max-width:660px;margin:28px auto 0;display:flex;flex-direction:column;gap:22px}
+.pn-card{background:linear-gradient(180deg,rgba(15,26,18,.96) 0%,rgba(11,20,14,.99) 100%);border:1px solid var(--border-gold);border-radius:12px;padding:26px 24px;box-shadow:0 18px 46px rgba(0,0,0,.48)}
+.pn-card.addon-card{border:1px solid rgba(242,202,118,.6)}
+.pn-kicker{display:block;font-family:'Cinzel',serif;font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent-gold);font-weight:600;margin-bottom:8px}
+.pn-card h2{font-family:'Newsreader',Georgia,serif;font-size:23px;font-weight:500;color:#fff;margin:0 0 12px}
+.pn-card p{font-family:'Newsreader',Georgia,serif;font-size:17px;line-height:1.68;color:var(--text-main);margin:0 0 14px}
+.pn-audio{background:rgba(244,239,228,.06);border:1px solid rgba(217,168,78,.45);border-radius:14px;padding:16px 20px}
+.pn-audio-head{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.pn-audio-title{font-family:'Newsreader',Georgia,serif;font-weight:600;color:#fff;font-size:17px}
+.pn-audio-meta{font-family:'JetBrains Mono',monospace;color:var(--accent-gold);font-size:11.5px}
+.pn-audio audio{width:100%;height:38px}
+.pn-steps{list-style:none;padding:0;margin:14px 0 0;display:flex;flex-direction:column;gap:12px}
+.pn-steps li{display:flex;gap:12px;background:var(--bg-input);border:1px solid var(--border);border-radius:8px;padding:13px 14px;font-size:14.5px;color:var(--text-muted)}
+.pn-num{flex:0 0 26px;height:26px;border-radius:50%;border:1px solid var(--accent-gold);color:var(--accent-gold);font-family:'Cinzel',serif;font-weight:700;font-size:12px;display:flex;align-items:center;justify-content:center}
+.pn-steps strong{color:#fff}
+.pn-slug-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin:14px 0 16px}
+.pn-slug{background:var(--bg-input);border:1px solid var(--border);border-radius:8px;padding:10px 13px;font-size:13.5px;color:var(--text-muted)}
+.pn-slug code{display:block;color:var(--accent-gold-light);font-family:'JetBrains Mono',monospace;font-size:13px;margin-bottom:2px}
+.pn-script-box{background:var(--bg-input);border:1px solid var(--border);border-radius:8px;padding:14px;margin-top:14px}
+.pn-script-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:8px}
+.pn-script-label{font-family:'Cinzel',serif;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-gold);font-weight:600}
+.pn-script-text{font-size:14.5px;line-height:1.6;color:var(--text-main)}
+.pn-mini-btn{background:rgba(203,178,121,.16);border:1px solid rgba(203,178,121,.5);color:#fff;border-radius:5px;padding:5px 11px;font-size:12.5px;font-weight:600;cursor:pointer}
+.pn-receipts{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin-top:14px}
+.pn-receipt{background:var(--bg-input);border:1px solid var(--border);border-radius:8px;padding:15px}
+.pn-receipt h3{font-family:'Newsreader',Georgia,serif;font-size:17px;color:var(--accent-gold-light);margin:0 0 6px}
+.pn-pdf-btn{display:inline-block;margin-top:8px;padding:13px 20px;border-radius:6px;background:var(--accent-gold);color:#0B140E;font-weight:700;font-size:14.5px;text-decoration:none}
+.pn-pdf-url{display:block;margin-top:10px;font-family:'JetBrains Mono',monospace;font-size:12.5px;color:var(--accent-gold)}
 </style>
 </head>
 <body>
@@ -383,7 +412,82 @@ footer{
   </section>
 
   <!-- Reserved container for tomorrow's partner guidelines & copy-paste message scripts -->
-  <section id="partner-notes"></section>
+  <section id="partner-notes" class="partner-notes">
+  <div class="pn-audio">
+    <div class="pn-audio-head">
+      <span class="pn-audio-title">A message from Kalyani</span>
+      <span class="pn-audio-meta">Welcome to the Family &bull; Proper Tools for Our People</span>
+    </div>
+    <audio controls preload="metadata">
+      <source src="https://kalyani-assets.b-cdn.net/partner-welcome-audio.mp3" type="audio/mpeg">
+    </audio>
+  </div>
+
+  <div class="pn-card">
+    <span class="pn-kicker">How This House Works</span>
+    <h2>Proper Tools &mdash; Not a Sheet of Paper</h2>
+    <p><strong>I want you to succeed.</strong> Most hardworking people fall short in this industry because they are never given the proper tools. A carpenter has a hammer, a painter has a brush, and a mechanic has a full chest of wrenches&mdash;yet most sponsors hand a new person a blank piece of paper and tell them to write down the names of all their friends and family so they can go pester them to join. They were told to go out and conquer the world with a sheet of paper.</p>
+    <p>Out on the front page, our rule is simple: <em>&ldquo;No hype, no bias, just the data.&rdquo;</em> Inside this room, the rule is just as simple: you never have to pitch or convince anyone.</p>
+    <ul class="pn-steps">
+      <li><span class="pn-num">1</span><div><strong>Generate Your One Link Above:</strong> Enter your d&#333;TERRA Member ID in the box at the top of this page to create your personal link.</div></li>
+      <li><span class="pn-num">2</span><div><strong>Share It Where Conversations Happen:</strong> Text it to a friend, post it in a group, or add it to your social bio. The site quietly scrubs the numbers from their address bar while remembering your ID across email, WhatsApp, and the 16-page Blueprint PDF.</div></li>
+      <li><span class="pn-num">3</span><div><strong>Automatic Sponsorship Credit:</strong> When your guest reaches Page 16 of the Blueprint and opens their 25% wholesale account, your Member ID is already attached&mdash;completely free for you to use.</div></li>
+    </ul>
+  </div>
+
+  <div class="pn-card">
+    <span class="pn-kicker">Included Free With Your Partner Access</span>
+    <h2>Track Which Links Are Paying Off with gozhc.com</h2>
+    <p>When you share one Kalyani link everywhere, it works&mdash;but you won&rsquo;t know whether your clicks came from Facebook, Instagram, a text message, or a flyer. As a Kalyani partner, you get <strong>free access</strong> to our private short-link creator and click tracker at <a href="https://gozhc.com" target="_blank" rel="noopener" style="color:#EFE6CF;font-weight:600;">gozhc.com</a> (normally $149/year, unlocked free with your Kalyani partner code). Create up to <strong>30 custom short links</strong>&mdash;all pointing to your exact same Kalyani URL&mdash;so each channel gets its own scoreboard:</p>
+    <div class="pn-slug-grid">
+      <div class="pn-slug"><code>gozhc.com/yourname-fb</code>Facebook posts &amp; group comments</div>
+      <div class="pn-slug"><code>gozhc.com/yourname-ig</code>Instagram bio &amp; stories</div>
+      <div class="pn-slug"><code>gozhc.com/yourname-text</code>Direct texts &amp; WhatsApp chats</div>
+      <div class="pn-slug"><code>gozhc.com/yourname-card</code>Built-in QR code for cards &amp; flyers</div>
+    </div>
+    <ul class="pn-steps">
+      <li><span class="pn-num">1</span><div><strong>Join with Your Partner Code:</strong> Open your Kalyani invite link, or go to <a href="https://gozhc.com/signup" target="_blank" rel="noopener" style="color:#EFE6CF;">gozhc.com</a>, click <strong>Join with a code</strong>, enter the Kalyani partner code, and create your free account.</div></li>
+      <li><span class="pn-num">2</span><div><strong>Make Short Links or QR Codes:</strong> Paste your Kalyani link, pick any ending you choose, and copy the short link or QR code.</div></li>
+      <li><span class="pn-num">3</span><div><strong>See Real Click Stats:</strong> Watch daily clicks, referring websites, and device types on the same page so you know which links are paying off.</div></li>
+    </ul>
+  </div>
+
+  <div class="pn-card">
+    <span class="pn-kicker">Copy &amp; Paste Invite Scripts</span>
+    <h2>What to Say When You Share</h2>
+    <p>Keep it casual and let the archive do the heavy lifting. These messages auto-fill with the Member ID typed at the top of the page.</p>
+    <div class="pn-script-box">
+      <div class="pn-script-head"><span class="pn-script-label">Option 1 &bull; Text or WhatsApp</span><button type="button" class="pn-mini-btn" data-copy-target="sc1">Copy Message</button></div>
+      <div class="pn-script-text" id="sc1">Hey&mdash;have you ever turned an essential oil bottle around and checked what&rsquo;s actually inside? I came across this botanical archive that breaks down the lab math and the 10-second bottle check before you buy another drop: https://kalyanima.in/?ref=&lt;your ID#&gt;</div>
+    </div>
+    <div class="pn-script-box">
+      <div class="pn-script-head"><span class="pn-script-label">Option 2 &bull; Facebook Post or Group</span><button type="button" class="pn-mini-btn" data-copy-target="sc2">Copy Message</button></div>
+      <div class="pn-script-text" id="sc2">Most store-bought &ldquo;essential oils&rdquo; are diluted with up to 76% mineral oil or synthetic fragrance&mdash;and almost nobody checks the bottom of the glass. This free 16-page botanical blueprint shows the exact 5-second label audit and batch check our elders used: https://kalyanima.in/?ref=&lt;your ID#&gt;</div>
+    </div>
+    <div class="pn-script-box">
+      <div class="pn-script-head"><span class="pn-script-label">Option 3 &bull; Short Social Bio</span><button type="button" class="pn-mini-btn" data-copy-target="sc3">Copy Message</button></div>
+      <div class="pn-script-text" id="sc3">No hype, no bias, just the botanical data. Get the free 16-page Household Botanical Blueprint &rarr; https://kalyanima.in/?ref=&lt;your ID#&gt;</div>
+    </div>
+  </div>
+
+  <div class="pn-card">
+    <span class="pn-kicker">Seeing Is Believing</span>
+    <h2>The Real-World Receipts Behind the Archive</h2>
+    <p>You never have to exaggerate or memorize chemistry. Everything out on the front page is backed by actual marketplace labels:</p>
+    <div class="pn-receipts">
+      <div class="pn-receipt"><h3>The $12.99 &ldquo;Frankincense&rdquo; Listing</h3><p style="font-size:15px;">Sold online as <em>&ldquo;Soap Making Fragrance&rdquo;</em> (4 Fl Oz for $12.99) listing only <em>&ldquo;Ingredients: Frankincense Oil&rdquo;</em>&mdash;zero <em>Boswellia</em> botanical species named and no batch code on the glass.</p></div>
+      <div class="pn-receipt"><h3>The 76.8% Paraffin Shelf Blend</h3><p style="font-size:15px;">Commercial shelf bottles listing <strong>76.8% light liquid paraffin</strong> (petroleum mineral oil) right on the back ingredient panel&mdash;contrasted against single-origin bottles stamped with a traceable lot number and expiration date.</p></div>
+    </div>
+  </div>
+
+  <div class="pn-card addon-card">
+    <span class="pn-kicker">Optional Partner Add-On</span>
+    <h2>Download Your Own ID-Stamped 16-Page Blueprint PDF</h2>
+    <p>Prefer sending the 16-page <em>Household Botanical Blueprint</em> directly to friends or family as a PDF attachment? Download your personal stamped copy below&mdash;it is the exact same guide with your d&#333;TERRA Member ID stamped on Page 16 so you still receive 100% of the wholesale sponsorship credit.</p>
+    <a href="https://kalyanima.in/api/blueprint" target="_blank" rel="noopener" class="pn-pdf-btn" id="stampedPdfBtn">Open / Download My Stamped Blueprint PDF &rarr;</a>
+    <span class="pn-pdf-url" id="stampedPdfUrl">https://kalyanima.in/api/blueprint?ref=&lt;your ID#&gt;</span>
+  </div>
+</section>
 </main>
 
 <footer>
