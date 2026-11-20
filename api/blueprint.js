@@ -44,7 +44,17 @@ module.exports = async function handler(req, res) {
       lastPage.node.set(pdfDoc.context.obj('Annots'), pdfDoc.context.obj([linkAnnot]));
     }
 
-    const pdfBytes = await pdfDoc.save();
+      // Stealth partner validation stamp on Page 16 footer: KALYANIMA.IN-<ref>
+  const fontFooter = await pdfDoc.embedFont(StandardFonts.Helvetica);
+  lastPage.drawText(`-${cleanRef}`, {
+    x: 244,
+    y: 38.5,
+    size: 7.5,
+    font: fontFooter,
+    color: rgb(0.41, 0.44, 0.41),
+  });
+
+  const pdfBytes = await pdfDoc.save();
 
     res.setHeader('Content-Type', 'application/pdf');
     res.setHeader('Content-Disposition', 'inline; filename="Household-Botanical-Blueprint.pdf"');
