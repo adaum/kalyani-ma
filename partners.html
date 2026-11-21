@@ -360,6 +360,72 @@ footer{
 .pn-receipt h3{font-family:'Newsreader',Georgia,serif;font-size:17px;color:var(--accent-gold-light);margin:0 0 6px}
 .pn-pdf-btn{display:inline-block;margin-top:8px;padding:13px 20px;border-radius:6px;background:var(--accent-gold);color:#0B140E;font-weight:700;font-size:14.5px;text-decoration:none}
 .pn-pdf-url{display:block;margin-top:10px;font-family:'JetBrains Mono',monospace;font-size:12.5px;color:var(--accent-gold)}
+
+/* Wide Back-Office Layout Override */
+.bo-shell{width:100%;max-width:1220px;margin:0 auto;padding:28px 24px 64px;}
+.bo-topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-bottom:20px;margin-bottom:26px;border-bottom:1px solid var(--border-gold);}
+.bo-brand{display:flex;align-items:center;gap:14px;}
+.bo-seal{width:44px;height:44px;border-radius:50%;border:1px solid var(--accent-gold);background:radial-gradient(circle at 30% 30%,rgba(203,178,121,0.22),rgba(11,20,14,0.95));display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;font-weight:700;font-size:15px;color:var(--accent-gold-light);letter-spacing:0.06em;flex-shrink:0;}
+.bo-title-wrap .kicker{display:block;margin:0 0 3px;font-size:10.5px;}
+.bo-title-wrap h1{margin:0;font-size:26px;line-height:1.2;text-align:left;}
+.bo-status{display:inline-flex;align-items:center;gap:8px;background:rgba(15,26,18,0.9);border:1px solid var(--border-gold);border-radius:999px;padding:7px 14px;font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--accent-gold-light);}
+.bo-dot{width:8px;height:8px;border-radius:50%;background:#52B77C;box-shadow:0 0 8px rgba(82,183,124,0.75);}
+.bo-grid{display:grid;grid-template-columns:360px minmax(0,1fr);gap:26px;align-items:start;}
+@media (max-width:960px){.bo-grid{grid-template-columns:1fr;}}
+.bo-sidebar{position:sticky;top:22px;display:flex;flex-direction:column;gap:16px;}
+@media (max-width:960px){.bo-sidebar{position:static;}}
+.bo-sidebar .panel{width:100%;max-width:none;margin:0;padding:24px 22px;}
+.bo-sidebar-note{background:rgba(15,26,18,0.72);border:1px solid var(--border);border-radius:10px;padding:16px 18px;font-size:13.5px;line-height:1.6;color:var(--text-muted);}
+.bo-sidebar-note strong{color:var(--accent-gold-light);}
+.bo-main,.partner-notes{min-width:0;width:100%;max-width:none;margin:0;}
+.pn-tabs{display:flex;gap:8px;border-bottom:1px solid var(--border-gold);margin-bottom:20px;overflow-x:auto;scrollbar-width:none;}
+.pn-tabs::-webkit-scrollbar{display:none;}
+.pn-tab{flex:1 0 auto;background:rgba(11,20,14,0.7);border:1px solid rgba(203,178,121,0.18);border-bottom:2px solid transparent;border-radius:8px 8px 0 0;padding:13px 18px;font-family:'Cinzel',serif;font-size:12px;font-weight:600;letter-spacing:0.11em;text-transform:uppercase;color:var(--text-muted);cursor:pointer;transition:all .18s ease;white-space:nowrap;}
+.pn-tab:hover{color:#fff;background:rgba(18,31,22,0.95);}
+.pn-tab.active{color:var(--accent-gold-light);background:linear-gradient(180deg,rgba(22,38,27,0.98) 0%,rgba(11,20,14,0.98) 100%);border-color:var(--border-gold);border-bottom:2px solid #F2CA76;box-shadow:0 -4px 18px rgba(203,178,121,0.12);}
+.pn-panel{display:none;flex-direction:column;gap:20px;animation:pnFade .2s ease;}
+.pn-panel.active{display:flex;}
+@keyframes pnFade{from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:translateY(0);}}
+.pn-card{background:linear-gradient(180deg,rgba(15,26,18,0.96) 0%,rgba(11,20,14,0.99) 100%);border:1px solid var(--border-gold);border-radius:12px;padding:26px 28px;box-shadow:0 18px 46px rgba(0,0,0,0.45);}
+.pn-card.addon-card{border:1px solid rgba(242,202,118,0.6);background:linear-gradient(180deg,rgba(22,38,27,0.98) 0%,rgba(11,20,14,0.99) 100%);}
+.pn-kicker{display:inline-block;font-family:'Cinzel',serif;font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent-gold);font-weight:600;margin-bottom:8px;}
+.pn-card h2{font-family:'Newsreader',Georgia,serif;font-size:24px;font-weight:500;color:#fff;margin:0 0 12px;line-height:1.28;}
+.pn-card p{font-family:'Newsreader',Georgia,serif;font-size:17px;line-height:1.66;color:var(--text-main);margin:0 0 14px;}
+.pn-card p:last-child{margin-bottom:0;}
+.pn-audio{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;background:rgba(244,239,228,0.06);border:1px solid rgba(217,168,78,0.45);border-radius:12px;padding:15px 20px;}
+.pn-audio-info{min-width:210px;}
+.pn-audio-title{display:block;font-family:'Newsreader',Georgia,serif;font-weight:600;color:#fff;font-size:17px;}
+.pn-audio-meta{display:block;font-family:'JetBrains Mono',monospace;color:var(--accent-gold);font-size:11.5px;margin-top:2px;}
+.pn-audio audio{flex:1 1 320px;max-width:100%;height:38px;border-radius:8px;}
+.pn-two-col{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:14px;}
+@media (max-width:720px){.pn-two-col{grid-template-columns:1fr;}}
+.pn-steps{list-style:none;padding:0;margin:14px 0 0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;}
+@media (max-width:820px){.pn-steps{grid-template-columns:1fr;}}
+.pn-steps li{display:flex;flex-direction:column;gap:10px;background:var(--bg-input);border:1px solid var(--border);border-radius:8px;padding:16px;font-size:14px;color:var(--text-muted);line-height:1.58;}
+.pn-num{width:28px;height:28px;border-radius:50%;border:1px solid var(--accent-gold);color:var(--accent-gold);font-family:'Cinzel',serif;font-weight:700;font-size:12.5px;display:flex;align-items:center;justify-content:center;}
+.pn-steps strong{color:#fff;display:block;margin-bottom:4px;font-size:15px;}
+.pn-script-box{background:var(--bg-input);border:1px solid var(--border);border-radius:8px;padding:16px;display:flex;flex-direction:column;justify-content:space-between;}
+.pn-script-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px;}
+.pn-script-label{font-family:'Cinzel',serif;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent-gold);font-weight:600;}
+.pn-script-text{font-size:14px;line-height:1.6;color:var(--text-main);white-space:pre-line;}
+.pn-mini-btn{background:rgba(203,178,121,0.16);border:1px solid rgba(203,178,121,0.5);color:#fff;border-radius:5px;padding:5px 11px;font-size:12px;font-weight:600;cursor:pointer;transition:background .15s;flex-shrink:0;}
+.pn-mini-btn:hover{background:rgba(203,178,121,0.28);}
+.pn-receipt,.pn-res-item{background:var(--bg-input);border:1px solid var(--border);border-radius:8px;padding:16px 18px;}
+.pn-receipt h3{font-family:'Newsreader',Georgia,serif;font-size:18px;color:var(--accent-gold-light);margin:0 0 8px;}
+.pn-res-item{display:flex;flex-direction:column;justify-content:space-between;gap:12px;}
+.pn-res-info h3{font-family:'Newsreader',Georgia,serif;font-size:18px;color:#fff;margin:0 0 6px;}
+.pn-res-info p{font-family:'Plus Jakarta Sans',sans-serif;font-size:13.5px;color:var(--text-muted);margin:0;line-height:1.52;}
+.pn-res-badge{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--green-text);background:var(--green-badge);border:1px solid rgba(82,183,124,0.3);padding:2px 7px;border-radius:4px;margin-left:6px;vertical-align:middle;}
+.pn-res-link{align-self:flex-start;background:rgba(203,178,121,0.14);border:1px solid var(--border-gold);color:var(--accent-gold-light);text-decoration:none;font-size:12.5px;font-weight:600;padding:7px 13px;border-radius:6px;}
+.pn-res-link:hover{background:rgba(203,178,121,0.26);}
+.pn-slug-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:14px 0 6px;}
+@media (max-width:760px){.pn-slug-grid{grid-template-columns:repeat(2,minmax(0,1fr));}}
+.pn-slug{background:var(--bg-input);border:1px solid var(--border);border-radius:8px;padding:10px 12px;font-size:12.5px;color:var(--text-muted);}
+.pn-slug code{display:block;color:var(--accent-gold-light);font-family:'JetBrains Mono',monospace;font-size:12px;margin-bottom:3px;}
+.pn-pdf-btn{display:inline-block;margin-top:8px;background:var(--accent-gold);color:#0B140E;font-weight:700;font-size:14.5px;padding:12px 18px;border-radius:6px;text-decoration:none;}
+.pn-pdf-btn:hover{background:#dfca96;}
+.pn-pdf-url{display:block;margin-top:10px;font-family:'JetBrains Mono',monospace;font-size:12.5px;color:var(--text-dim);word-break:break-all;}
+
 </style>
 <script async defer src='https://app.visitortracking.com/assets/js/tracer.js'></script>
 <script>
@@ -396,91 +462,151 @@ function init_tracer() {
   </div>
 </nav>
 
-<main>
-  <div class="header">
-    <span class="kicker">Keeper of the Botanical Archive &bull; Partner Portal</span>
-    <h1>Partner Link Generator Page</h1>
-  </div>
-
-  <section class="panel">
-    <label for="memberId">Enter Your d&#333;TERRA Member ID</label>
-    <div class="input-row">
-      <input type="text" id="memberId" maxlength="10" inputmode="numeric" pattern="[0-9]*" placeholder="Place your d&#333;TERRA Member ID here (e.g., 12345)" autocomplete="off">
-    </div>
-
-    <div class="output-group" style="margin-bottom:0;">
-      <label>Your All-In-One Link to Share</label>
-      <div class="output-box">
-        <span class="output-url" id="funnelUrl" class="output-url is-placeholder">https://kalyanima.in/?ref=&lt;your ID#&gt;</span>
-        <button class="btn-copy" type="button" id="copyBtn">Copy Link</button>
+<div class="bo-shell">
+  <header class="bo-topbar">
+    <div class="bo-brand">
+      <div class="bo-seal">KM</div>
+      <div class="bo-title-wrap">
+        <span class="kicker">Keeper of the Botanical Archive</span>
+        <h1>Partner Back Office</h1>
       </div>
-      <p class="voice-note">
-        <strong>This is the only link you ever need to share.</strong> The Kalyani Ma site quietly remembers your ID in the background, walks your guest through the purity standards, delivers <em>The Household Botanical Blueprint</em>, and attaches your sponsorship ID when they acquire their oils&mdash;all without you ever pitching or chasing anyone. <strong>And it&rsquo;s Free for you to use.</strong>
-      </p>
     </div>
-  </section>
-
-  <!-- Reserved container for tomorrow's partner guidelines & copy-paste message scripts -->
-  <section id="partner-notes" class="partner-notes">
-  <div class="pn-audio">
-    <div class="pn-audio-head">
-      <span class="pn-audio-title">A message from Kalyani</span>
-      <span class="pn-audio-meta">Welcome to the Family &bull; Proper Tools for Our People</span>
+    <div class="bo-status"><span class="bo-dot"></span>ZHC Autonomous Engine &bull; 24/7 Active</div>
+  </header>
+  <div class="bo-grid">
+    <aside class="bo-sidebar">
+      <section class="panel">
+        <label for="memberId">Your d&#333;TERRA Member ID</label>
+        <div class="input-row">
+          <input type="text" id="memberId" inputmode="numeric" pattern="[0-9]*" maxlength="10" placeholder="Place your d&#333;TERRA Member ID here (e.g., 12345)" autocomplete="off">
+        </div>
+        <div class="output-group" style="margin-bottom:0;">
+          <label>Your All-In-One Link to Share</label>
+          <div class="output-box">
+            <span class="output-url is-placeholder" id="funnelUrl">https://kalyanima.in/?ref=&lt;your ID#&gt;</span>
+            <button class="btn-copy" type="button" id="copyBtn">Copy Link</button>
+          </div>
+          <p class="voice-note" style="font-size:14.5px;line-height:1.62;margin-top:14px;">
+            <strong>This is the only link you ever need to share.</strong> The Kalyani Ma site quietly remembers your ID in the background, walks your guest through the purity standards, delivers <em>The Household Botanical Blueprint</em>, and attaches your sponsorship ID when they acquire their oils&mdash;all without you ever pitching or chasing anyone. <strong>And it&rsquo;s Free for you to use.</strong>
+          </p>
+        </div>
+      </section>
+      <div class="bo-sidebar-note">
+        <strong>Live Sync Active:</strong> Typing your Member ID above automatically updates every invite note, AI starter prompt, and stamped Blueprint PDF link across all four workspace tabs.
+      </div>
+    </aside>
+    <div class="bo-main">
+      <section id="partner-notes" class="partner-notes">
+        <div class="pn-tabs" role="tablist" aria-label="Partner Back Office Tabs">
+          <button type="button" class="pn-tab active" role="tab" aria-selected="true" data-tab="tab-house">How This House Runs</button>
+          <button type="button" class="pn-tab" role="tab" aria-selected="false" data-tab="tab-sharing">Sharing</button>
+          <button type="button" class="pn-tab" role="tab" aria-selected="false" data-tab="tab-resources">Resources</button>
+          <button type="button" class="pn-tab" role="tab" aria-selected="false" data-tab="tab-blueprint">Stamped Blueprint</button>
+        </div>
+        <div class="pn-panel active" id="tab-house" role="tabpanel">
+          <div class="pn-audio">
+            <div class="pn-audio-info"><span class="pn-audio-title">A message from Kalyani</span><span class="pn-audio-meta">How the Autonomous House Works</span></div>
+            <audio controls preload="metadata"><source src="https://kalyani-assets.b-cdn.net/partner-zhc-audio.mp3" type="audio/mpeg"></audio>
+          </div>
+          <div class="pn-card">
+            <span class="pn-kicker">Zero-Human Company (ZHC) Architecture</span>
+            <h2>An Archive That Operates 24/7 Without Human Intervention</h2>
+            <p><strong>I want you to succeed.</strong> Most people walk away from sharing botanicals because they were handed a blank sheet of paper and told to go convince friends and family. In this back office, you never have to act as a customer service desk, follow-up reminder, or presenter.</p>
+            <p>Kalyani Ma runs as an autonomous <strong>Zero-Human Company (ZHC)</strong> archive. It operates daily on its own&mdash;so the moment someone opens your link from the left panel, the system handles every step automatically:</p>
+            <ul class="pn-steps">
+              <li><span class="pn-num">1</span><div><strong>Quiet Attribution</strong>The page captures your Member ID into the visitor&rsquo;s session and scrubs the numbers from their browser bar so the link stays clean.</div></li>
+              <li><span class="pn-num">2</span><div><strong>24/7 Instant Delivery</strong>Whether your guest requests <em>The Household Botanical Blueprint</em> by email or WhatsApp, the system routes them by region and delivers it within seconds.</div></li>
+              <li><span class="pn-num">3</span><div><strong>Page 16 ID Stamping</strong>Before the 16-page PDF reaches them, your d&#333;TERRA Member ID is stamped onto the final page so any wholesale account credits under you.</div></li>
+            </ul>
+          </div>
+          <div class="pn-card">
+            <span class="pn-kicker">Seeing Is Believing</span>
+            <h2>The Real-World Receipts Behind the Archive</h2>
+            <p>You never have to exaggerate or memorize chemistry. Everything out on the front page is backed by actual marketplace labels:</p>
+            <div class="pn-two-col">
+              <div class="pn-receipt"><h3>The $12.99 &ldquo;Frankincense&rdquo; Listing</h3><p style="font-size:14.5px;">Sold online as <em>&ldquo;Soap Making Fragrance&rdquo;</em> (4 Fl Oz for $12.99) listing only <em>&ldquo;Ingredients: Frankincense Oil&rdquo;</em>&mdash;zero <em>Boswellia</em> botanical species named and no batch code on the glass.</p></div>
+              <div class="pn-receipt"><h3>The 76.8% Paraffin Shelf Blend</h3><p style="font-size:14.5px;">Commercial shelf bottles listing <strong>76.8% light liquid paraffin</strong> (petroleum mineral oil) right on the back ingredient panel&mdash;contrasted against single-origin bottles stamped with a traceable lot number and expiration date.</p></div>
+            </div>
+          </div>
+        </div>
+        <div class="pn-panel" id="tab-sharing" role="tabpanel">
+          <div class="pn-audio">
+            <div class="pn-audio-info"><span class="pn-audio-title">A message from Kalyani</span><span class="pn-audio-meta">Sharing Without Pestering</span></div>
+            <audio controls preload="metadata"><source src="https://kalyani-assets.b-cdn.net/partner-sharing-audio.mp3" type="audio/mpeg"></audio>
+          </div>
+          <div class="pn-card">
+            <span class="pn-kicker">1-Tap Invite Notes</span>
+            <h2>Point People to the Archive &mdash; Let the Data Speak</h2>
+            <p>No meetings, no scripts to memorize, and no leaning back on your heels. Copy any note below&mdash;your Member ID from the left sidebar fills in automatically:</p>
+            <div class="pn-two-col">
+              <div class="pn-script-box"><div class="pn-script-head"><span class="pn-script-label">Note 1 &bull; Text or WhatsApp</span><button type="button" class="pn-mini-btn" data-copy-target="sc1">Copy Note</button></div><div class="pn-script-text" id="sc1">Hey&mdash;have you ever turned an essential oil bottle around and checked what&rsquo;s actually inside? I came across this botanical archive that breaks down the lab math and the 10-second bottle check before you buy another drop: https://kalyanima.in/?ref=&lt;your ID#&gt;</div></div>
+              <div class="pn-script-box"><div class="pn-script-head"><span class="pn-script-label">Note 2 &bull; Community Post or Group</span><button type="button" class="pn-mini-btn" data-copy-target="sc2">Copy Note</button></div><div class="pn-script-text" id="sc2">Most store-bought &ldquo;essential oils&rdquo; are diluted with up to 76% mineral oil or synthetic fragrance&mdash;and almost nobody checks the bottom of the glass. This free 16-page botanical blueprint shows the exact 5-second label audit and batch check our elders used: https://kalyanima.in/?ref=&lt;your ID#&gt;</div></div>
+            </div>
+            <div class="pn-script-box" style="margin-top:14px;"><div class="pn-script-head"><span class="pn-script-label">Note 3 &bull; Short Profile Bio</span><button type="button" class="pn-mini-btn" data-copy-target="sc3">Copy Note</button></div><div class="pn-script-text" id="sc3">No hype, no bias, just the botanical data. Get the free 16-page Household Botanical Blueprint &rarr; https://kalyanima.in/?ref=&lt;your ID#&gt;</div></div>
+          </div>
+          <div class="pn-card">
+            <span class="pn-kicker">Put Your Own Sharing on Autopilot</span>
+            <h2>Set Up a Free AI Assistant to Write Your Daily Posts</h2>
+            <p>Just as Kalyani Ma runs autonomously on its own, you can use a free AI assistant (like Grok or ChatGPT) to draft calm, educational posts around the 10-second bottle check so you stay consistent without spending hours writing.</p>
+            <div class="pn-script-box" style="margin-top:12px;"><div class="pn-script-head"><span class="pn-script-label">1-Click Copy Starter Prompt (Pre-Loaded With Your Link)</span><button type="button" class="pn-mini-btn" data-copy-target="aiPrompt">Copy Prompt</button></div><div class="pn-script-text" id="aiPrompt">Act as a calm, grounded household researcher sharing educational tips about essential oil label transparency. Write 7 short, non-pushy social media posts and photo captions teaching readers how to turn an essential oil bottle around, look for the Latin botanical species name, check the bottom of the glass for a lot number and expiration date, and watch out for mineral oil or synthetic fragrance fillers. Never make medical claims, never use hype or sales pressure, and invite curious readers to read the free 16-page Household Botanical Blueprint at: https://kalyanima.in/?ref=&lt;your ID#&gt;</div></div>
+          </div>
+        </div>
+        <div class="pn-panel" id="tab-resources" role="tabpanel">
+          <div class="pn-audio">
+            <div class="pn-audio-info"><span class="pn-audio-title">A message from Kalyani</span><span class="pn-audio-meta">Free Tools &bull; Zero Affiliate Links</span></div>
+            <audio controls preload="metadata"><source src="https://kalyani-assets.b-cdn.net/partner-resources-audio.mp3" type="audio/mpeg"></audio>
+          </div>
+          <div class="pn-card">
+            <span class="pn-kicker">100% Free Toolkit &bull; Zero Affiliate Links</span>
+            <h2>See Which Links Pay Off with gozhc.com</h2>
+            <p>Every tool listed in this back office is completely free to use&mdash;and <strong>not a single link here is an affiliate link</strong>. Nobody in this house earns a side commission off the tools you use.</p>
+            <p>With your free partner access to <strong>gozhc.com</strong> (normally $149/year), you can create up to <strong>30 custom short links</strong>&mdash;all pointing to your exact same Kalyani URL&mdash;so you can see which places actually bring visitors:</p>
+            <div class="pn-slug-grid">
+              <div class="pn-slug"><code>gozhc.com/name-fb</code>Facebook posts &amp; groups</div>
+              <div class="pn-slug"><code>gozhc.com/name-ig</code>Instagram bio &amp; stories</div>
+              <div class="pn-slug"><code>gozhc.com/name-text</code>Direct texts &amp; WhatsApp</div>
+              <div class="pn-slug"><code>gozhc.com/name-card</code>QR code for cards &amp; flyers</div>
+            </div>
+            <div class="pn-two-col">
+              <div class="pn-res-item"><div class="pn-res-info"><h3>gozhc.com Tracker <span class="pn-res-badge">Free Partner Access</span></h3><p>Create up to 30 short links + QR codes for your Kalyani URL and track daily clicks, referrers, and devices.</p></div><a href="https://gozhc.com" target="_blank" rel="noopener" class="pn-res-link">Open gozhc.com &rarr;</a></div>
+              <div class="pn-res-item"><div class="pn-res-info"><h3>Grok AI <span class="pn-res-badge">Free Tier &bull; Direct Link</span></h3><p>Paste the starter prompt from the Sharing tab to generate educational bottle-check posts and short video hooks.</p></div><a href="https://grok.com" target="_blank" rel="noopener" class="pn-res-link">Open Grok &rarr;</a></div>
+              <div class="pn-res-item"><div class="pn-res-info"><h3>ChatGPT <span class="pn-res-badge">Free Tier &bull; Direct Link</span></h3><p>Alternative free AI helper for drafting calm, natural-sounding posts in your own everyday voice.</p></div><a href="https://chatgpt.com" target="_blank" rel="noopener" class="pn-res-link">Open ChatGPT &rarr;</a></div>
+              <div class="pn-res-item"><div class="pn-res-info"><h3>Canva <span class="pn-res-badge">Free Plan &bull; Direct Link</span></h3><p>Create clean image cards or printable flyers pairing your gozhc.com QR code with the 10-second bottle check.</p></div><a href="https://www.canva.com" target="_blank" rel="noopener" class="pn-res-link">Open Canva &rarr;</a></div>
+            </div>
+          </div>
+        </div>
+        <div class="pn-panel" id="tab-blueprint" role="tabpanel">
+          <div class="pn-audio">
+            <div class="pn-audio-info"><span class="pn-audio-title">A message from Kalyani</span><span class="pn-audio-meta">Optional Add-On &bull; Personal Stamped PDF</span></div>
+            <audio controls preload="metadata"><source src="https://kalyani-assets.b-cdn.net/partner-pdf-audio.mp3" type="audio/mpeg"></audio>
+          </div>
+          <div class="pn-card addon-card">
+            <span class="pn-kicker">Optional Partner Add-On</span>
+            <h2>Download Your Own ID-Stamped 16-Page Blueprint PDF</h2>
+            <div class="pn-two-col" style="align-items:start;">
+              <div>
+                <p>Prefer sending the 16-page <em>Household Botanical Blueprint</em> directly to close friends or family as a PDF attachment? Download your personal stamped copy below&mdash;it is the exact same guide with your d&#333;TERRA Member ID stamped onto Page 16 so you still receive 100% of the wholesale sponsorship credit.</p>
+                <a href="https://kalyanima.in/api/blueprint" target="_blank" rel="noopener" class="pn-pdf-btn" id="stampedPdfBtn">Open / Download My Stamped Blueprint PDF &rarr;</a>
+                <span class="pn-pdf-url" id="blueprintPreviewUrl">https://kalyanima.in/api/blueprint?ref=&lt;your ID#&gt;</span>
+              </div>
+              <div style="padding:16px;border-radius:10px;background:rgba(7,12,8,0.55);border:1px solid rgba(203,178,121,0.25);">
+                <div style="font-size:0.75rem;letter-spacing:0.08em;text-transform:uppercase;color:#CBB279;margin-bottom:8px;font-weight:600;">Page 16 Footer Proof Preview</div>
+                <div style="background:#F4EFE4;border-radius:6px;padding:14px 16px 12px;box-shadow:inset 0 1px 3px rgba(0,0,0,0.18);font-family:Helvetica,Arial,sans-serif;">
+                  <div style="height:1px;background:#C8BFA8;margin-bottom:9px;"></div>
+                  <div style="display:flex;justify-content:space-between;align-items:center;font-size:0.74rem;letter-spacing:0.04em;color:#687068;">
+                    <span>KALYANI BOTANICAL ARCHIVE &bull; KALYANIMA.IN <span id="pdfFooterPreviewId" style="color:#8A6B2F;font-weight:700;background:rgba(203,178,121,0.24);padding:1px 6px;border-radius:3px;">&bull; &lt;your ID#&gt;</span></span>
+                    <span style="opacity:0.85;">PAGE 16</span>
+                  </div>
+                </div>
+                <p style="margin:10px 0 0;font-size:0.84rem;line-height:1.52;color:rgba(247,242,231,0.76);">Prints in matching muted archival grey at the bottom-left of Page 16 so it looks like a catalog code to guests while proving your ID is locked in.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
-    <audio controls preload="metadata">
-      <source src="https://kalyani-assets.b-cdn.net/partner-welcome-audio.mp3" type="audio/mpeg">
-    </audio>
   </div>
-
-  <div class="pn-card">
-    <span class="pn-kicker">How This House Works</span>
-    <h2>Proper Tools &mdash; Not a Sheet of Paper</h2>
-    <p><strong>I want you to succeed.</strong> Most hardworking people fall short in this industry because they are never given the proper tools. A carpenter has a hammer, a painter has a brush, and a mechanic has a full chest of wrenches&mdash;yet most sponsors hand a new person a blank piece of paper and tell them to write down the names of all their friends and family so they can go pester them to join. They were told to go out and conquer the world with a sheet of paper.</p>
-    <p>Out on the front page, our rule is simple: <em>&ldquo;No hype, no bias, just the data.&rdquo;</em> Inside this room, the rule is just as simple: you never have to pitch or convince anyone.</p>
-    <ul class="pn-steps">
-      <li><span class="pn-num">1</span><div><strong>Generate Your One Link Above:</strong> Enter your d&#333;TERRA Member ID in the box at the top of this page to create your personal link.</div></li>
-      <li><span class="pn-num">2</span><div><strong>Share It Where Conversations Happen:</strong> Text it to a friend, post it in a group, or add it to your social bio. The site quietly scrubs the numbers from their address bar while remembering your ID across email, WhatsApp, and the 16-page Blueprint PDF.</div></li>
-      <li><span class="pn-num">3</span><div><strong>Automatic Sponsorship Credit:</strong> When your guest reaches Page 16 of the Blueprint and opens their 25% wholesale account, your Member ID is already attached&mdash;completely free for you to use.</div></li>
-    </ul>
-  </div>
-
-  <div class="pn-card">
-    <span class="pn-kicker">Included Free With Your Partner Access</span>
-    <h2>Track Which Links Are Paying Off with gozhc.com</h2>
-    <p>When you share one Kalyani link everywhere, it works&mdash;but you won&rsquo;t know whether your clicks came from Facebook, Instagram, a text message, or a flyer. As a Kalyani partner, you get <strong>free access</strong> to our private short-link creator and click tracker at <a href="https://gozhc.com" target="_blank" rel="noopener" style="color:#EFE6CF;font-weight:600;">gozhc.com</a> (normally $149/year, unlocked free with your Kalyani partner code). Create up to <strong>30 custom short links</strong>&mdash;all pointing to your exact same Kalyani URL&mdash;so each channel gets its own scoreboard:</p>
-    <div class="pn-slug-grid">
-      <div class="pn-slug"><code>gozhc.com/yourname-fb</code>Facebook posts &amp; group comments</div>
-      <div class="pn-slug"><code>gozhc.com/yourname-ig</code>Instagram bio &amp; stories</div>
-      <div class="pn-slug"><code>gozhc.com/yourname-text</code>Direct texts &amp; WhatsApp chats</div>
-      <div class="pn-slug"><code>gozhc.com/yourname-card</code>Built-in QR code for cards &amp; flyers</div>
-    </div>
-    <ul class="pn-steps">
-      <li><span class="pn-num">1</span><div><strong>Join with Your Partner Code:</strong> Open your Kalyani invite link, or go to <a href="https://gozhc.com/signup" target="_blank" rel="noopener" style="color:#EFE6CF;">gozhc.com</a>, click <strong>Join with a code</strong>, enter the Kalyani partner code, and create your free account.</div></li>
-      <li><span class="pn-num">2</span><div><strong>Make Short Links or QR Codes:</strong> Paste your Kalyani link, pick any ending you choose, and copy the short link or QR code.</div></li>
-      <li><span class="pn-num">3</span><div><strong>See Real Click Stats:</strong> Watch daily clicks, referring websites, and device types on the same page so you know which links are paying off.</div></li>
-    </ul>
-  </div>
-
-  <div class="pn-card">
-    <span class="pn-kicker">Seeing Is Believing</span>
-    <h2>The Real-World Receipts Behind the Archive</h2>
-    <p>You never have to exaggerate or memorize chemistry. Everything out on the front page is backed by actual marketplace labels:</p>
-    <div class="pn-receipts">
-      <div class="pn-receipt"><h3>The $12.99 &ldquo;Frankincense&rdquo; Listing</h3><p style="font-size:15px;">Sold online as <em>&ldquo;Soap Making Fragrance&rdquo;</em> (4 Fl Oz for $12.99) listing only <em>&ldquo;Ingredients: Frankincense Oil&rdquo;</em>&mdash;zero <em>Boswellia</em> botanical species named and no batch code on the glass.</p></div>
-      <div class="pn-receipt"><h3>The 76.8% Paraffin Shelf Blend</h3><p style="font-size:15px;">Commercial shelf bottles listing <strong>76.8% light liquid paraffin</strong> (petroleum mineral oil) right on the back ingredient panel&mdash;contrasted against single-origin bottles stamped with a traceable lot number and expiration date.</p></div>
-    </div>
-  </div>
-
-  <div class="pn-card addon-card">
-    <span class="pn-kicker">Optional Partner Add-On</span>
-    <h2>Download Your Own ID-Stamped 16-Page Blueprint PDF</h2>
-    <p>Prefer sending the 16-page <em>Household Botanical Blueprint</em> directly to friends or family as a PDF attachment? Download your personal stamped copy below&mdash;it is the exact same guide with your d&#333;TERRA Member ID stamped on Page 16 so you still receive 100% of the wholesale sponsorship credit.</p>
-    <a href="https://kalyanima.in/api/blueprint" target="_blank" rel="noopener" class="pn-pdf-btn" id="stampedPdfBtn">Open / Download My Stamped Blueprint PDF &rarr;</a>
-    <span class="pn-pdf-url" id="stampedPdfUrl">https://kalyanima.in/api/blueprint?ref=&lt;your ID#&gt;</span>
-          <p style="margin-top: 12px; font-size: 0.86rem; line-height: 1.55; color: rgba(247, 242, 231, 0.72);"><strong>How to verify your personal stamp:</strong> Open your downloaded PDF and scroll to the bottom-left footer of <strong>Page 16</strong>. Right after <code>KALYANI BOTANICAL ARCHIVE &bull; KALYANIMA.IN</code>, you will see <code>&bull; &lt;your ID#&gt;</code> stamped in matching grey archival text.</p>
-  </div>
-</section>
-</main>
+</div>
 
 <footer>
   &copy; 2026 Kalyani Ma &bull; Field Formulary &amp; Botanical Archive
@@ -609,5 +735,29 @@ function init_tracer() {
   if (btn) { btn.addEventListener("click", fixPdf); }
 })();
 </script>
-</body>
+<script>
+(function(){
+  const tabs=document.querySelectorAll(".pn-tab"),panels=document.querySelectorAll(".pn-panel");
+  tabs.forEach(tab=>{tab.addEventListener("click",()=>{document.querySelectorAll("audio").forEach(a=>{try{a.pause();}catch(e){}});tabs.forEach(t=>{t.classList.remove("active");t.setAttribute("aria-selected","false");});panels.forEach(p=>p.classList.remove("active"));tab.classList.add("active");tab.setAttribute("aria-selected","true");const target=document.getElementById(tab.getAttribute("data-tab"));if(target)target.classList.add("active");});});
+  const inp=document.getElementById("memberId"),pBtn=document.getElementById("stampedPdfBtn"),bpPrevEl=document.getElementById("blueprintPreviewUrl"),footerPrevEl=document.getElementById("pdfFooterPreviewId");
+  const list=[
+    {el:document.getElementById("sc1"),t:"Hey—have you ever turned an essential oil bottle around and checked what’s actually inside? I came across this botanical archive that breaks down the lab math and the 10-second bottle check before you buy another drop: "},
+    {el:document.getElementById("sc2"),t:"Most store-bought “essential oils” are diluted with up to 76% mineral oil or synthetic fragrance—and almost nobody checks the bottom of the glass. This free 16-page botanical blueprint shows the exact 5-second label audit and batch check our elders used: "},
+    {el:document.getElementById("sc3"),t:"No hype, no bias, just the botanical data. Get the free 16-page Household Botanical Blueprint → "},
+    {el:document.getElementById("aiPrompt"),t:"Act as a calm, grounded household researcher sharing educational tips about essential oil label transparency. Write 7 short, non-pushy social media posts and photo captions teaching readers how to turn an essential oil bottle around, look for the Latin botanical species name, check the bottom of the glass for a lot number and expiration date, and watch out for mineral oil or synthetic fragrance fillers. Never make medical claims, never use hype or sales pressure, and invite curious readers to read the free 16-page Household Botanical Blueprint at: "}
+  ];
+  function syncAll(){
+    const id=inp?inp.value.replace(/[^0-9]/g,"").slice(0,10):"";
+    const u=id?"https://kalyanima.in/?ref="+id:"https://kalyanima.in/?ref=<your ID#>";
+    const pdf=id?"https://kalyanima.in/api/blueprint?ref="+id:"https://kalyanima.in/api/blueprint";
+    list.forEach(x=>{if(x.el)x.el.textContent=x.t+u;});
+    if(pBtn)pBtn.href=pdf;
+    if(bpPrevEl)bpPrevEl.textContent=id?pdf:"https://kalyanima.in/api/blueprint?ref=<your ID#>";
+    if(footerPrevEl)footerPrevEl.textContent=id?"• "+id:"• <your ID#>";
+  }
+  if(inp){inp.addEventListener("input",syncAll);syncAll();}
+  if(pBtn){pBtn.addEventListener("click",function(){const id=inp?inp.value.replace(/[^0-9]/g,"").slice(0,10):"";this.href=id?"https://kalyanima.in/api/blueprint?ref="+id:"https://kalyanima.in/api/blueprint";});}
+  document.querySelectorAll("[data-copy-target]").forEach(btn=>{btn.addEventListener("click",()=>{const el=document.getElementById(btn.getAttribute("data-copy-target"));if(!el)return;navigator.clipboard.writeText(el.textContent).then(()=>{const o=btn.textContent;btn.textContent="Copied!";setTimeout(()=>btn.textContent=o,1800);});});});
+})();
+</script></body>
 </html>
