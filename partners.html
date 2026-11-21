@@ -486,7 +486,7 @@ function init_tracer() {
     <aside class="bo-sidebar">
       <section class="panel">
         <h2 style="font-family:'Cinzel',serif;font-size:16px;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent-gold-light);margin:0 0 16px;padding-bottom:10px;border-bottom:1px solid rgba(203,178,121,0.22);">Start Here</h2>
-        <p style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;letter-spacing:0.04em;color:#F2CA76;margin:-8px 0 16px;">Listen to My Message First &rarr;</p>
+        <p style="font-family:'Newsreader',Georgia,serif;font-size:17.5px;font-weight:600;color:#F2CA76;margin:-4px 0 20px;">Listen to My Message First &rarr;</p>
         <label for="memberId">Your d&#333;TERRA Member ID</label>
         <div class="input-row">
           <input type="text" id="memberId" inputmode="numeric" pattern="[0-9]*" maxlength="10" placeholder="Place your d&#333;TERRA Member ID here (e.g., 12345)" autocomplete="off">
@@ -508,17 +508,19 @@ function init_tracer() {
     </aside>
     <div class="bo-main">
       <section id="partner-notes" class="partner-notes">
-        <div class="pn-tabs" role="tablist" aria-label="Partner Operations Tabs">
+        
+        <div class="pn-audio" id="pn-top-audio">
+            <div class="pn-audio-info"><span class="pn-audio-title">A message from Kalyani</span><span class="pn-audio-meta">How the Autonomous House Works</span></div>
+            <audio controls preload="metadata"><source src="https://kalyani-assets.b-cdn.net/partner-welcome-audio.mp3" type="audio/mpeg"></audio>
+          </div>
+        <div class="pn-tabs" style="margin:20px 0;" role="tablist" aria-label="Partner Operations Tabs">
           <button type="button" class="pn-tab active" role="tab" aria-selected="true" data-tab="tab-house">How This House Runs</button>
           <button type="button" class="pn-tab" role="tab" aria-selected="false" data-tab="tab-sharing">Sharing</button>
           <button type="button" class="pn-tab" role="tab" aria-selected="false" data-tab="tab-resources">Resources</button>
           <button type="button" class="pn-tab" role="tab" aria-selected="false" data-tab="tab-blueprint">Stamped Blueprint</button>
         </div>
         <div class="pn-panel active" id="tab-house" role="tabpanel">
-          <div class="pn-audio" id="pn-top-audio">
-            <div class="pn-audio-info"><span class="pn-audio-title">A message from Kalyani</span><span class="pn-audio-meta">How the Autonomous House Works</span></div>
-            <audio controls preload="metadata"><source src="https://kalyani-assets.b-cdn.net/partner-welcome-audio.mp3" type="audio/mpeg"></audio>
-          </div>
+          
           <div class="pn-card addon-card">
             <span class="pn-kicker">What&rsquo;s Next &bull; Your 3-Step Launch</span>
             <h2>Three Simple Steps to Put Your Link to Work Today</h2>
