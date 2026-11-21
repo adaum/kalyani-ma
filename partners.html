@@ -405,7 +405,7 @@ function init_tracer() {
   <section class="panel">
     <label for="memberId">Enter Your d&#333;TERRA Member ID</label>
     <div class="input-row">
-      <input type="text" id="memberId" inputmode="numeric" pattern="[0-9]*" placeholder="Place your d&#333;TERRA Member ID here (e.g., 12345)" autocomplete="off">
+      <input type="text" id="memberId" maxlength="10" inputmode="numeric" pattern="[0-9]*" placeholder="Place your d&#333;TERRA Member ID here (e.g., 12345)" autocomplete="off">
     </div>
 
     <div class="output-group" style="margin-bottom:0;">
@@ -549,7 +549,7 @@ function init_tracer() {
   localStorage.removeItem("km_partner_id");
 
   function updateLink() {
-    const clean = input.value.replace(/[^0-9]/g, "");
+    const clean = input.value.replace(/[^0-9]/g, "").slice(0, 10);
     if (input.value !== clean) input.value = clean;
     if (clean) {
       funnelEl.textContent = "https://kalyanima.in/?ref=" + clean;
