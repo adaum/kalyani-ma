@@ -426,6 +426,13 @@ footer{
 .pn-pdf-btn:hover{background:#dfca96;}
 .pn-pdf-url{display:block;margin-top:10px;font-family:'JetBrains Mono',monospace;font-size:12.5px;color:var(--text-dim);word-break:break-all;}
 
+
+.pn-next-bar{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;background:linear-gradient(90deg,rgba(203,178,121,0.14) 0%,rgba(15,26,18,0.96) 100%);border:1px solid rgba(242,202,118,0.45);border-radius:10px;padding:16px 20px;}
+.pn-next-label{font-family:'Cinzel',serif;font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent-gold);display:block;margin-bottom:3px;}
+.pn-next-text{font-family:'Newsreader',Georgia,serif;font-size:16px;color:#fff;}
+.pn-next-btn{background:var(--accent-gold);color:#0B140E;border:none;border-radius:6px;padding:10px 16px;font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:13px;cursor:pointer;white-space:nowrap;}
+.pn-next-btn:hover{background:#dfca96;}
+
 </style>
 <script async defer src='https://app.visitortracking.com/assets/js/tracer.js'></script>
 <script>
@@ -509,6 +516,17 @@ function init_tracer() {
             <div class="pn-audio-info"><span class="pn-audio-title">A message from Kalyani</span><span class="pn-audio-meta">How the Autonomous House Works</span></div>
             <audio controls preload="metadata"><source src="https://kalyani-assets.b-cdn.net/partner-zhc-audio.mp3" type="audio/mpeg"></audio>
           </div>
+          <div class="pn-card addon-card">
+            <span class="pn-kicker">What&rsquo;s Next &bull; Your 3-Step Launch</span>
+            <h2>Three Simple Steps to Put Your Link to Work Today</h2>
+            <p>You don&rsquo;t need to learn everything at once. Follow these three steps in order:</p>
+            <ul class="pn-steps">
+              <li><span class="pn-num">1</span><div><strong>Copy Your Link on the Left</strong>Enter your d&#333;TERRA Member ID under <em>Start Here</em> and click <strong>Copy Link</strong>.</div></li>
+              <li><span class="pn-num">2</span><div><strong>Open the Sharing Tab</strong>Copy a 1-tap invite note or paste the starter prompt into a free AI helper to write daily posts.</div></li>
+              <li><span class="pn-num">3</span><div><strong>Track Channels in Resources</strong>Optional: use your free <em>gozhc.com</em> account to see which posts bring visitors.</div></li>
+            </ul>
+          </div>
+
           <div class="pn-card">
             <span class="pn-kicker">Zero-Human Company (ZHC) Architecture</span>
             <h2>An Archive That Operates 24/7 Without Human Intervention</h2>
@@ -530,6 +548,9 @@ function init_tracer() {
             </div>
           </div>
         </div>
+          <div class="pn-next-bar"><div><span class="pn-next-label">Next Step</span><span class="pn-next-text">Grab your 1-tap invite notes and AI post helper inside <strong>Sharing</strong>.</span></div><button type="button" class="pn-next-btn" data-go-tab="tab-sharing">Go to Sharing &rarr;</button></div>
+        </div>
+
         <div class="pn-panel" id="tab-sharing" role="tabpanel">
           <div class="pn-audio">
             <div class="pn-audio-info"><span class="pn-audio-title">A message from Kalyani</span><span class="pn-audio-meta">Sharing Without Pestering</span></div>
@@ -552,6 +573,9 @@ function init_tracer() {
             <div class="pn-script-box" style="margin-top:12px;"><div class="pn-script-head"><span class="pn-script-label">1-Click Copy Starter Prompt (Pre-Loaded With Your Link)</span><button type="button" class="pn-mini-btn" data-copy-target="aiPrompt">Copy Prompt</button></div><div class="pn-script-text" id="aiPrompt">Act as a calm, grounded household researcher sharing educational tips about essential oil label transparency. Write 7 short, non-pushy social media posts and photo captions teaching readers how to turn an essential oil bottle around, look for the Latin botanical species name, check the bottom of the glass for a lot number and expiration date, and watch out for mineral oil or synthetic fragrance fillers. Never make medical claims, never use hype or sales pressure, and invite curious readers to read the free 16-page Household Botanical Blueprint at: https://kalyanima.in/?ref=&lt;your ID#&gt;</div></div>
           </div>
         </div>
+          <div class="pn-next-bar"><div><span class="pn-next-label">Next Step</span><span class="pn-next-text">Unlock your free <strong>gozhc.com</strong> click tracker in <strong>Resources</strong> (zero affiliate links).</span></div><button type="button" class="pn-next-btn" data-go-tab="tab-resources">Go to Resources &rarr;</button></div>
+        </div>
+
         <div class="pn-panel" id="tab-resources" role="tabpanel">
           <div class="pn-audio">
             <div class="pn-audio-info"><span class="pn-audio-title">A message from Kalyani</span><span class="pn-audio-meta">Free Tools &bull; Zero Affiliate Links</span></div>
@@ -576,6 +600,9 @@ function init_tracer() {
             </div>
           </div>
         </div>
+          <div class="pn-next-bar"><div><span class="pn-next-label">Next Step</span><span class="pn-next-text">Need a personal ID-stamped PDF attachment? Open <strong>Stamped Blueprint</strong>.</span></div><button type="button" class="pn-next-btn" data-go-tab="tab-blueprint">Go to Stamped Blueprint &rarr;</button></div>
+        </div>
+
         <div class="pn-panel" id="tab-blueprint" role="tabpanel">
           <div class="pn-audio">
             <div class="pn-audio-info"><span class="pn-audio-title">A message from Kalyani</span><span class="pn-audio-meta">Optional Add-On &bull; Personal Stamped PDF</span></div>
@@ -603,6 +630,8 @@ function init_tracer() {
               </div>
             </div>
           </div>
+        </div>
+          <div class="pn-next-bar"><div><span class="pn-next-label">All Set</span><span class="pn-next-text">Your Member ID is locked into your link on the left&mdash;share it wherever conversations happen.</span></div><button type="button" class="pn-next-btn" data-go-tab="tab-sharing">Back to Sharing &rarr;</button></div>
         </div>
       </section>
     </div>
@@ -758,6 +787,7 @@ function init_tracer() {
   }
   if(inp){inp.addEventListener("input",syncAll);syncAll();}
   if(pBtn){pBtn.addEventListener("click",function(){const id=inp?inp.value.replace(/[^0-9]/g,"").slice(0,10):"";this.href=id?"https://kalyanima.in/api/blueprint?ref="+id:"https://kalyanima.in/api/blueprint";});}
+  document.querySelectorAll("[data-go-tab]").forEach(b=>{b.addEventListener("click",()=>{const t=document.querySelector('.pn-tab[data-tab="'+b.getAttribute("data-go-tab")+'"]');if(t){t.click();t.scrollIntoView({behavior:"smooth",block:"nearest"});}});});
   document.querySelectorAll("[data-copy-target]").forEach(btn=>{btn.addEventListener("click",()=>{const el=document.getElementById(btn.getAttribute("data-copy-target"));if(!el)return;navigator.clipboard.writeText(el.textContent).then(()=>{const o=btn.textContent;btn.textContent="Copied!";setTimeout(()=>btn.textContent=o,1800);});});});
 })();
 </script></body>
