@@ -553,9 +553,11 @@ function init_tracer() {
     if (input.value !== clean) input.value = clean;
     if (clean) {
       funnelEl.textContent = "https://kalyanima.in/?ref=" + clean;
+      const bpPrevEl = document.getElementById("stampedPdfUrl"); if (bpPrevEl) bpPrevEl.textContent = "https://kalyanima.in/api/blueprint?ref=" + clean;
       funnelEl.classList.remove("is-placeholder");
     } else {
       funnelEl.textContent = "https://kalyanima.in/?ref=<your ID#>";
+      const bpPrevEl = document.getElementById("stampedPdfUrl"); if (bpPrevEl) bpPrevEl.textContent = "https://kalyanima.in/api/blueprint?ref=<your ID#>";
       funnelEl.classList.add("is-placeholder");
     }
   }
