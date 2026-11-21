@@ -598,5 +598,16 @@ function init_tracer() {
   });
 })();
 </script>
+<script>
+(function(){
+  const inp = document.getElementById("memberId"), btn = document.getElementById("stampedPdfBtn");
+  function fixPdf() {
+    const id = inp ? inp.value.replace(/[^0-9]/g, "").slice(0, 10) : "";
+    if (btn) btn.href = id ? ("https://kalyanima.in/api/blueprint?ref=" + id) : "https://kalyanima.in/api/blueprint";
+  }
+  if (inp) { inp.addEventListener("input", fixPdf); fixPdf(); }
+  if (btn) { btn.addEventListener("click", fixPdf); }
+})();
+</script>
 </body>
 </html>
