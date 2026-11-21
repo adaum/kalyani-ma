@@ -515,7 +515,7 @@ function init_tracer() {
           <button type="button" class="pn-tab" role="tab" aria-selected="false" data-tab="tab-blueprint">Stamped Blueprint</button>
         </div>
         <div class="pn-panel active" id="tab-house" role="tabpanel">
-          <div class="pn-audio">
+          <div class="pn-audio" id="pn-top-audio">
             <div class="pn-audio-info"><span class="pn-audio-title">A message from Kalyani</span><span class="pn-audio-meta">How the Autonomous House Works</span></div>
             <audio controls preload="metadata"><source src="https://kalyani-assets.b-cdn.net/partner-welcome-audio.mp3" type="audio/mpeg"></audio>
           </div>
@@ -554,10 +554,6 @@ function init_tracer() {
         </div>
 
         <div class="pn-panel" id="tab-sharing" role="tabpanel">
-          <div class="pn-audio">
-            <div class="pn-audio-info"><span class="pn-audio-title">A message from Kalyani</span><span class="pn-audio-meta">Sharing Without Pestering</span></div>
-            <audio controls preload="metadata"><source src="https://kalyani-assets.b-cdn.net/partner-sharing-audio.mp3" type="audio/mpeg"></audio>
-          </div>
           <div class="pn-card">
             <span class="pn-kicker">1-Tap Invite Notes</span>
             <h2>Point People to the Archive &mdash; Let the Data Speak</h2>
@@ -585,10 +581,6 @@ function init_tracer() {
         </div>
 
         <div class="pn-panel" id="tab-resources" role="tabpanel">
-          <div class="pn-audio">
-            <div class="pn-audio-info"><span class="pn-audio-title">A message from Kalyani</span><span class="pn-audio-meta">Free Tools &bull; Zero Affiliate Links</span></div>
-            <audio controls preload="metadata"><source src="https://kalyani-assets.b-cdn.net/partner-resources-audio.mp3" type="audio/mpeg"></audio>
-          </div>
           <div class="pn-card">
             <span class="pn-kicker">100% Free Toolkit &bull; Zero Affiliate Links</span>
             <h2>See Which Links Pay Off with gozhc.com</h2>
@@ -611,10 +603,6 @@ function init_tracer() {
         </div>
 
         <div class="pn-panel" id="tab-blueprint" role="tabpanel">
-          <div class="pn-audio">
-            <div class="pn-audio-info"><span class="pn-audio-title">A message from Kalyani</span><span class="pn-audio-meta">Optional Add-On &bull; Personal Stamped PDF</span></div>
-            <audio controls preload="metadata"><source src="https://kalyani-assets.b-cdn.net/partner-pdf-audio.mp3" type="audio/mpeg"></audio>
-          </div>
           <div class="pn-card addon-card">
             <span class="pn-kicker">Optional Partner Add-On</span>
             <h2>Download Your Own ID-Stamped 16-Page Blueprint PDF</h2>
@@ -773,6 +761,27 @@ function init_tracer() {
 </script>
 <script>
 (function(){
+  
+  const tabAudioMap = {
+    "tab-house": { meta: "How the Autonomous House Works", src: "https://kalyani-assets.b-cdn.net/partner-welcome-audio.mp3" },
+    "tab-sharing": { meta: "Sharing Without Selling", src: "https://kalyani-assets.b-cdn.net/partner-sharing-audio.mp3" },
+    "tab-resources": { meta: "Free Tools, Zero Catches", src: "https://kalyani-assets.b-cdn.net/partner-resources-audio.mp3" },
+    "tab-blueprint": { meta: "Your Personal Stamped Blueprint", src: "https://kalyani-assets.b-cdn.net/partner-pdf-audio.mp3" }
+  };
+  const topBox = document.getElementById("pn-top-audio");
+  const topMeta = topBox ? topBox.querySelector(".pn-audio-meta") : null;
+  const topAudio = topBox ? topBox.querySelector("audio") : null;
+  function syncTabAudio(tabId) {
+    if (!topAudio || !tabAudioMap[tabId]) return;
+    topAudio.pause();
+    if (topMeta) topMeta.textContent = tabAudioMap[tabId].meta;
+    const sourceEl = topAudio.querySelector("source");
+    if (sourceEl && sourceEl.getAttribute("src") !== tabAudioMap[tabId].src) {
+      sourceEl.setAttribute("src", tabAudioMap[tabId].src);
+      topAudio.load();
+    }
+  }
+
   const tabs=document.querySelectorAll(".pn-tab"),panels=document.querySelectorAll(".pn-panel");
   tabs.forEach(tab=>{tab.addEventListener("click",()=>{document.querySelectorAll("audio").forEach(a=>{try{a.pause();}catch(e){}});tabs.forEach(t=>{t.classList.remove("active");t.setAttribute("aria-selected","false");});panels.forEach(p=>p.classList.remove("active"));tab.classList.add("active");tab.setAttribute("aria-selected","true");const target=document.getElementById(tab.getAttribute("data-tab"));if(target)target.classList.add("active");});});
   document.addEventListener("DOMContentLoaded",()=>{
