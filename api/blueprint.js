@@ -57,10 +57,11 @@ module.exports = async function handler(req, res) {
       lastPage.node.set(pdfDoc.context.obj('Annots'), pdfDoc.context.obj([linkAnnot]));
     }
 
-    const stampStr = `• ${cleanRef}`;
+    lastPage.drawCircle({ x: 270.2, y: 54.7, size: 1.25, color: rgb(0.361, 0.400, 0.369) });
+    const stampStr = `${cleanRef}`;
     const fontSize = 6.75;
     const tracking = 1.125;
-    let cursorX = 268;
+    let cursorX = 276;
     for (const ch of stampStr) {
       lastPage.drawText(ch, {
         x: cursorX,
