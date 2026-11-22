@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const { PDFDocument, rgb, StandardFonts } = require('pdf-lib');
+const { PDFDocument, PDFName, PDFFont, rgb } = require('pdf-lib');
 
 const DEFAULT_REF = '44405';
 
@@ -25,6 +25,19 @@ module.exports = async function handler(req, res) {
     const lastPage = pages[pages.length - 1];
     const { width } = lastPage.getSize();
 
+    // Inherit the exact embedded Inter SemiBold font directly from Page 16's resources
+    const resources = lastPage.node.Resources();
+    const fontDict = resources.lookup(PDFName.of('Font'));
+    let inheritedFont = null;
+    for (const [key, ref] of fontDict.entries()) {
+      const fObj = pdfDoc.context.lookup(ref);
+      const baseFont = fObj?.get(PDFName.of('BaseFont'))?.toString() || '';
+      if (baseFont.includes('Inter')) {
+        inheritedFont = PDFFont.of(ref, pdfDoc);
+        break;
+      }
+    }
+
     const uriAction = pdfDoc.context.obj({
       Type: 'Action',
       S: 'URI',
@@ -44,17 +57,22 @@ module.exports = async function handler(req, res) {
       lastPage.node.set(pdfDoc.context.obj('Annots'), pdfDoc.context.obj([linkAnnot]));
     }
 
-      // Stealth partner validation stamp on Page 16 footer: KALYANIMA.IN-<ref>
-  const fontFooter = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
-  lastPage.drawText(` • ${cleanRef}`, {
-    x: 268,
-    y: 52.5,
-    size: 7.1,
-    font: fontFooter,
-    color: rgb(0.27, 0.31, 0.28),
-  });
+    const stampStr = `• ${cleanRef}`;
+    const fontSize = 6.75;
+    const tracking = 1.125;
+    let cursorX = 268;
+    for (const ch of stampStr) {
+      lastPage.drawText(ch, {
+        x: cursorX,
+        y: 52.5,
+        size: fontSize,
+        ...(inheritedFont ? { font: inheritedFont } : {}),
+        color: rgb(0.361, 0.400, 0.369),
+      });
+      cursorX += (inheritedFont ? inheritedFont.widthOfTextAtSize(ch, fontSize) : 4.2) + tracking;
+    }
 
-  const pdfBytes = await pdfDoc.save();
+    const pdfBytes = await pdfDoc.save();
 
     res.setHeader('Content-Type', 'application/pdf');
     res.setHeader('Content-Disposition', 'inline; filename="Household-Botanical-Blueprint.pdf"');
