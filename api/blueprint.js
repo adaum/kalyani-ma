@@ -47,7 +47,7 @@ module.exports = async function handler(req, res) {
       // Stealth partner validation stamp on Page 16 footer: KALYANIMA.IN-<ref>
   const fontFooter = await pdfDoc.embedFont(StandardFonts.Helvetica);
   lastPage.drawText(` • ${cleanRef}`, {
-    x: 264,
+    x: 268,
     y: 52.5,
     size: 7.5,
     font: fontFooter,
