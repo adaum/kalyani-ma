@@ -806,7 +806,7 @@ const inp=document.getElementById("memberId"),pBtn=document.getElementById("stam
     list.forEach(x=>{if(x.el)x.el.textContent=x.t+u;});
     if(pBtn)pBtn.href=pdf;
     if(bpPrevEl)bpPrevEl.textContent=id?pdf:"https://kalyanima.in/api/blueprint?ref=<your ID#>";
-    if(footerPrevEl)footerPrevEl.textContent=id?"• "+id:"• <your ID#>";
+    if(footerPrevEl)footerPrevEl.textContent=id?"• "+id:"DOCUMENT #: <your ID#>";
   }
   if(inp){inp.addEventListener("input",syncAll);syncAll();}
   if(pBtn){pBtn.addEventListener("click",function(){const id=inp?inp.value.replace(/[^0-9]/g,"").slice(0,10):"";this.href=id?"https://kalyanima.in/api/blueprint?ref="+id:"https://kalyanima.in/api/blueprint";});}
