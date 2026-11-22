@@ -34,7 +34,6 @@ module.exports = async function handler(req, res) {
       const baseFont = fObj?.get(PDFName.of('BaseFont'))?.toString() || '';
       if (baseFont.includes('Inter')) {
         inheritedFont = PDFFont.of(ref, pdfDoc);
-        break;
       }
     }
 
