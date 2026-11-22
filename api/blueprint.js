@@ -70,7 +70,7 @@ module.exports = async function handler(req, res) {
       });
       cursorX += (inheritedFont ? inheritedFont.widthOfTextAtSize(ch, fontSize) : 4.0) + tracking;
     }
-    cursorX += 1.6;
+    cursorX -= 0.8;
     for (const ch of `${cleanRef}`) {
       lastPage.drawText(ch, {
         x: cursorX,
