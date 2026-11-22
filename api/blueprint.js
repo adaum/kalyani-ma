@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const { PDFDocument, PDFName, PDFFont, rgb } = require('pdf-lib');
+const { PDFDocument, PDFName, PDFFont, StandardFonts, rgb } = require('pdf-lib');
 
 const DEFAULT_REF = '44405';
 
@@ -57,11 +57,12 @@ module.exports = async function handler(req, res) {
       lastPage.node.set(pdfDoc.context.obj('Annots'), pdfDoc.context.obj([linkAnnot]));
     }
 
-    lastPage.drawCircle({ x: 270.2, y: 54.7, size: 1.25, color: rgb(0.361, 0.400, 0.369) });
+    const dotFont = await pdfDoc.embedFont(StandardFonts.Helvetica);
+    lastPage.drawText('\u2022', { x: 269.2, y: 52.3, size: 7.5, font: dotFont, color: rgb(0.361, 0.400, 0.369) });
     const stampStr = `${cleanRef}`;
-    const fontSize = 6.75;
+    const fontSize = 7.0;
     const tracking = 1.125;
-    let cursorX = 276;
+    let cursorX = 275.5;
     for (const ch of stampStr) {
       lastPage.drawText(ch, {
         x: cursorX,
