@@ -10,3 +10,4 @@
 .trueline-history/
 .backups/
 node_modules/
+*.zip
