@@ -58,11 +58,11 @@ module.exports = async function handler(req, res) {
     }
 
     const dotFont = await pdfDoc.embedFont(StandardFonts.Helvetica);
-    lastPage.drawText('\u2022', { x: 269.2, y: 52.3, size: 7.5, font: dotFont, color: rgb(0.361, 0.400, 0.369) });
+    lastPage.drawText('\u2022', { x: 271.5, y: 52.4, size: 7.2, font: dotFont, color: rgb(0.361, 0.400, 0.369) });
     const stampStr = `${cleanRef}`;
-    const fontSize = 7.0;
-    const tracking = 1.125;
-    let cursorX = 275.5;
+    const fontSize = 6.5;
+    const tracking = 0.5;
+    let cursorX = 277.5;
     for (const ch of stampStr) {
       lastPage.drawText(ch, {
         x: cursorX,
