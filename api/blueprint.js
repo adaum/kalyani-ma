@@ -58,9 +58,9 @@ module.exports = async function handler(req, res) {
     }
 
     const stampStr = `DOC #: ${cleanRef}`;
-    const fontSize = 6.2;
-    const tracking = 0.85;
-    let cursorX = 68.5;
+    const fontSize = 6.75;
+    const tracking = 1.05;
+    let cursorX = 56.5;
     for (const ch of stampStr) {
       lastPage.drawText(ch, {
         x: cursorX,
