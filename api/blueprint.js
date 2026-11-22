@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const { PDFDocument, PDFName, PDFFont, StandardFonts, rgb } = require('pdf-lib');
+const { PDFDocument, PDFName, PDFFont, rgb } = require('pdf-lib');
 
 const DEFAULT_REF = '44405';
 
@@ -57,21 +57,19 @@ module.exports = async function handler(req, res) {
       lastPage.node.set(pdfDoc.context.obj('Annots'), pdfDoc.context.obj([linkAnnot]));
     }
 
-    const dotFont = await pdfDoc.embedFont(StandardFonts.Helvetica);
-    lastPage.drawText('\u2022', { x: 271.5, y: 52.4, size: 7.2, font: dotFont, color: rgb(0.361, 0.400, 0.369) });
-    const stampStr = `${cleanRef}`;
-    const fontSize = 6.5;
-    const tracking = 0.5;
-    let cursorX = 277.5;
+    const stampStr = `DOC #: ${cleanRef}`;
+    const fontSize = 6.2;
+    const tracking = 0.85;
+    let cursorX = 68.5;
     for (const ch of stampStr) {
       lastPage.drawText(ch, {
         x: cursorX,
-        y: 52.5,
+        y: 42.5,
         size: fontSize,
         ...(inheritedFont ? { font: inheritedFont } : {}),
         color: rgb(0.361, 0.400, 0.369),
       });
-      cursorX += (inheritedFont ? inheritedFont.widthOfTextAtSize(ch, fontSize) : 4.2) + tracking;
+      cursorX += (inheritedFont ? inheritedFont.widthOfTextAtSize(ch, fontSize) : 4.0) + tracking;
     }
 
     const pdfBytes = await pdfDoc.save();
