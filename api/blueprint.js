@@ -56,8 +56,8 @@ module.exports = async function handler(req, res) {
       lastPage.node.set(pdfDoc.context.obj('Annots'), pdfDoc.context.obj([linkAnnot]));
     }
 
-    const fontSize = 6.75;
-    const tracking = 1.05;
+    const fontSize = 5.75;
+    const tracking = 0.85;
     let cursorX = 55.0;
     for (const ch of 'DOC #:') {
       lastPage.drawText(ch, {
