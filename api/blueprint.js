@@ -57,11 +57,21 @@ module.exports = async function handler(req, res) {
       lastPage.node.set(pdfDoc.context.obj('Annots'), pdfDoc.context.obj([linkAnnot]));
     }
 
-    const stampStr = `DOC #: ${cleanRef}`;
     const fontSize = 6.75;
     const tracking = 1.05;
-    let cursorX = 56.5;
-    for (const ch of stampStr) {
+    let cursorX = 55.0;
+    for (const ch of 'DOC #:') {
+      lastPage.drawText(ch, {
+        x: cursorX,
+        y: 42.5,
+        size: fontSize,
+        ...(inheritedFont ? { font: inheritedFont } : {}),
+        color: rgb(0.361, 0.400, 0.369),
+      });
+      cursorX += (inheritedFont ? inheritedFont.widthOfTextAtSize(ch, fontSize) : 4.0) + tracking;
+    }
+    cursorX += 1.6;
+    for (const ch of `${cleanRef}`) {
       lastPage.drawText(ch, {
         x: cursorX,
         y: 42.5,
