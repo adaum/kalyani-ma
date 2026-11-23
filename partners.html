@@ -449,6 +449,18 @@ footer{
 .pn-tabs{align-items:center;}
 .pn-tabs{align-items:center;}.pn-tabs{align-items:center;}.pn-tabs{align-items:center;}.pn-tab-sep{flex:0 0 auto;display:inline-flex;align-items:center;padding:0 3px;pointer-events:none;}
 
+
+.pn-video-wrap{margin-top:16px;border-radius:10px;overflow:hidden;border:1px solid var(--border-gold);background:#050806;box-shadow:0 14px 34px rgba(0,0,0,0.5);}
+.pn-video-wrap video{display:block;width:100%;height:auto;max-height:540px;background:#050806;}
+.pn-video-cap{padding:10px 14px;font-size:13px;color:var(--text-muted);background:rgba(15,26,18,0.92);border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;}
+@media (max-width:960px){
+  .bo-grid{display:flex;flex-direction:column;}
+  .bo-main{display:contents;}
+  #pn-top-audio{order:1;margin-bottom:16px;}
+  .bo-sidebar{order:2;position:static;margin-bottom:18px;}
+  .partner-notes{order:3;}
+}
+
 </style>
 <script async defer src='https://app.visitortracking.com/assets/js/tracer.js'></script>
 <script>
@@ -617,6 +629,15 @@ function init_tracer() {
             <h2>See Which Links Pay Off with gozhc.com</h2>
             <p>Every tool listed in this back office is completely Free to use&mdash;and <strong>not a single link here is an affiliate link</strong>. Nobody in this house earns a side commission off you or the tools you use.</p>
             <p>With your free partner access to <strong>gozhc.com</strong> (I had it developed specifically for you to use here), you can create up to <strong>30 custom short links</strong>&mdash;all pointing to your exact same Kalyani URL&mdash;so you can see which places actually bring visitors for you:</p>
+            <div class="pn-video-wrap">
+  <video id="gozhcWalkthroughVideo" controls preload="metadata" playsinline>
+    <source src="https://kalyani-assets.b-cdn.net/gozhc-walkthrough-final.mp4" type="video/mp4">
+  </video>
+  <div class="pn-video-cap">
+    <span><strong style="color:#EFE6CF;">Step-by-Step Walkthrough:</strong> Setting up your free gozhc.com account &amp; tracking links</span>
+    <span style="font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--accent-gold);">2:55 &bull; Guided by Kalyani</span>
+  </div>
+</div>
             <div class="pn-slug-grid">
               <div class="pn-slug"><code>gozhc.com/name-fb</code>Facebook posts &amp; groups</div>
               <div class="pn-slug"><code>gozhc.com/name-ig</code>Instagram bio &amp; stories</div>
@@ -918,7 +939,7 @@ document.addEventListener("click", function(e) {
   const meta = box.querySelector(".pn-audio-meta");
   const src = au ? au.querySelector("source") : null;
   const url = "https://kalyani-assets.b-cdn.net/" + map[id][2];
-  if (au) au.pause();
+  if (au) au.pause(); const vid=document.getElementById("gozhcWalkthroughVideo"); if(vid) vid.pause();
   if (title) title.textContent = map[id][0];
   if (meta) meta.textContent = map[id][1];
   if (src && src.getAttribute("src") !== url) {
