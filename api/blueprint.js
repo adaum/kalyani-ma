@@ -62,7 +62,7 @@ module.exports = async function handler(req, res) {
     for (const ch of 'DOC #:') {
       lastPage.drawText(ch, {
         x: cursorX,
-        y: 42.5,
+        y: 40.5,
         size: fontSize,
         ...(inheritedFont ? { font: inheritedFont } : {}),
         color: rgb(0.361, 0.400, 0.369),
