@@ -450,9 +450,30 @@ footer{
 .pn-tabs{align-items:center;}.pn-tabs{align-items:center;}.pn-tabs{align-items:center;}.pn-tab-sep{flex:0 0 auto;display:inline-flex;align-items:center;padding:0 3px;pointer-events:none;}
 
 
-.pn-video-wrap{margin-top:16px;border-radius:10px;overflow:hidden;border:1px solid var(--border-gold);background:#050806;box-shadow:0 14px 34px rgba(0,0,0,0.5);}
-.pn-video-wrap video{display:block;width:100%;height:auto;max-height:540px;background:#050806;}
-.pn-video-cap{padding:10px 14px;font-size:13px;color:var(--text-muted);background:rgba(15,26,18,0.92);border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;}
+.pn-flipbook{margin-top:16px;border-radius:12px;border:1px solid var(--border-gold);background:linear-gradient(165deg,rgba(18,32,23,0.96),rgba(9,16,12,0.98));box-shadow:0 16px 38px rgba(0,0,0,0.52);overflow:hidden;perspective:1400px;}
+.pn-fb-top{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;padding:12px 16px;background:rgba(13,24,17,0.95);border-bottom:1px solid var(--border);}
+.pn-fb-badge{font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:0.06em;text-transform:uppercase;color:var(--accent-gold);display:flex;align-items:center;gap:8px;}
+.pn-fb-dots{display:flex;align-items:center;gap:6px;}
+.pn-fb-dot{width:26px;height:26px;border-radius:6px;border:1px solid var(--border);background:rgba(255,255,255,0.03);color:var(--text-muted);font-family:'JetBrains Mono',monospace;font-size:11.5px;cursor:pointer;transition:all 0.2s ease;}
+.pn-fb-dot:hover{border-color:var(--border-gold);color:#EFE6CF;}
+.pn-fb-dot.active{background:rgba(201,164,92,0.18);border-color:var(--accent-gold);color:#EFE6CF;font-weight:600;}
+.pn-fb-stage{position:relative;padding:18px;transform-style:preserve-3d;transition:transform 0.32s cubic-bezier(0.22,1,0.36,1),opacity 0.25s ease;}
+.pn-fb-stage.turning-next{transform:rotateY(-8deg) translateX(-10px);opacity:0.35;}
+.pn-fb-stage.turning-prev{transform:rotateY(8deg) translateX(10px);opacity:0.35;}
+.pn-fb-screen{border-radius:8px;overflow:hidden;border:1px solid rgba(201,164,92,0.28);background:#050806;box-shadow:0 10px 26px rgba(0,0,0,0.45);}
+.pn-fb-screen img{display:block;width:100%;height:auto;max-height:460px;object-fit:contain;margin:0 auto;}
+.pn-fb-copy{margin-top:14px;padding:14px 16px;border-radius:8px;background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.06);}
+.pn-fb-step-kicker{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent-gold);margin-bottom:4px;}
+.pn-fb-title{font-family:'Cormorant Garamond',Georgia,serif;font-size:22px;font-weight:600;color:#F5EFE0;line-height:1.25;margin:0 0 6px;}
+.pn-fb-text{font-size:14.5px;line-height:1.62;color:var(--text-main);margin:0;}
+.pn-fb-tip{margin-top:9px;padding-top:9px;border-top:1px dashed rgba(201,164,92,0.24);font-size:13px;color:var(--text-muted);}
+.pn-fb-nav{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 16px;background:rgba(13,24,17,0.95);border-top:1px solid var(--border);}
+.pn-fb-btn{padding:9px 16px;border-radius:8px;border:1px solid var(--border-gold);background:rgba(201,164,92,0.12);color:#EFE6CF;font-size:13.5px;font-weight:500;cursor:pointer;transition:all 0.18s ease;display:inline-flex;align-items:center;gap:6px;}
+.pn-fb-btn:hover:not(:disabled){background:rgba(201,164,92,0.24);transform:translateY(-1px);}
+.pn-fb-btn:disabled{opacity:0.35;cursor:not-allowed;}
+.pn-fb-btn.primary{background:linear-gradient(135deg,#C9A45C,#A8833E);color:#0B140E;border-color:#DFBE78;font-weight:600;}
+.pn-fb-btn.primary:hover:not(:disabled){filter:brightness(1.06);}
+.pn-fb-counter{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--text-muted);}
 @media (max-width:960px){
   .bo-grid{display:flex;flex-direction:column;}
   .bo-main{display:contents;}
@@ -629,13 +650,26 @@ function init_tracer() {
             <h2>See Which Links Pay Off with gozhc.com</h2>
             <p>Every tool listed in this back office is completely Free to use&mdash;and <strong>not a single link here is an affiliate link</strong>. Nobody in this house earns a side commission off you or the tools you use.</p>
             <p>With your free partner access to <strong>gozhc.com</strong> (I had it developed specifically for you to use here), you can create up to <strong>30 custom short links</strong>&mdash;all pointing to your exact same Kalyani URL&mdash;so you can see which places actually bring visitors for you:</p>
-            <div class="pn-video-wrap">
-  <video id="gozhcWalkthroughVideo" controls preload="metadata" playsinline>
-    <source src="https://kalyani-assets.b-cdn.net/gozhc-walkthrough-final.mp4" type="video/mp4">
-  </video>
-  <div class="pn-video-cap">
-    <span><strong style="color:#EFE6CF;">Step-by-Step Walkthrough:</strong> Setting up your free gozhc.com account &amp; tracking links</span>
-    <span style="font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--accent-gold);">2:55 &bull; Guided by Kalyani</span>
+            <div class="pn-flipbook" id="gozhcManualBook" tabindex="0" aria-label="gozhc.com Step-by-Step Field Manual">
+  <div class="pn-fb-top">
+    <div class="pn-fb-badge">&#128214; Illustrated Field Manual &bull; gozhc.com</div>
+    <div class="pn-fb-dots" id="pnFbDots" role="tablist" aria-label="Manual pages"></div>
+  </div>
+  <div class="pn-fb-stage" id="pnFbStage">
+    <div class="pn-fb-screen">
+      <img id="pnFbImg" src="assets/gozhc-manual/step-1.webp" alt="Step 1: Copy your Kalyani Partner Invite Code">
+    </div>
+    <div class="pn-fb-copy">
+      <div class="pn-fb-step-kicker" id="pnFbKicker">Page 1 of 6 &bull; Getting Started</div>
+      <h4 class="pn-fb-title" id="pnFbTitle">Copy Your Partner Invite Code</h4>
+      <p class="pn-fb-text" id="pnFbText">Right below this manual inside Partner Operations, tap <strong>Copy Code</strong> next to your Kalyani Partner Invite Code—that code unlocks your account for free. Then tap <strong>Open gozhc.com &nearr;</strong> to open the link tracker in a separate browser tab so you can flip back and forth easily.</p>
+      <div class="pn-fb-tip" id="pnFbTip"><strong>Tip:</strong> Leave this manual open in one tab while you work in gozhc.com—no pausing or rewinding needed.</div>
+    </div>
+  </div>
+  <div class="pn-fb-nav">
+    <button type="button" class="pn-fb-btn" id="pnFbPrev" disabled>&larr; Previous Page</button>
+    <span class="pn-fb-counter" id="pnFbCounter">Page 1 / 6</span>
+    <button type="button" class="pn-fb-btn primary" id="pnFbNext">Next Page &rarr;</button>
   </div>
 </div>
             <div class="pn-slug-grid">
@@ -939,7 +973,7 @@ document.addEventListener("click", function(e) {
   const meta = box.querySelector(".pn-audio-meta");
   const src = au ? au.querySelector("source") : null;
   const url = "https://kalyani-assets.b-cdn.net/" + map[id][2];
-  if (au) au.pause(); const vid=document.getElementById("gozhcWalkthroughVideo"); if(vid) vid.pause();
+  if (au) au.pause();
   if (title) title.textContent = map[id][0];
   if (meta) meta.textContent = map[id][1];
   if (src && src.getAttribute("src") !== url) {
@@ -949,5 +983,125 @@ document.addEventListener("click", function(e) {
   }
 }, true);
 </script>
+
+<script>
+(function(){
+  const pages = [
+    {
+      kicker: "Page 1 of 6 • Getting Started",
+      title: "Copy Your Kalyani Partner Invite Code",
+      img: "assets/gozhc-manual/step-1.webp",
+      alt: "Step 1: Copy Code and Open gozhc.com",
+      text: "Scroll just below this manual in the <strong>Link Tracking</strong> tab and tap <strong>Copy Code</strong> next to your Kalyani Partner Invite Code—this unlocks your gozhc.com account completely free. Next, tap <strong>Open gozhc.com ↗</strong> to open the tracker in a second tab beside this guide.",
+      tip: "<strong>Calm pace:</strong> Keep this manual open in one tab and gozhc.com in the next so you can flip pages at your own speed."
+    },
+    {
+      kicker: "Page 2 of 6 • Free Account Registration",
+      title: "Join With Your Partner Code",
+      img: "assets/gozhc-manual/step-2.webp",
+      alt: "Step 2: Fill out the Join gozhc.com registration form",
+      text: "On gozhc.com, tap <strong>Join with your partner code</strong>. Paste your invite code into the top box, fill in your name, your email address, and a password (at least 10 characters), then tap <strong>Create my account</strong>.",
+      tip: "<strong>Note:</strong> Capital letters do not matter for the partner invite code."
+    },
+    {
+      kicker: "Page 3 of 6 • Email Confirmation",
+      title: "Verify Your Email Address Within 24 Hours",
+      img: "assets/gozhc-manual/step-3.webp",
+      alt: "Step 3: Check your email confirmation screen",
+      text: "As soon as you submit the sign-up form, you will see the <strong>Check your email</strong> screen. Open your inbox—and check your spam or promotions folder just in case—open the confirmation message from gozhc.com, and click the verification link inside within 24 hours. Once verified, sign in to open your dashboard.",
+      tip: "<strong>Didn’t see it?</strong> You can tap <em>Send it again</em> right on that confirmation screen."
+    },
+    {
+      kicker: "Page 4 of 6 • Member ID Attribution",
+      title: "Enter Your dōTERRA Member ID Once",
+      img: "assets/gozhc-manual/step-4.webp",
+      alt: "Step 4: Entering your dōTERRA Member ID in My Links",
+      text: "Inside your <strong>My Links</strong> dashboard, enter your dōTERRA Member ID in the top box. Look right above that field—your main Kalyani link is already pre-loaded, so every short link you create here automatically carries your Member ID forward.",
+      tip: "<strong>Verify once:</strong> Double-check your digits here so every click routes credit cleanly to your ID."
+    },
+    {
+      kicker: "Page 5 of 6 • Creating Tracked Links",
+      title: "Give Each Post Its Own Short Link & Label",
+      img: "assets/gozhc-manual/step-5.webp",
+      alt: "Step 5: Creating a custom short ending like tk1 and label",
+      text: "Type a short ending—for example, <strong>tk1</strong> for your first TikTok post or <strong>fb1</strong> for Facebook—and enter a clear label like <strong>TikTok Post</strong> next to it so you always remember where you shared it. Then tap <strong>Make my short link</strong>.",
+      tip: "<strong>Why separate links?</strong> Using a fresh code per post shows you which platform and story actually bring visitors."
+    },
+    {
+      kicker: "Page 6 of 6 • Notes, QR Codes & Organization",
+      title: "Track Clicks, Save Notes & Build Your Asset Folder",
+      img: "assets/gozhc-manual/step-6.webp",
+      alt: "Step 6: Link Notes, QR Code download, click stats, and Copy Link",
+      text: "Your new short link appears right below. Use <strong>Link Notes</strong> to jot down what you posted and tap <strong>Save</strong>, download a printable <strong>QR Code</strong> for flyers, or tap any link to view clicks for <strong>Today, 7 days, 30 days, or All time</strong>—plus which platforms people clicked from. Tap <strong>Copy Link</strong> whenever you are ready to share.",
+      tip: "<strong>Kalyani’s Folder Habit:</strong> Create one dedicated folder on your computer or phone (such as <em>Kalyani Ma Asset Folder</em>) and keep your links, notes, and stamped Blueprint PDF together in one calm home base."
+    }
+  ];
+
+  const book = document.getElementById("gozhcManualBook");
+  if (!book) return;
+  const stage = document.getElementById("pnFbStage");
+  const imgEl = document.getElementById("pnFbImg");
+  const kickerEl = document.getElementById("pnFbKicker");
+  const titleEl = document.getElementById("pnFbTitle");
+  const textEl = document.getElementById("pnFbText");
+  const tipEl = document.getElementById("pnFbTip");
+  const prevBtn = document.getElementById("pnFbPrev");
+  const nextBtn = document.getElementById("pnFbNext");
+  const counterEl = document.getElementById("pnFbCounter");
+  const dotsWrap = document.getElementById("pnFbDots");
+
+  let idx = 0;
+
+  pages.forEach((_, i) => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "pn-fb-dot" + (i === 0 ? " active" : "");
+    b.textContent = String(i + 1);
+    b.setAttribute("aria-label", "Go to page " + (i + 1));
+    b.addEventListener("click", () => goTo(i));
+    dotsWrap.appendChild(b);
+  });
+
+  function goTo(nextIdx) {
+    if (nextIdx < 0 || nextIdx >= pages.length || nextIdx === idx) return;
+    const dir = nextIdx > idx ? "turning-next" : "turning-prev";
+    stage.classList.add(dir);
+    setTimeout(() => {
+      idx = nextIdx;
+      const p = pages[idx];
+      imgEl.src = p.img;
+      imgEl.alt = p.alt;
+      kickerEl.textContent = p.kicker;
+      titleEl.textContent = p.title;
+      textEl.innerHTML = p.text;
+      tipEl.innerHTML = p.tip;
+      counterEl.textContent = "Page " + (idx + 1) + " / " + pages.length;
+      prevBtn.disabled = idx === 0;
+      nextBtn.disabled = idx === pages.length - 1;
+      nextBtn.textContent = idx === pages.length - 1 ? "Manual Complete ✓" : "Next Page →";
+      Array.from(dotsWrap.children).forEach((d, i) => d.classList.toggle("active", i === idx));
+      stage.classList.remove(dir);
+    }, 170);
+  }
+
+  prevBtn.addEventListener("click", () => goTo(idx - 1));
+  nextBtn.addEventListener("click", () => goTo(idx + 1));
+
+  book.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowRight") { e.preventDefault(); goTo(idx + 1); }
+    if (e.key === "ArrowLeft") { e.preventDefault(); goTo(idx - 1); }
+  });
+
+  let touchX = null;
+  stage.addEventListener("touchstart", (e) => { touchX = e.changedTouches[0].clientX; }, { passive: true });
+  stage.addEventListener("touchend", (e) => {
+    if (touchX === null) return;
+    const dx = e.changedTouches[0].clientX - touchX;
+    touchX = null;
+    if (Math.abs(dx) > 42) goTo(dx < 0 ? idx + 1 : idx - 1);
+  }, { passive: true });
+})();
+</script>
+
 </body>
 </html>
