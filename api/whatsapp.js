@@ -40,7 +40,7 @@ function extractRef(text) {
 
 function buildReply(ref) {
   const id = sanitizeRef(ref);
-  const url = `https://kalyanima.in/api/blueprint?ref=${encodeURIComponent(id)}`;
+  const url = id === DEFAULT_REF ? 'https://kalyanima.in/api/blueprint' : `https://kalyanima.in/api/blueprint?ref=${encodeURIComponent(id)}`;
   return `Namaste, your Blueprint is here.
 
 Thank you for requesting the Household Botanical Blueprint. Inside, you'll find:
@@ -49,7 +49,7 @@ Thank you for requesting the Household Botanical Blueprint. Inside, you'll find:
 ✓  The 10-second home blot test
 ✓  How to verify the batch code and expiration date stamped on the bottom of the glass
 
-${url}
+Tap the button below to open and save your copy.
 
 Save this guide to your device for quick reference in your kitchen and home—and whenever you are ready for pure, batch-verified oils, your direct wholesale access link is waiting on the final page.
 Warmly,
@@ -298,12 +298,17 @@ async function sendWhatsAppText(to, body) {
     body: JSON.stringify({
       messaging_product: 'whatsapp',
       to,
-      type: 'text',
-      text: {
-        body,
-        // The only URL is a PDF from /api/blueprint. A preview would crawl
-        // that download and has no HTML card to show. The link stays tappable.
-        preview_url: false,
+      type: 'interactive',
+      interactive: {
+        type: 'cta_url',
+        body: { text: body },
+        action: {
+          name: 'cta_url',
+          parameters: {
+            display_text: 'Open Blueprint PDF',
+            url,
+          },
+        },
       },
     }),
   });
