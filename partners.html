@@ -445,6 +445,20 @@ footer{
 .pn-audio audio{flex:1 1 320px;max-width:100%;height:38px;border-radius:8px;}
 
 @media (max-width: 768px){.pn-steps{grid-template-columns:1fr !important;}}
+
+.pn-tabs{align-items:center;}
+.pn-tab-sep{
+  flex:0 0 auto;
+  color:rgba(203,178,121,0.72);
+  font-family:'Cinzel',serif;
+  font-size:15px;
+  font-weight:700;
+  line-height:1;
+  padding:0 2px;
+  user-select:none;
+  pointer-events:none;
+}
+
 </style>
 <script async defer src='https://app.visitortracking.com/assets/js/tracer.js'></script>
 <script>
@@ -523,13 +537,15 @@ function init_tracer() {
       <section id="partner-notes" class="partner-notes">
         
         <div class="pn-audio" id="pn-top-audio" style="margin-top:58px;">
-            <div class="pn-audio-info"><span class="pn-audio-title">Kalyani&rsquo;s First Message</span><span class="pn-audio-meta">How the Autonomous House Works</span></div>
-            <audio controls preload="metadata"><source src="https://kalyani-assets.b-cdn.net/partner-welcome-audio.mp3" type="audio/mpeg"></audio>
-          </div>
-        <div class="pn-tabs" style="margin:22px 0 20px;" role="tablist" aria-label="Partner Operations Tabs">
+            <div class="pn-audio-info"><span class="pn-audio-title">Kalyani&rsquo;s First Message</span><spa<div class="pn-tabs" style="margin:22px 0 20px;" role="tablist" aria-label="Partner Operations Tabs">
           <button type="button" class="pn-tab active" role="tab" aria-selected="true" data-tab="tab-house">How This House Runs</button>
+          <span class="pn-tab-sep" aria-hidden="true">&rsaquo;</span>
           <button type="button" class="pn-tab" role="tab" aria-selected="false" data-tab="tab-sharing">Sharing</button>
+          <span class="pn-tab-sep" aria-hidden="true">&rsaquo;</span>
           <button type="button" class="pn-tab" role="tab" aria-selected="false" data-tab="tab-blueprint">Stamped Blueprint</button>
+          <span class="pn-tab-sep" aria-hidden="true">&rsaquo;</span>
+          <button type="button" class="pn-tab" role="tab" aria-selected="false" data-tab="tab-resources">Link Tracking</button>
+        </div>ass="pn-tab" role="tab" aria-selected="false" data-tab="tab-blueprint">Stamped Blueprint</button>
           <button type="button" class="pn-tab" role="tab" aria-selected="false" data-tab="tab-resources">Link Tracking</button>
         </div>
         <div class="pn-panel active" id="tab-house" role="tabpanel">
