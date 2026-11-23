@@ -1135,5 +1135,6 @@ document.addEventListener("click", function(e) {
   <button type="button" class="pn-fb-modal-close" id="pnFbModalClose">&times; Close</button>
   <img id="pnFbModalImg" src="" alt="Expanded manual screenshot">
 </div>
+<script>document.addEventListener("DOMContentLoaded",()=>{const sc=document.getElementById("pnFbScreen"),im=document.getElementById("pnFbImg"),mo=document.getElementById("pnFbModal"),mi=document.getElementById("pnFbModalImg"),cl=document.getElementById("pnFbModalClose");if(!sc||!im)return;sc.addEventListener("mousemove",e=>{const r=sc.getBoundingClientRect();im.style.transformOrigin=`${((e.clientX-r.left)/r.width)*100}% ${((e.clientY-r.top)/r.height)*100}%`;sc.classList.add("is-zooming");});sc.addEventListener("mouseleave",()=>{sc.classList.remove("is-zooming");im.style.transformOrigin="center center";});if(mo&&mi){sc.addEventListener("click",()=>{mi.src=im.currentSrc||im.src;mi.alt=im.alt;mo.classList.add("open");});mo.addEventListener("click",e=>{if(e.target===mo||e.target===cl)mo.classList.remove("open");});document.addEventListener("keydown",e=>{if(e.key==="Escape")mo.classList.remove("open");});}});</script>
 </body>
 </html>
