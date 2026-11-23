@@ -461,7 +461,7 @@ footer{
 .pn-fb-stage.turning-next{transform:rotateY(-8deg) translateX(-10px);opacity:0.35;}
 .pn-fb-stage.turning-prev{transform:rotateY(8deg) translateX(10px);opacity:0.35;}
 .pn-fb-screen{border-radius:8px;overflow:hidden;border:1px solid rgba(201,164,92,0.28);background:#050806;box-shadow:0 10px 26px rgba(0,0,0,0.45);}
-.pn-fb-screen{position:relative;cursor:zoom-in;}.pn-fb-screen img{display:block;width:100%;height:auto;max-height:none;margin:0 auto;}.pn-fb-zoom-pill{position:absolute;right:10px;bottom:10px;padding:5px 10px;border-radius:6px;background:rgba(7,12,8,0.86);border:1px solid rgba(203,178,121,0.5);color:#F2CA76;font-family:'JetBrains Mono',monospace;font-size:11px;pointer-events:none;box-shadow:0 4px 12px rgba(0,0,0,0.45);}.pn-fb-modal{position:fixed;inset:0;z-index:9999;background:rgba(4,8,6,0.93);display:none;align-items:center;justify-content:center;padding:20px;cursor:zoom-out;}.pn-fb-modal.open{display:flex;}.pn-fb-modal img{max-width:96vw;max-height:92vh;width:auto;height:auto;border-radius:10px;border:1px solid var(--accent-gold);box-shadow:0 24px 60px rgba(0,0,0,0.8);cursor:default;}.pn-fb-modal-close{position:fixed;top:16px;right:20px;padding:8px 14px;border-radius:8px;border:1px solid var(--border-gold);background:#0E1A12;color:#F5EFE0;font-family:'JetBrains Mono',monospace;font-size:13px;cursor:pointer;}
+.pn-fb-screen{position:relative;overflow:hidden;cursor:zoom-in;}.pn-fb-screen img{display:block;width:100%;height:auto;max-height:none;margin:0 auto;transition:transform 0.14s ease-out;will-change:transform;}.pn-fb-screen.is-zooming img{transform:scale(1.85);}.pn-fb-zoom-pill{position:absolute;right:10px;bottom:10px;padding:5px 10px;border-radius:6px;background:rgba(7,12,8,0.86);border:1px solid rgba(203,178,121,0.5);color:#F2CA76;font-family:'JetBrains Mono',monospace;font-size:11px;pointer-events:none;box-shadow:0 4px 12px rgba(0,0,0,0.45);}.pn-fb-modal{position:fixed;inset:0;z-index:9999;background:rgba(4,8,6,0.93);display:none;align-items:center;justify-content:center;padding:20px;cursor:zoom-out;}.pn-fb-modal.open{display:flex;}.pn-fb-modal img{max-width:96vw;max-height:92vh;width:auto;height:auto;border-radius:10px;border:1px solid var(--accent-gold);box-shadow:0 24px 60px rgba(0,0,0,0.8);cursor:default;}.pn-fb-modal-close{position:fixed;top:16px;right:20px;padding:8px 14px;border-radius:8px;border:1px solid var(--border-gold);background:#0E1A12;color:#F5EFE0;font-family:'JetBrains Mono',monospace;font-size:13px;cursor:pointer;}
 .pn-fb-copy{margin-top:14px;padding:14px 16px;border-radius:8px;background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.06);}
 .pn-fb-step-kicker{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent-gold);margin-bottom:4px;}
 .pn-fb-title{font-family:'Cormorant Garamond',Georgia,serif;font-size:22px;font-weight:600;color:#F5EFE0;line-height:1.25;margin:0 0 6px;}
@@ -658,7 +658,7 @@ function init_tracer() {
   <div class="pn-fb-stage" id="pnFbStage">
     <div class="pn-fb-screen" id="pnFbScreen" title="Click to expand full screen">
       <img id="pnFbImg" src="assets/gozhc-manual/step-1.webp" alt="Step 1: Copy your Kalyani Partner Invite Code">
-      <span class="pn-fb-zoom-pill">&#128269; Tap to expand</span>
+      <span class="pn-fb-zoom-pill">&#128269; Hover to zoom &bull; Click for full screen</span>
     </div>
     <div class="pn-fb-copy">
       <div class="pn-fb-step-kicker" id="pnFbKicker">Page 1 of 6 &bull; Getting Started</div>
@@ -1054,8 +1054,26 @@ document.addEventListener("click", function(e) {
   const modalEl = document.getElementById("pnFbModal");
   const modalImg = document.getElementById("pnFbModalImg");
   const modalClose = document.getElementById("pnFbModalClose");
+  if (screenEl && imgEl) {
+    screenEl.addEventListener("mousemove", (e) => {
+      const r = screenEl.getBoundingClientRect();
+      const x = ((e.clientX - r.left) / r.width) * 100;
+      const y = ((e.clientY - r.top) / r.height) * 100;
+      imgEl.style.transformOrigin = x + "% " + y + "%";
+      screenEl.classList.add("is-zooming");
+    });
+    screenEl.addEventListener("mouseleave", () => {
+      screenEl.classList.remove("is-zooming");
+      imgEl.style.transformOrigin = "center center";
+    });
+  }
   if (screenEl && modalEl && modalImg) {
-    screenEl.addEventListener("click", () => { modalImg.src = imgEl.src; modalImg.alt = imgEl.alt; modalEl.classList.add("open"); });
+    screenEl.addEventListener("click", (e) => {
+      e.stopPropagation();
+      modalImg.src = imgEl.currentSrc || imgEl.src;
+      modalImg.alt = imgEl.alt;
+      modalEl.classList.add("open");
+    });
     modalEl.addEventListener("click", (e) => { if (e.target === modalEl || e.target === modalClose) modalEl.classList.remove("open"); });
     document.addEventListener("keydown", (e) => { if (e.key === "Escape") modalEl.classList.remove("open"); });
   }
