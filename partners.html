@@ -977,8 +977,8 @@ document.addEventListener("click", function(e) {
   if (au) au.pause();
   if (title) title.textContent = map[id][0];
   if (meta) meta.textContent = map[id][1];
-  if (src && src.getAttribute("src") !== url) {
-    src.setAttribute("src", url);
+  if (au && au.currentSrc !== url) {
+    if (src) src.setAttribute("src", url);
     au.src = url;
     au.load();
   }
