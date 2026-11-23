@@ -58,11 +58,11 @@ module.exports = async function handler(req, res) {
 
     const fontSize = 5.75;
     const tracking = 0.85;
-    let cursorX = 55.0;
+    let cursorX = 52.5;
     for (const ch of 'DOC #:') {
       lastPage.drawText(ch, {
         x: cursorX,
-        y: 42.5,
+        y: 44.5,
         size: fontSize,
         ...(inheritedFont ? { font: inheritedFont } : {}),
         color: rgb(0.361, 0.400, 0.369),
