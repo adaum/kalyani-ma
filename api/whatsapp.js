@@ -49,7 +49,7 @@ Thank you for requesting the Household Botanical Blueprint. Inside, you'll find:
 ✓  The 10-second home blot test
 ✓  How to verify the batch code and expiration date stamped on the bottom of the glass
 
-Tap the button below to open and save your copy.
+${url}
 
 Save this guide to your device for quick reference in your kitchen and home—and whenever you are ready for pure, batch-verified oils, your direct wholesale access link is waiting on the final page.
 Warmly,
@@ -298,17 +298,10 @@ async function sendWhatsAppText(to, body) {
     body: JSON.stringify({
       messaging_product: 'whatsapp',
       to,
-      type: 'interactive',
-      interactive: {
-        type: 'cta_url',
-        body: { text: body },
-        action: {
-          name: 'cta_url',
-          parameters: {
-            display_text: 'Open Blueprint PDF',
-            url,
-          },
-        },
+      type: 'text',
+      text: {
+        body,
+        preview_url: false,
       },
     }),
   });
