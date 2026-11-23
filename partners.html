@@ -457,11 +457,11 @@ footer{
 .pn-fb-dot{width:26px;height:26px;border-radius:6px;border:1px solid var(--border);background:rgba(255,255,255,0.03);color:var(--text-muted);font-family:'JetBrains Mono',monospace;font-size:11.5px;cursor:pointer;transition:all 0.2s ease;}
 .pn-fb-dot:hover{border-color:var(--border-gold);color:#EFE6CF;}
 .pn-fb-dot.active{background:rgba(201,164,92,0.18);border-color:var(--accent-gold);color:#EFE6CF;font-weight:600;}
-.pn-fb-stage{position:relative;padding:18px;transform-style:preserve-3d;transition:transform 0.32s cubic-bezier(0.22,1,0.36,1),opacity 0.25s ease;}
+.pn-fb-stage{position:relative;padding:10px 10px 16px;transform-style:preserve-3d;transition:transform 0.32s cubic-bezier(0.22,1,0.36,1),opacity 0.25s ease;}
 .pn-fb-stage.turning-next{transform:rotateY(-8deg) translateX(-10px);opacity:0.35;}
 .pn-fb-stage.turning-prev{transform:rotateY(8deg) translateX(10px);opacity:0.35;}
 .pn-fb-screen{border-radius:8px;overflow:hidden;border:1px solid rgba(201,164,92,0.28);background:#050806;box-shadow:0 10px 26px rgba(0,0,0,0.45);}
-.pn-fb-screen img{display:block;width:100%;height:auto;max-height:460px;object-fit:contain;margin:0 auto;}
+.pn-fb-screen{position:relative;cursor:zoom-in;}.pn-fb-screen img{display:block;width:100%;height:auto;max-height:none;margin:0 auto;}.pn-fb-zoom-pill{position:absolute;right:10px;bottom:10px;padding:5px 10px;border-radius:6px;background:rgba(7,12,8,0.86);border:1px solid rgba(203,178,121,0.5);color:#F2CA76;font-family:'JetBrains Mono',monospace;font-size:11px;pointer-events:none;box-shadow:0 4px 12px rgba(0,0,0,0.45);}.pn-fb-modal{position:fixed;inset:0;z-index:9999;background:rgba(4,8,6,0.93);display:none;align-items:center;justify-content:center;padding:20px;cursor:zoom-out;}.pn-fb-modal.open{display:flex;}.pn-fb-modal img{max-width:96vw;max-height:92vh;width:auto;height:auto;border-radius:10px;border:1px solid var(--accent-gold);box-shadow:0 24px 60px rgba(0,0,0,0.8);cursor:default;}.pn-fb-modal-close{position:fixed;top:16px;right:20px;padding:8px 14px;border-radius:8px;border:1px solid var(--border-gold);background:#0E1A12;color:#F5EFE0;font-family:'JetBrains Mono',monospace;font-size:13px;cursor:pointer;}
 .pn-fb-copy{margin-top:14px;padding:14px 16px;border-radius:8px;background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.06);}
 .pn-fb-step-kicker{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent-gold);margin-bottom:4px;}
 .pn-fb-title{font-family:'Cormorant Garamond',Georgia,serif;font-size:22px;font-weight:600;color:#F5EFE0;line-height:1.25;margin:0 0 6px;}
@@ -656,8 +656,9 @@ function init_tracer() {
     <div class="pn-fb-dots" id="pnFbDots" role="tablist" aria-label="Manual pages"></div>
   </div>
   <div class="pn-fb-stage" id="pnFbStage">
-    <div class="pn-fb-screen">
+    <div class="pn-fb-screen" id="pnFbScreen" title="Click to expand full screen">
       <img id="pnFbImg" src="assets/gozhc-manual/step-1.webp" alt="Step 1: Copy your Kalyani Partner Invite Code">
+      <span class="pn-fb-zoom-pill">&#128269; Tap to expand</span>
     </div>
     <div class="pn-fb-copy">
       <div class="pn-fb-step-kicker" id="pnFbKicker">Page 1 of 6 &bull; Getting Started</div>
@@ -1049,6 +1050,15 @@ document.addEventListener("click", function(e) {
   const nextBtn = document.getElementById("pnFbNext");
   const counterEl = document.getElementById("pnFbCounter");
   const dotsWrap = document.getElementById("pnFbDots");
+  const screenEl = document.getElementById("pnFbScreen");
+  const modalEl = document.getElementById("pnFbModal");
+  const modalImg = document.getElementById("pnFbModalImg");
+  const modalClose = document.getElementById("pnFbModalClose");
+  if (screenEl && modalEl && modalImg) {
+    screenEl.addEventListener("click", () => { modalImg.src = imgEl.src; modalImg.alt = imgEl.alt; modalEl.classList.add("open"); });
+    modalEl.addEventListener("click", (e) => { if (e.target === modalEl || e.target === modalClose) modalEl.classList.remove("open"); });
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape") modalEl.classList.remove("open"); });
+  }
 
   let idx = 0;
 
@@ -1103,5 +1113,9 @@ document.addEventListener("click", function(e) {
 })();
 </script>
 
+<div class="pn-fb-modal" id="pnFbModal" role="dialog" aria-modal="true" aria-label="Expanded manual slide">
+  <button type="button" class="pn-fb-modal-close" id="pnFbModalClose">&times; Close</button>
+  <img id="pnFbModalImg" src="" alt="Expanded manual screenshot">
+</div>
 </body>
 </html>
