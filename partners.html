@@ -482,7 +482,7 @@ footer{
   .partner-notes{order:3;}
 }
 
-.pn-tabs{justify-content:center;flex-wrap:wrap;}.pn-tab[data-tab="tab-power3"]{font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#F2CA76;border-bottom:2px solid rgba(242,202,118,.45);}.pn-tab[data-tab="tab-power3"].active{color:#102217;background:#F2CA76;border-radius:8px 8px 0 0;padding:10px 16px;}.pn-kicker,.bo-sidebar label,.output-group label,.pn-fb-step{font-size:12.5px!important;color:#F2CA76!important;letter-spacing:.12em;}.pn-card p,.pn-steps li div,.pn-fb-cap p,.voice-note p{color:#EFE6CF!important;font-size:15.5px;line-height:1.68;}
+.pn-tabs{justify-content:center;flex-wrap:nowrap;gap:4px;}.pn-tab{flex:0 1 auto!important;padding:10px 10px!important;font-size:11px!important;letter-spacing:.06em!important;}.pn-tab-sep{padding:0 1px!important;}.pn-tab[data-tab="tab-power3"]{font-weight:800;color:#F2CA76;border-bottom:2px solid rgba(242,202,118,.55);}.pn-tab[data-tab="tab-power3"].active{color:#102217!important;background:#F2CA76!important;border-radius:8px 8px 0 0;}.pn-fb-pages{display:flex;align-items:center;gap:6px;}.pn-fb-num{width:28px;height:28px;border-radius:6px;border:1px solid var(--border);background:rgba(255,255,255,.04);color:var(--text-muted);font-family:monospace;font-size:12px;cursor:pointer;}.pn-fb-num.active{background:#F2CA76;color:#102217;font-weight:700;border-color:#F2CA76;}.pn-fb-count{font-family:monospace;font-size:12px;color:#F2CA76;}.pn-fb-slide{display:none;}.pn-fb-slide.active{display:block;}.pn-fb-imgwrap{border-radius:8px;overflow:hidden;border:1px solid rgba(201,164,92,.32);background:#050806;}.pn-fb-imgwrap img{display:block;width:100%;height:auto;max-width:100%;}.pn-fb-cap{margin-top:14px;padding:14px 16px;border-radius:8px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);}.pn-fb-cap h3{font-family:"Cormorant Garamond",Georgia,serif;font-size:22px;color:#F5EFE0;margin:4px 0 8px;}.pn-kicker,.bo-sidebar label,.output-group label,.pn-fb-step{font-size:12.5px!important;color:#F2CA76!important;letter-spacing:.12em;}.pn-card p,.pn-steps li div,.pn-fb-cap p,.voice-note p{color:#EFE6CF!important;font-size:15.5px;line-height:1.68;}
 </style>
 <script async defer src='https://app.visitortracking.com/assets/js/tracer.js'></script>
 <script>
@@ -538,7 +538,7 @@ function init_tracer() {
         <p style="font-family:'Newsreader',Georgia,serif;font-size:17.5px;font-weight:600;color:#F2CA76;margin:-4px 0 20px;">Listen to My First Message</p>
         <label for="memberId">Your d&#333;TERRA Member ID</label>
         <div class="input-row">
-          <input type="text" id="memberId" inputmode="numeric" pattern="[0-9]*" maxlength="10" placeholder="Enter Member ID (e.g. 44405)" autocomplete="off">
+          <input type="text" id="memberId" inputmode="numeric" pattern="[0-9]*" maxlength="10" placeholder="e.g. 44405" autocomplete="off">
         </div>
         <div class="output-group" style="margin-bottom:0;">
           <label>Your All-In-One Link to Share</label>
