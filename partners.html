@@ -476,10 +476,11 @@ footer{
 .pn-fb-counter{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--text-muted);}
 @media (max-width:960px){
   .bo-grid{display:flex;flex-direction:column;}
-  .bo-main{display:contents;}
-  #pn-top-audio{order:1;margin-bottom:16px;}
+  .bo-main,.partner-notes{display:contents;}
+  #pn-top-audio{order:1;margin-top:0 !important;margin-bottom:16px;}
   .bo-sidebar{order:2;position:static;margin-bottom:18px;}
-  .partner-notes{order:3;}
+  .pn-tabs{order:3;justify-content:flex-start !important;overflow-x:auto !important;padding:0 14px 2px !important;scroll-behavior:smooth;}
+  .pn-panel{order:4;}
 }
 
 .pn-tabs{justify-content:center;flex-wrap:nowrap;gap:4px;}.pn-tab{flex:0 1 auto!important;padding:10px 10px!important;font-size:11px!important;letter-spacing:.06em!important;}.pn-tab-sep{padding:0 1px!important;}.pn-tab[data-tab="tab-power3"]{font-weight:800;color:#F2CA76;border-bottom:2px solid rgba(242,202,118,.55);}.pn-tab[data-tab="tab-power3"].active{color:#102217!important;background:#F2CA76!important;border-radius:8px 8px 0 0;}.pn-fb-pages{display:flex;align-items:center;gap:6px;}.pn-fb-num{width:28px;height:28px;border-radius:6px;border:1px solid var(--border);background:rgba(255,255,255,.04);color:var(--text-muted);font-family:monospace;font-size:12px;cursor:pointer;}.pn-fb-num.active{background:#F2CA76;color:#102217;font-weight:700;border-color:#F2CA76;}.pn-fb-count{font-family:monospace;font-size:12px;color:#F2CA76;}.pn-fb-slide{display:none;}.pn-fb-slide.active{display:block;}.pn-fb-imgwrap{border-radius:8px;overflow:hidden;border:1px solid rgba(201,164,92,.32);background:#050806;}.pn-fb-imgwrap img{display:block;width:100%;height:auto;max-width:100%;}.pn-fb-cap{margin-top:14px;padding:14px 16px;border-radius:8px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);}.pn-fb-cap h3{font-family:"Cormorant Garamond",Georgia,serif;font-size:22px;color:#F5EFE0;margin:4px 0 8px;}.pn-kicker,.bo-sidebar label,.output-group label,.pn-fb-step{font-size:12.5px!important;color:#F2CA76!important;letter-spacing:.12em;}.pn-card p,.pn-steps li div,.pn-fb-cap p,.voice-note p{color:#EFE6CF!important;font-size:15.5px;line-height:1.68;}
@@ -971,6 +972,14 @@ document.addEventListener("click", function(e) {
     "tab-resources": ["Link Tracking", "How They Found You", "tracking-audio.mp3"]
   };
   const box = document.getElementById("pn-top-audio");
+  if (window.innerWidth <= 960) {
+    const tabBar = document.querySelector(".pn-tabs");
+    const activeTab = tabBar ? tabBar.querySelector('.pn-tab[data-tab="' + id + '"]') : null;
+    if (tabBar && activeTab) {
+      const targetLeft = Math.max(0, activeTab.offsetLeft - 14);
+      tabBar.scrollTo({ left: targetLeft, behavior: "smooth" });
+    }
+  }
   if (!box || !map[id]) return;
   const au = box.querySelector("audio");
   const title = box.querySelector(".pn-audio-title");
