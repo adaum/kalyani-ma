@@ -1,6 +1,6 @@
 # WhatsApp Cloud API — Blueprint auto-reply
 
-`https://kalyanima.in/api/whatsapp` answers an inbound WhatsApp message with the Household Botanical Blueprint link.
+`https://www.kalyanima.in/api/whatsapp` answers an inbound WhatsApp message with the Household Botanical Blueprint link.
 
 The webhook replies to **text**, **button**, and **interactive** messages (`button_reply` and `list_reply`). It reads a referral id from `(Ref: 99999)` (spacing and case do not matter) and falls back to `44405`. The id is stripped to letters, numbers, `_`, and `-`, then capped at 32 characters, the same character set `api/blueprint.js` allows.
 
@@ -34,17 +34,18 @@ Set these on the Vercel project for Production (and Preview, if you exercise the
 
 | Name | Purpose |
 | --- | --- |
-| `WHATSAPP_TOKEN` | Permanent System User token with the `whatsapp_business_messaging` permission. Business Settings → Users → System users → generate a token for this Meta app. |
+| `WHATSAPP_TOKEN` | Permanent token from a System User (Admin) in Business Settings → Users → System users. Assign this Meta app and the WhatsApp account to that user, then generate a token with expiry Never and the `whatsapp_business_messaging` permission. |
 | `WHATSAPP_PHONE_NUMBER_ID` | Phone number ID from WhatsApp Manager (a long numeric id). This is not the display number `+1 430-340-4160`. |
 | `WHATSAPP_VERIFY_TOKEN` | Any long random string you invent. Enter the same string in the Meta webhook form. |
-| `WHATSAPP_APP_SECRET` | Recommended. App Secret from the Meta app (App settings → Basic). Every POST is checked with HMAC SHA-256 of the raw body (`X-Hub-Signature-256`). A mismatch returns 401. |
+| `WHATSAPP_APP_SECRET` | App Secret from the Meta app (App settings → Basic), set on Vercel Production. Every POST is checked with HMAC SHA-256 of the raw body (`X-Hub-Signature-256`). A mismatch returns 401. |
 
 ## Meta webhook
 
-1. Meta app → WhatsApp → Configuration → Webhook.
-2. Callback URL: `https://kalyanima.in/api/whatsapp`
-3. Verify token: the same value as `WHATSAPP_VERIFY_TOKEN`.
-4. Subscribe the **`messages`** field. Status events may arrive on that field too; the handler ignores them.
+1. Meta App Dashboard → WhatsApp → Configuration → Webhook.
+2. Callback URL: `https://www.kalyanima.in/api/whatsapp`. The apex host `kalyanima.in` 308-redirects to www, and Meta's verification will not follow that redirect, so the www form is required.
+3. Verify token: the same value as `WHATSAPP_VERIFY_TOKEN`. Choose Verify and save.
+4. After Verify and save, subscribe the **`messages`** webhook field. Status events may arrive on that field too; the handler ignores them.
+5. Publish the app. Publishing needs a privacy policy URL, for example `https://www.kalyanima.in/privacy-policy`. If the app is not Published, production messages are not delivered.
 
 `middleware.js` matches only `/preview-k92x/:path*`. The staging basic-auth gate does not cover `/api/whatsapp`, so Meta can reach the webhook without credentials. No exemption was added.
 
@@ -85,7 +86,7 @@ Leave `+1 430-340-4160` on the phone app. Register a different number on the Clo
 Use your real `WHATSAPP_VERIFY_TOKEN`. A match returns the challenge as plain text. Anything else returns 403.
 
 ```bash
-curl -i "https://kalyanima.in/api/whatsapp?hub.mode=subscribe&hub.verify_token=YOUR_VERIFY_TOKEN&hub.challenge=1234567890"
+curl -i "https://www.kalyanima.in/api/whatsapp?hub.mode=subscribe&hub.verify_token=YOUR_VERIFY_TOKEN&hub.challenge=1234567890"
 ```
 
 Expect `HTTP/2 200` (or `HTTP/1.1 200`) and a body of exactly:
