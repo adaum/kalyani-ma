@@ -18,7 +18,7 @@
 
       window.__KALYANI_ACCESS__ = { ref: cleanRef, isIndia: isIndia };
 
-      // Auto-redirect US / Global visitors immediately to dynamic 25% discount link
+      // Auto-redirect US / Global visitors immediately to dynamic wholesale discount link (up to 25% off retail)
       if (rawRegion && !isIndia) {
         window.location.replace('https://referral.doterra.me/' + encodeURIComponent(cleanRef));
       }
@@ -179,7 +179,7 @@
 <body>
   <main class="shell">
     <div class="eyebrow">Kalyani Botanical Archive &bull; Wholesale Access</div>
-    <h1 id="pageTitle">Your Personal 25% Wholesale Access (India)</h1>
+    <h1 id="pageTitle">Your Personal Wholesale Access — Up to 25% Off (India)</h1>
     <p class="sub" id="pageSub">Direct household pricing from our vetted botanical source &mdash; zero joining fee, no starter kit required, and no obligation to sell.</p>
 
     <div class="id-box" id="sponsorBox">
@@ -192,12 +192,12 @@
 
     <ul class="steps" id="indiaSteps">
       <li><span class="step-num">1</span><span>Tap <strong>Copy Code</strong> above so your wholesale access code is ready to paste.</span></li>
-      <li><span class="step-num">2</span><span>Open d&#333;TERRA India&rsquo;s official welcome page below and select <strong>Join Now</strong> (India accounts carry the <em>Wellness Advocate</em> label by default&mdash;that is simply how the 25% household discount is applied, with zero business requirement).</span></li>
-      <li><span class="step-num">3</span><span>Paste your access code during registration to establish your profile and lock in your permanent 25% wholesale discount.</span></li>
+      <li><span class="step-num">2</span><span>Open d&#333;TERRA India&rsquo;s official welcome page below and select <strong>Join Now</strong>, choosing either <em>Preferred Customer</em> or <em>Wellness Advocate</em> (both carry zero joining fee and unlock wholesale pricing of typically 21%&ndash;25% off retail, with zero business requirement).</span></li>
+      <li><span class="step-num">3</span><span>Paste your access code during registration to establish your profile and lock in your permanent wholesale discount (typically 21%&ndash;25% off retail).</span></li>
     </ul>
 
     <a href="https://www.doterra.com/IN/en_IN/new-to-doterra" class="cta" id="primaryCta">Continue to Official d&#333;TERRA India Portal &rarr;</a>
-    <p class="footnote">Personal household access at 25% below retail. No monthly minimums or business participation required.</p>
+    <p class="footnote">Personal household wholesale access (typically 21%&ndash;25% off retail). No monthly minimums or business participation required.</p>
     <p class="alt-link" id="regionSwitch"></p>
   </main>
 
@@ -223,7 +223,7 @@
 
       if (state.isIndia) {
         cta.href = indiaUrl;
-        switchEl.innerHTML = 'Ordering from the US or outside India? <a href="' + globalUrl + '">Use the Global 25% Discount Link &rarr;</a>';
+        switchEl.innerHTML = 'Ordering from the US or outside India? <a href="' + globalUrl + '">Use the Global Wholesale Discount Link (Up to 25% Off) &rarr;</a>';
       } else {
         // Fallback if region param wasn't set on /access: auto-forward to Global link
         window.location.replace(globalUrl);
